@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Main;
+import InternalFrame.*;
 
 /**
  *
@@ -16,6 +17,8 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Sistema Cine");
     }
 
     /**
@@ -27,21 +30,89 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelPrincipal = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        menuPelicula = new javax.swing.JMenuItem();
+        menuSala = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
+        panelPrincipal.setLayout(panelPrincipalLayout);
+        panelPrincipalLayout.setHorizontalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 991, Short.MAX_VALUE)
+        );
+        panelPrincipalLayout.setVerticalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 502, Short.MAX_VALUE)
+        );
+
+        jMenu1.setText("Inicio");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Funciones ");
+
+        menuPelicula.setText("Peliculas");
+        menuPelicula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPeliculaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuPelicula);
+
+        menuSala.setText("Salas");
+        menuSala.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSalaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuSala);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Venta");
+
+        jMenuItem3.setText("Reservacion ");
+        jMenu3.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Cliente");
+        jMenuBar1.add(jMenu4);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
+            .addComponent(panelPrincipal)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 312, Short.MAX_VALUE)
+            .addComponent(panelPrincipal)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuSalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalaActionPerformed
+       Sala sala = new Sala();
+       this.panelPrincipal.add(sala);
+       sala.show();
+    }//GEN-LAST:event_menuSalaActionPerformed
+
+    private void menuPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPeliculaActionPerformed
+      Pelicula pelicula = new Pelicula();
+      this.panelPrincipal.add(pelicula);
+      pelicula.show();
+    }//GEN-LAST:event_menuPeliculaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +150,14 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem menuPelicula;
+    private javax.swing.JMenuItem menuSala;
+    private javax.swing.JDesktopPane panelPrincipal;
     // End of variables declaration//GEN-END:variables
 }
