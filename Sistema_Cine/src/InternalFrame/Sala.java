@@ -52,7 +52,7 @@ public class Sala extends javax.swing.JInternalFrame {
 
         panelGeneral.setLayout(new java.awt.BorderLayout());
 
-        panelSuperior.setBackground(new java.awt.Color(51, 51, 255));
+        panelSuperior.setBackground(new java.awt.Color(29, 45, 80));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -65,6 +65,7 @@ public class Sala extends javax.swing.JInternalFrame {
             .addGap(0, 80, Short.MAX_VALUE)
         );
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Nueva sala");
 
@@ -79,6 +80,7 @@ public class Sala extends javax.swing.JInternalFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Modificar sala");
 
@@ -86,13 +88,14 @@ public class Sala extends javax.swing.JInternalFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 119, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 79, Short.MAX_VALUE)
         );
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Eliminar sala");
 
@@ -142,6 +145,8 @@ public class Sala extends javax.swing.JInternalFrame {
 
         panelCentral.setLayout(new java.awt.CardLayout());
 
+        panelinicial.setBackground(new java.awt.Color(30, 95, 116));
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -157,11 +162,13 @@ public class Sala extends javax.swing.JInternalFrame {
 
         jButton1.setText("Buscar");
 
-        jPanel4.setBackground(new java.awt.Color(51, 153, 255));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Metodo de busqueda"));
+        jPanel4.setBackground(new java.awt.Color(19, 59, 92));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Metodo de busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
 
+        jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton1.setText("Numero de sala");
 
+        jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("ID de sala");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -199,7 +206,7 @@ public class Sala extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 806, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         panelinicialLayout.setVerticalGroup(
             panelinicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +239,7 @@ public class Sala extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
         );
 
         pack();
