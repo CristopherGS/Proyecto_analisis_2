@@ -17,7 +17,7 @@ public class Sala extends javax.swing.JInternalFrame {
         initComponents();
         setTitle("Salas");
         baseDeDatos = conexion.ConectarLaBD();
-        baseDeDatos.Algo();
+        
            
     }
 

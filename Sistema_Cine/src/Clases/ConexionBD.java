@@ -50,9 +50,5 @@ public class ConexionBD {
           
         return instancia;
     }
-    public void Algo(){
-        System.out.println("algo");
-    }
-
     
 }
