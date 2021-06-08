@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package InternalFrame;
+import Clases.*;
 
 /**
  *
@@ -11,12 +12,13 @@ package InternalFrame;
  */
 public class Sala extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Sala
-     */
+    private ConexionBD conexion,baseDeDatos;
     public Sala() {
         initComponents();
         setTitle("Salas");
+        baseDeDatos = conexion.ConectarLaBD();
+        baseDeDatos.Algo();
+           
     }
 
     /**
