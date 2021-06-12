@@ -23,7 +23,7 @@ public class Sala extends javax.swing.JInternalFrame {
         sala = new SalaClass();//Instanciamos la clase de la sala
         
         //Llenamos la tabla de salas
-        this.conexion.ConectarLaBD().llenarTabla(sala.getTitulo(), tablaSalas, sala.getConsulta(txtBusqueda.getText()));
+        this.conexion.ConectarLaBD().getCrud().llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(txtBusqueda.getText()));
 
     }
 
@@ -259,7 +259,7 @@ public class Sala extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelBuscarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBuscarRegistroMouseClicked
-        conexion.ConectarLaBD().llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(txtBusqueda.getText()));
+        this.conexion.ConectarLaBD().getCrud().llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(txtBusqueda.getText()));
     }//GEN-LAST:event_panelBuscarRegistroMouseClicked
 
 
