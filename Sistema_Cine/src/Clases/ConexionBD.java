@@ -47,12 +47,15 @@ public class ConexionBD {
     }
     
     public static ConexionBD ConectarLaBD(){
+        
         if(instancia == null){
               instancia = new ConexionBD();
           }
           
         return instancia;
     }
+    
+    
     public void llenarTabla(String[] titulos, JTable tabla, String consulta) {
         Statement sentenciaAux;//Objeto que se usa para usar ejecutar sentencias de SQL. Ejecuta una sentencia SQL simple que no tiene ningun parametro.
         ResultSet resultSetAux;//Contiene los resultados de una consulta SQL. Mantiene un cursor apuntando a su fila de datos actual. 

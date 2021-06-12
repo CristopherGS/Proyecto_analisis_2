@@ -5,13 +5,13 @@
  */
 package Clases;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class SalaClass extends Registro {
-
-    private String consulta, where;
 
     public SalaClass() {
         super(3);//Es para inicializar el constructor del padre
@@ -21,14 +21,26 @@ public class SalaClass extends Registro {
 
     }
 
-    public String getConsulta(int sizeTexto) {
-        if (sizeTexto == 0) {
-            where = " where 1 = 1";
-            consulta = "select * from sala " + where;
+    @Override
+    public String getConsulta(String  texto) {
+        if (texto.length() == 0) {//si no hay nada en la caja de texto para buscar 
+            setWhere(" where 1 = 1"); //esto funciona como un true 
         } else {
-
+            /*si hay texto se le agrega al where el identificador y cual registro
+              se quiere encontrar, que en este caso sera texto
+            */
+            
+            try {
+                // verificamos que lo que se esta buscando es un numero entero
+                int id_numSala = Integer.parseInt(texto); 
+                setWhere ("where idSala = "+id_numSala+" or num_sala="+id_numSala);  
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Debe de ingresar un numero entero","Error",JOptionPane.ERROR_MESSAGE);
+            }
+           
         }
-        return consulta;
+        setQuery("select * from sala " + getWhere());
+        return getQuery();
     }
 
 }

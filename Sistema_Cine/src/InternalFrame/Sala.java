@@ -21,8 +21,9 @@ public class Sala extends javax.swing.JInternalFrame {
         setTitle("Salas");
         this.conexion.ConectarLaBD();//Realizamos la conexion con la base de datos, con el patron singleton
         sala = new SalaClass();//Instanciamos la clase de la sala
-
-        this.conexion.ConectarLaBD().llenarTabla(sala.getTitulo(), tablaSalas, sala.getConsulta(txtBusqueda.getText().length()));
+        
+        //Llenamos la tabla de salas
+        this.conexion.ConectarLaBD().llenarTabla(sala.getTitulo(), tablaSalas, sala.getConsulta(txtBusqueda.getText()));
 
     }
 
@@ -48,11 +49,9 @@ public class Sala extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaSalas = new javax.swing.JTable();
         txtBusqueda = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
-        radioBotonNumSala = new javax.swing.JRadioButton();
-        radioBotonIdSala = new javax.swing.JRadioButton();
         panelBuscarRegistro = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -181,39 +180,12 @@ public class Sala extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(tablaSalas);
 
-        jPanel4.setBackground(new java.awt.Color(19, 59, 92));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Metodo de busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
-
-        grupoRadioButton.add(radioBotonNumSala);
-        radioBotonNumSala.setForeground(new java.awt.Color(255, 255, 255));
-        radioBotonNumSala.setText("Numero de sala");
-
-        grupoRadioButton.add(radioBotonIdSala);
-        radioBotonIdSala.setForeground(new java.awt.Color(255, 255, 255));
-        radioBotonIdSala.setText("ID de sala");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(radioBotonNumSala, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(radioBotonIdSala, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(radioBotonNumSala)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(radioBotonIdSala)
-                .addContainerGap())
-        );
-
         panelBuscarRegistro.setBackground(new java.awt.Color(30, 95, 116));
+        panelBuscarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelBuscarRegistroMouseClicked(evt);
+            }
+        });
 
         jLabel4.setBackground(new java.awt.Color(30, 95, 116));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -230,17 +202,22 @@ public class Sala extends javax.swing.JInternalFrame {
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel8.setText("Buscar por ID o por numero de sala");
+
         javax.swing.GroupLayout panelinicialLayout = new javax.swing.GroupLayout(panelinicial);
         panelinicial.setLayout(panelinicialLayout);
         panelinicialLayout.setHorizontalGroup(
             panelinicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelinicialLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addGroup(panelinicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(panelinicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelinicialLayout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelinicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelinicialLayout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(98, 98, 98)))
                         .addGap(18, 18, 18)
                         .addComponent(panelBuscarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 806, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -249,16 +226,14 @@ public class Sala extends javax.swing.JInternalFrame {
         panelinicialLayout.setVerticalGroup(
             panelinicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelinicialLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelinicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelinicialLayout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelinicialLayout.createSequentialGroup()
-                        .addGroup(panelinicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelBuscarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29)))
+                .addContainerGap(60, Short.MAX_VALUE)
+                .addGroup(panelinicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelinicialLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelBuscarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
         );
@@ -283,6 +258,10 @@ public class Sala extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void panelBuscarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBuscarRegistroMouseClicked
+        conexion.ConectarLaBD().llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(txtBusqueda.getText()));
+    }//GEN-LAST:event_panelBuscarRegistroMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup grupoRadioButton;
@@ -293,7 +272,7 @@ public class Sala extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel panelBuscarRegistro;
@@ -304,8 +283,6 @@ public class Sala extends javax.swing.JInternalFrame {
     private javax.swing.JPanel panelNuevaSala;
     private javax.swing.JPanel panelSuperior;
     private javax.swing.JPanel panelinicial;
-    private javax.swing.JRadioButton radioBotonIdSala;
-    private javax.swing.JRadioButton radioBotonNumSala;
     private javax.swing.JTable tablaSalas;
     private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables

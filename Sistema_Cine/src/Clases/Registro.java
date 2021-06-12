@@ -14,6 +14,7 @@ import javax.swing.JTable;
 public class Registro {
 
     private String[] titulo;
+    private String where ="",query="";
 
     public Registro(int size) {
         this.titulo = new String[size];
@@ -23,8 +24,30 @@ public class Registro {
         return titulo;
     }
 
+    public String getWhere() {
+        return where;
+    }
+
+    public void setWhere(String where) {
+        this.where = where;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
+    }
+   
+
     public void setTitulo(String[] titulo) {
         this.titulo = titulo;
     }
+    
+     public String getConsulta(String texto) {
+        return null;
+    }
+  
 
 }
