@@ -6,6 +6,9 @@
 package InternalFrame;
 
 import Clases.*;
+import java.awt.Color;
+import java.awt.Cursor;
+import javax.swing.JDialog;
 
 /**
  *
@@ -20,6 +23,12 @@ public class Sala extends javax.swing.JInternalFrame {
         initComponents();
         setTitle("Salas");
         this.conexion.ConectarLaBD();//Realizamos la conexion con la base de datos, con el patron singleton
+        //configuraciones de jdialog de nueva sala
+        NuevaSala.setTitle("Nueva Sala");
+        NuevaSala.setSize(510,400);
+        NuevaSala.setLocationRelativeTo(Sala.this);//el relativo respecto al internal frame
+        NuevaSala.setUndecorated(true);//Le quita el boron de cerrar
+        
         sala = new SalaClass();//Instanciamos la clase de la sala
         
         //Llenamos la tabla de salas
@@ -32,6 +41,20 @@ public class Sala extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         grupoRadioButton = new javax.swing.ButtonGroup();
+        NuevaSala = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        panelCancelarNuevo = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        panelAceptarNuevo = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         panelGeneral = new javax.swing.JPanel();
         panelSuperior = new javax.swing.JPanel();
@@ -53,6 +76,184 @@ public class Sala extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
+        NuevaSala.setModal(true);
+
+        jPanel1.setBackground(new java.awt.Color(19, 59, 92));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+
+        jPanel2.setBackground(new java.awt.Color(30, 95, 116));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Numero de sala");
+
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Numero de asientos");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(jTextField2))
+                .addGap(26, 26, 26))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(41, 41, 41)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(30, 95, 116));
+        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        panelCancelarNuevo.setBackground(new java.awt.Color(30, 95, 116));
+        panelCancelarNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelarNuevaSala(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EntrarPanelDialogo(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SalirPanelDialogo(evt);
+            }
+        });
+
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
+
+        javax.swing.GroupLayout panelCancelarNuevoLayout = new javax.swing.GroupLayout(panelCancelarNuevo);
+        panelCancelarNuevo.setLayout(panelCancelarNuevoLayout);
+        panelCancelarNuevoLayout.setHorizontalGroup(
+            panelCancelarNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+        );
+        panelCancelarNuevoLayout.setVerticalGroup(
+            panelCancelarNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+        );
+
+        panelAceptarNuevo.setBackground(new java.awt.Color(30, 95, 116));
+        panelAceptarNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EntrarPanelDialogo(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SalirPanelDialogo(evt);
+            }
+        });
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/aceptar.png"))); // NOI18N
+
+        javax.swing.GroupLayout panelAceptarNuevoLayout = new javax.swing.GroupLayout(panelAceptarNuevo);
+        panelAceptarNuevo.setLayout(panelAceptarNuevoLayout);
+        panelAceptarNuevoLayout.setHorizontalGroup(
+            panelAceptarNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+        );
+        panelAceptarNuevoLayout.setVerticalGroup(
+            panelAceptarNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addComponent(panelAceptarNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addComponent(panelCancelarNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelCancelarNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelAceptarNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
+        );
+
+        jPanel4.setBackground(new java.awt.Color(30, 95, 116));
+        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel13.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Nueva Sala");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 16, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
+        );
+
+        javax.swing.GroupLayout NuevaSalaLayout = new javax.swing.GroupLayout(NuevaSala.getContentPane());
+        NuevaSala.getContentPane().setLayout(NuevaSalaLayout);
+        NuevaSalaLayout.setHorizontalGroup(
+            NuevaSalaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        NuevaSalaLayout.setVerticalGroup(
+            NuevaSalaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setClosable(true);
         setIconifiable(true);
 
@@ -61,6 +262,17 @@ public class Sala extends javax.swing.JInternalFrame {
         panelSuperior.setBackground(new java.awt.Color(29, 45, 80));
 
         panelNuevaSala.setBackground(new java.awt.Color(29, 45, 80));
+        panelNuevaSala.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickNuevo(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EntrarPanel(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SalirPanel(evt);
+            }
+        });
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevo_registro.png"))); // NOI18N
@@ -81,6 +293,14 @@ public class Sala extends javax.swing.JInternalFrame {
         jLabel1.setText("Nueva sala");
 
         panelEliminarRegistro.setBackground(new java.awt.Color(29, 45, 80));
+        panelEliminarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EntrarPanel(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SalirPanel(evt);
+            }
+        });
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar_registro.png"))); // NOI18N
@@ -102,6 +322,14 @@ public class Sala extends javax.swing.JInternalFrame {
 
         panelModificarRegistro.setBackground(new java.awt.Color(29, 45, 80));
         panelModificarRegistro.setPreferredSize(new java.awt.Dimension(100, 80));
+        panelModificarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EntrarPanel(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SalirPanel(evt);
+            }
+        });
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar_registro.png"))); // NOI18N
@@ -178,12 +406,19 @@ public class Sala extends javax.swing.JInternalFrame {
 
             }
         ));
+        tablaSalas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane2.setViewportView(tablaSalas);
 
         panelBuscarRegistro.setBackground(new java.awt.Color(30, 95, 116));
         panelBuscarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 panelBuscarRegistroMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EntrarPanel(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SalirPanel(evt);
             }
         });
 
@@ -262,10 +497,80 @@ public class Sala extends javax.swing.JInternalFrame {
         this.conexion.ConectarLaBD().getCrud().llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(txtBusqueda.getText()));
     }//GEN-LAST:event_panelBuscarRegistroMouseClicked
 
+    private void EntrarPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrarPanel
+        if (evt.getSource() == panelNuevaSala) {
+            panelNuevaSala.setBackground(new Color(30, 95, 116));
+            panelNuevaSala.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+        if (evt.getSource() == panelModificarRegistro) {
+            panelModificarRegistro.setBackground(new Color(30, 95, 116));
+            panelModificarRegistro.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+        if (evt.getSource() == panelEliminarRegistro) {
+            panelEliminarRegistro.setBackground(new Color(30, 95, 116));
+            panelEliminarRegistro.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+        if (evt.getSource() == panelBuscarRegistro){
+            panelBuscarRegistro.setBackground(new Color(29, 45, 80));
+            panelBuscarRegistro.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+    }//GEN-LAST:event_EntrarPanel
+
+    private void SalirPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirPanel
+        if (evt.getSource() == panelNuevaSala) {
+            panelNuevaSala.setBackground(new Color(29, 45, 80));
+            
+        }
+        if (evt.getSource() == panelModificarRegistro) {
+            panelModificarRegistro.setBackground(new Color(29, 45, 80));
+        }
+        if (evt.getSource() == panelEliminarRegistro) {
+            panelEliminarRegistro.setBackground(new Color(29, 45, 80));
+        }
+        if (evt.getSource() == panelBuscarRegistro){
+            panelBuscarRegistro.setBackground(new Color(30, 95, 116));
+        }
+    }//GEN-LAST:event_SalirPanel
+
+    private void clickNuevo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickNuevo
+        NuevaSala.setVisible(true);
+    }//GEN-LAST:event_clickNuevo
+
+    private void cancelarNuevaSala(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarNuevaSala
+       NuevaSala.dispose();
+    }//GEN-LAST:event_cancelarNuevaSala
+
+    private void EntrarPanelDialogo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrarPanelDialogo
+       if (evt.getSource() == panelAceptarNuevo){
+            panelAceptarNuevo.setBackground(new Color(29, 45, 80));
+            panelAceptarNuevo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+       if (evt.getSource() == panelCancelarNuevo){
+            panelCancelarNuevo.setBackground(new Color(29, 45, 80));
+            panelCancelarNuevo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+    }//GEN-LAST:event_EntrarPanelDialogo
+
+    private void SalirPanelDialogo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirPanelDialogo
+        if (evt.getSource() == panelAceptarNuevo){
+            panelAceptarNuevo.setBackground(new Color(30, 95, 116));
+            panelAceptarNuevo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+        if (evt.getSource() == panelCancelarNuevo){
+            panelCancelarNuevo.setBackground(new Color(30, 95, 116));
+            panelCancelarNuevo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+    }//GEN-LAST:event_SalirPanelDialogo
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog NuevaSala;
     private javax.swing.ButtonGroup grupoRadioButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -273,9 +578,18 @@ public class Sala extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPanel panelAceptarNuevo;
     private javax.swing.JPanel panelBuscarRegistro;
+    private javax.swing.JPanel panelCancelarNuevo;
     private javax.swing.JPanel panelCentral;
     private javax.swing.JPanel panelEliminarRegistro;
     private javax.swing.JPanel panelGeneral;

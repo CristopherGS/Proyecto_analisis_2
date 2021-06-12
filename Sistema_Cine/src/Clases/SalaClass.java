@@ -16,8 +16,8 @@ public class SalaClass extends Registro {
     public SalaClass() {
         super(3);//Es para inicializar el constructor del padre
         this.getTitulo()[0] = "Id";
-        this.getTitulo()[1] = "No. Sala";
-        this.getTitulo()[2] = "No. Asientos";
+        this.getTitulo()[1] = "No. Asientos";
+        this.getTitulo()[2] = "No. Sala";
 
     }
 
