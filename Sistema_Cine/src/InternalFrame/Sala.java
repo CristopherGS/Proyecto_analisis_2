@@ -9,6 +9,7 @@ import Clases.*;
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -44,8 +45,8 @@ public class Sala extends javax.swing.JInternalFrame {
         NuevaSala = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtNumSala = new javax.swing.JTextField();
+        txtNumAsientos = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -104,8 +105,8 @@ public class Sala extends javax.swing.JInternalFrame {
                         .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                    .addComponent(jTextField2))
+                    .addComponent(txtNumSala, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(txtNumAsientos))
                 .addGap(26, 26, 26))
         );
         jPanel2Layout.setVerticalGroup(
@@ -113,11 +114,11 @@ public class Sala extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
@@ -154,6 +155,9 @@ public class Sala extends javax.swing.JInternalFrame {
 
         panelAceptarNuevo.setBackground(new java.awt.Color(30, 95, 116));
         panelAceptarNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickAceptar(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 EntrarPanelDialogo(evt);
             }
@@ -562,6 +566,37 @@ public class Sala extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_SalirPanelDialogo
 
+    private void clickAceptar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickAceptar
+         if(txtNumAsientos.getText().length()>0&&txtNumSala.getText().length()>0){
+            try {
+                int num_sala_int = Integer.parseInt(txtNumSala.getText());
+                int num_aseintos_int = Integer.parseInt(txtNumAsientos.getText());
+                
+                if(!this.conexion.ConectarLaBD().getCrud().Existe(sala.getConsulta(txtNumSala.getText()),txtNumSala.getText(),"num_sala")){
+                  this.conexion.ConectarLaBD().getCrud().EjecutarInstruccion("insert into sala(num_asientos,num_sala) values("+txtNumAsientos.getText()+","+txtNumSala.getText()+")");    
+                  this.conexion.ConectarLaBD().getCrud().llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(""));
+             
+                  txtNumAsientos.setText("");
+                  txtNumSala.setText("");
+                  
+                  NuevaSala.dispose();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"El numero de sala ya existe ingrese uno diferente","Error",JOptionPane.ERROR_MESSAGE);
+                    txtNumSala.setText("");
+                }
+                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"Debe de ingresar numero enteros","Error",JOptionPane.ERROR_MESSAGE);
+                 txtNumAsientos.setText("");
+                 txtNumSala.setText("");
+            }     
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Debe de llenar todos los campos","Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_clickAceptar
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog NuevaSala;
@@ -585,8 +620,6 @@ public class Sala extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel panelAceptarNuevo;
     private javax.swing.JPanel panelBuscarRegistro;
     private javax.swing.JPanel panelCancelarNuevo;
@@ -599,5 +632,7 @@ public class Sala extends javax.swing.JInternalFrame {
     private javax.swing.JPanel panelinicial;
     private javax.swing.JTable tablaSalas;
     private javax.swing.JTextField txtBusqueda;
+    private javax.swing.JTextField txtNumAsientos;
+    private javax.swing.JTextField txtNumSala;
     // End of variables declaration//GEN-END:variables
 }

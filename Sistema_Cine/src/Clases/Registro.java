@@ -48,6 +48,13 @@ public class Registro {
      public String getConsulta(String texto) {
         return null;
     }
+    
+     public String getInstruccion(String texto){
+         return null;
+     }
+     public String getInstruccion(String texto,String texto2){
+         return null;
+     }
   
 
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Clases;
 
 import java.sql.ResultSet;
@@ -15,13 +14,31 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * 
+ *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class CRUD {
+
     private ConexionBD conexion;
-    
-    
+
+    public void EjecutarInstruccion(String Instruccion) {
+        int filas = 0;
+        Statement sentenciaAux;
+        try {
+            
+            //preStare = conexion.prepareStatement(Instruccion);
+            sentenciaAux = conexion.ConectarLaBD().getConexion().createStatement();//Se crea el objeto sentencia que es el encargado de inviar la instruccion
+            sentenciaAux.executeUpdate(Instruccion);//Se enviar la instruccion y el resultSet guarda los datos. Se debe de enviar el Update que se utiliza para: INSERT, DELETE, UPDATE, REPLACE y TRUNCATE
+            //preStare.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Instruccion ejecutada correctamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+            //sentencia.close();
+            //El .executeUpdate devuelve el numero de registros modificados. 
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error de conexion", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println(ex.getMessage());
+        }
+    }
+
     public void llenarTabla(String[] titulos, JTable tabla, String consulta) {
         Statement sentenciaAux;//Objeto que se usa para usar ejecutar sentencias de SQL. Ejecuta una sentencia SQL simple que no tiene ningun parametro.
         ResultSet resultSetAux;//Contiene los resultados de una consulta SQL. Mantiene un cursor apuntando a su fila de datos actual. 
@@ -32,7 +49,7 @@ public class CRUD {
         tabla.setModel(modelo);//Agregamos el modelo a la tabla
 
         try {
-           // .createStatement(); //Instanciamos el Statement.
+            // .createStatement(); //Instanciamos el Statement.
             sentenciaAux = conexion.ConectarLaBD().getConexion().createStatement();
             resultSetAux = sentenciaAux.executeQuery(consulta); //Instanciamos el resultSet, en donde se guardan los resultados de la sentencia.
             rsMd = resultSetAux.getMetaData(); //Instanciamos el ResultSetMetaData con la informacion del ResultSet.
@@ -52,6 +69,29 @@ public class CRUD {
             JOptionPane.showMessageDialog(null, "Error al llenar la tabla", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getMessage());
         }
+    }
+
+    public boolean Existe(String consulta, String parametro, String columna) {
+        Statement sentenciaAux;//Objeto que se usa para usar ejecutar sentencias de SQL. Ejecuta una sentencia SQL simple que no tiene ningun parametro.
+        ResultSet resultSetAux;//Contiene los resultados de una consulta SQL. Mantiene un cursor apuntando a su fila de datos actual. 
+        
+        boolean existe = false;
+        String parametroExistente = "";
+        try {            
+            sentenciaAux = conexion.ConectarLaBD().getConexion().createStatement();
+            resultSetAux = sentenciaAux.executeQuery(consulta);
+            while (resultSetAux.next()) {//Se van recorriendo las filas de la consulta con el while
+                
+                parametroExistente = resultSetAux.getString(columna); //se consulta el dato que tenga esa fila en una columna determinada, y se pasa el resultado a una variable
+                if (parametroExistente.equals(parametro)) {//Se evalua que el parametro actual coincide con el que se quiere encontrar 
+                    existe = true;
+                }
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error de conexion", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println(ex.getMessage());
+        }
+        return existe;
     }
 
 }

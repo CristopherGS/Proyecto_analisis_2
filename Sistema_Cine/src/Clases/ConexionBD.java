@@ -64,6 +64,22 @@ public class ConexionBD {
     public CRUD getCrud() {
         return crud;
     }
+
+    public Statement getSentencia() {
+        return sentencia;
+    }
+
+    public ResultSet getResultSet() {
+        return resultSet;
+    }
+
+    public void setSentencia(Statement sentencia) {
+        this.sentencia = sentencia;
+    }
+
+    public void setResultSet(ResultSet resultSet) {
+        this.resultSet = resultSet;
+    } 
     
     
 }
