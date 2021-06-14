@@ -17,10 +17,12 @@ public class SalaClass extends Registro {
     private CRUD crud;
 
     public SalaClass() {
-        super(3);//Es para inicializar el constructor del padre
+        super(5);//Es para inicializar el constructor del padre
         this.getTitulo()[0] = "Id";
-        this.getTitulo()[1] = "No. Asientos";
-        this.getTitulo()[2] = "No. Sala";
+        this.getTitulo()[1] = "No. Sala";
+        this.getTitulo()[2] = "Columnas";
+        this.getTitulo()[3] = "Filas";
+        this.getTitulo()[4] = "No. Asientos";
         crud = new CRUD();
 
     }
@@ -47,31 +49,47 @@ public class SalaClass extends Registro {
         return getQuery();
     }
     
-    public void insertarRegistro(JTextField num_sala,JTextField num_asientos){
-        String consulta = "";
-        if(num_asientos.getText().length()>0&&num_sala.getText().length()>0){
+    public int validacionDeDatos(JTextField num_sala,JTextField txtcolumnas,JTextField txtfilas){
+        int num_asientos = 0;
+        //Verificamos que los capos no este vacios
+        if(num_sala.getText().length()>0&&txtcolumnas.getText().length()>0&&txtfilas.getText().length()>0){
+            //con esto comprobamos que sean valores enteros 
             try {
                 int num_sala_int = Integer.parseInt(num_sala.getText());
-                int num_aseintos_int = Integer.parseInt(num_asientos.getText());
+               
+                int columnas = Integer.parseInt(txtcolumnas.getText());
+                int filas = Integer.parseInt(txtfilas.getText());
                 
-                if(!crud.Existe(getConsulta(num_sala.getText()), num_sala.getText(),"num_sala")){
-                    crud.EjecutarInstruccion("insert into sala(num_asientos,num_sala) values("+num_asientos.getText()+","+num_sala.getText()+")");    
+                //verificamos que las columnas y filas sean mayores a cero
+                if(columnas>0 && filas >0){
+                    if(filas<=27){
+                        num_asientos = filas*columnas;
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null,"El numero de filas debe de ser menor a 27","Error",JOptionPane.ERROR_MESSAGE);
+                         txtfilas.setText("");
+                    }
+                    
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"El numero de sala ya existe ingrese uno diferente","Error",JOptionPane.ERROR_MESSAGE);
-                   
+                    JOptionPane.showMessageDialog(null,"Las filas y columnas debe de ser mayor a cero","Errro",JOptionPane.ERROR_MESSAGE);
+                    txtcolumnas.setText("");
+                    txtfilas.setText("");
                 }
+                        
                 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null,"Debe de ingresar numero enteros","Error",JOptionPane.ERROR_MESSAGE);
                  num_sala.setText("");
-                 num_asientos.setText("");
+                 txtcolumnas.setText("");
+                 txtfilas.setText("");
             }     
         }
         else{
             JOptionPane.showMessageDialog(null,"Debe de llenar todos los campos","Error",JOptionPane.ERROR_MESSAGE);
         }
-       
+        
+        return num_asientos;
     }
     
 

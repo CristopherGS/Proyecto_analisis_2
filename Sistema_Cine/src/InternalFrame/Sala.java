@@ -26,7 +26,7 @@ public class Sala extends javax.swing.JInternalFrame {
         this.conexion.ConectarLaBD();//Realizamos la conexion con la base de datos, con el patron singleton
         //configuraciones de jdialog de nueva sala
         NuevaSala.setTitle("Nueva Sala");
-        NuevaSala.setSize(510,400);
+        NuevaSala.setSize(510,430);
         NuevaSala.setLocationRelativeTo(Sala.this);//el relativo respecto al internal frame
         NuevaSala.setUndecorated(true);//Le quita el boron de cerrar
         
@@ -46,9 +46,11 @@ public class Sala extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         txtNumSala = new javax.swing.JTextField();
-        txtNumAsientos = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        txtColumnas = new javax.swing.JTextField();
+        txtFilas = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         panelCancelarNuevo = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -88,39 +90,45 @@ public class Sala extends javax.swing.JInternalFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Numero de sala");
 
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Numero de asientos");
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Columnas");
+
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Filas");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel9))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
+                .addContainerGap(58, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel14))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtNumSala, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                    .addComponent(txtNumAsientos))
-                .addGap(26, 26, 26))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtFilas, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtColumnas, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumSala, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(68, 68, 68))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNumSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNumAsientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                    .addComponent(txtColumnas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFilas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addGap(33, 33, 33))
         );
 
         jPanel3.setBackground(new java.awt.Color(30, 95, 116));
@@ -187,7 +195,7 @@ public class Sala extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(106, 106, 106)
                 .addComponent(panelAceptarNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelCancelarNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92))
         );
@@ -230,9 +238,9 @@ public class Sala extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 16, Short.MAX_VALUE))
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -240,9 +248,9 @@ public class Sala extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -567,33 +575,28 @@ public class Sala extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_SalirPanelDialogo
 
     private void clickAceptar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickAceptar
-         if(txtNumAsientos.getText().length()>0&&txtNumSala.getText().length()>0){
-            try {
-                int num_sala_int = Integer.parseInt(txtNumSala.getText());
-                int num_aseintos_int = Integer.parseInt(txtNumAsientos.getText());
-                
-                if(!this.conexion.ConectarLaBD().getCrud().Existe(sala.getConsulta(txtNumSala.getText()),txtNumSala.getText(),"num_sala")){
-                  this.conexion.ConectarLaBD().getCrud().EjecutarInstruccion("insert into sala(num_asientos,num_sala) values("+txtNumAsientos.getText()+","+txtNumSala.getText()+")");    
+        //con esta condicion verificamos que se cumplan todos los requisitos para la nueva sala 
+        //si reportno un numero mayot a cero todo esta bien, este numero es el numero de asientos que tendra la sala
+        int num_asientos = sala.validacionDeDatos(txtNumSala, txtColumnas, txtFilas);
+        if(num_asientos>0){
+           //con esta condicion comprobamos que no exista una sala con el mismo numero
+            if(!this.conexion.ConectarLaBD().getCrud().Existe(sala.getConsulta(txtNumSala.getText()),txtNumSala.getText(),"num_sala")){
+                  //ingresamos la nueva sala
+                  this.conexion.ConectarLaBD().getCrud().EjecutarInstruccion("insert into sala(num_sala,columnas,filas,num_asientos) values("+txtNumSala.getText()+","+txtColumnas.getText()+","+txtFilas.getText()+","+num_asientos+")");    
+                  //volvemos a llenar la tabla, ya con los datos actualizados
                   this.conexion.ConectarLaBD().getCrud().llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(""));
-             
-                  txtNumAsientos.setText("");
+                  //Limpiamos los campos de texto
                   txtNumSala.setText("");
-                  
+                  txtColumnas.setText("");
+                  txtFilas.setText("");
+                  //Cerramos la ventana emergente de nueva sala 
                   NuevaSala.dispose();
                 }
                 else{
                     JOptionPane.showMessageDialog(null,"El numero de sala ya existe ingrese uno diferente","Error",JOptionPane.ERROR_MESSAGE);
                     txtNumSala.setText("");
                 }
-                
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,"Debe de ingresar numero enteros","Error",JOptionPane.ERROR_MESSAGE);
-                 txtNumAsientos.setText("");
-                 txtNumSala.setText("");
-            }     
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"Debe de llenar todos los campos","Error",JOptionPane.ERROR_MESSAGE);
+            
         }
     }//GEN-LAST:event_clickAceptar
 
@@ -602,10 +605,11 @@ public class Sala extends javax.swing.JInternalFrame {
     private javax.swing.JDialog NuevaSala;
     private javax.swing.ButtonGroup grupoRadioButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -632,7 +636,8 @@ public class Sala extends javax.swing.JInternalFrame {
     private javax.swing.JPanel panelinicial;
     private javax.swing.JTable tablaSalas;
     private javax.swing.JTextField txtBusqueda;
-    private javax.swing.JTextField txtNumAsientos;
+    private javax.swing.JTextField txtColumnas;
+    private javax.swing.JTextField txtFilas;
     private javax.swing.JTextField txtNumSala;
     // End of variables declaration//GEN-END:variables
 }
