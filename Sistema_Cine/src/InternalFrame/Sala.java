@@ -550,6 +550,9 @@ public class Sala extends javax.swing.JInternalFrame {
 
     private void cancelarNuevaSala(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarNuevaSala
        NuevaSala.dispose();
+       txtColumnas.setText("");
+       txtFilas.setText("");
+       txtNumSala.setText("");
     }//GEN-LAST:event_cancelarNuevaSala
 
     private void EntrarPanelDialogo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrarPanelDialogo
