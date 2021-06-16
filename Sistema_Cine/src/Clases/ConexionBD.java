@@ -25,7 +25,7 @@ public class ConexionBD {
     private Connection conexion;//Se utiliza para instanciar un objeto en el cual se inviara la cadena de conexion
     private Statement sentencia;//Se utiliza para ejecutar la instruccion o consulta
     private ResultSet resultSet;//Se utiliza para recibir los datos resultado de la instruccion o consulta 
-    private CRUD crud;
+  
     
     private String baseDatos = "bdcine";
     private String puerto ="3305";
@@ -39,7 +39,7 @@ public class ConexionBD {
             cadenaConexion = "jdbc:mysql://localhost"+":"+puerto+"/"+baseDatos;
             Class.forName(claseNombre);
             conexion = DriverManager.getConnection(cadenaConexion, usuario, password);
-            crud = new CRUD();
+            
             //JOptionPane.showMessageDialog(null,"Conexion exitosa","Mensaje",JOptionPane.INFORMATION_MESSAGE);
             
         } catch (ClassNotFoundException | SQLException ex) {
@@ -59,10 +59,6 @@ public class ConexionBD {
 
     public Connection getConexion() {
         return conexion;
-    }
-
-    public CRUD getCrud() {
-        return crud;
     }
 
     public Statement getSentencia() {

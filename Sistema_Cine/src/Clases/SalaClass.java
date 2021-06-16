@@ -5,6 +5,8 @@
  */
 package Clases;
 
+import ImplemetInterface.TitulosSala;
+import Interface.DefinirTitulos;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -14,17 +16,14 @@ import javax.swing.JTextField;
  */
 public class SalaClass extends Registro {
     
-    private CRUD crud;
+   
+    private DefinirTitulos titulosGestion;
 
     public SalaClass() {
-        super(5);//Es para inicializar el constructor del padre
-        this.getTitulo()[0] = "Id";
-        this.getTitulo()[1] = "No. Sala";
-        this.getTitulo()[2] = "Columnas";
-        this.getTitulo()[3] = "Filas";
-        this.getTitulo()[4] = "No. Asientos";
-        crud = new CRUD();
-
+        titulosGestion = new TitulosSala();
+        this.setTitulo(titulosGestion.DefinirTitulos());
+        System.out.println(this.getTitulo().length);
+       
     }
 
     @Override

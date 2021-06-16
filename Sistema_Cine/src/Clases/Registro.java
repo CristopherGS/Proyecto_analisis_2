@@ -16,9 +16,6 @@ public class Registro {
     private String[] titulo;
     private String where ="",query="";
 
-    public Registro(int size) {
-        this.titulo = new String[size];
-    }
 
     public String[] getTitulo() {
         return titulo;

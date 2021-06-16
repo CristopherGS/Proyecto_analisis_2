@@ -17,13 +17,16 @@ import javax.swing.JOptionPane;
  */
 public class Sala extends javax.swing.JInternalFrame {
 
-    private ConexionBD conexion;
+    private CRUD crud;
     private SalaClass sala;
+    private TablaGestion tablaGestion;
 
     public Sala() {
         initComponents();
         setTitle("Salas");
-        this.conexion.ConectarLaBD();//Realizamos la conexion con la base de datos, con el patron singleton
+        tablaGestion = new TablaGestion();
+        crud = new CRUD();
+        
         //configuraciones de jdialog de nueva sala
         NuevaSala.setTitle("Nueva Sala");
         NuevaSala.setSize(510,430);
@@ -31,10 +34,10 @@ public class Sala extends javax.swing.JInternalFrame {
         NuevaSala.setUndecorated(true);//Le quita el boron de cerrar
         
         sala = new SalaClass();//Instanciamos la clase de la sala
+        //System.out.println(sala.getTitulo().length);
         
         //Llenamos la tabla de salas
-        this.conexion.ConectarLaBD().getCrud().llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(txtBusqueda.getText()));
-
+        tablaGestion.llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(""));
     }
 
     @SuppressWarnings("unchecked")
@@ -506,7 +509,7 @@ public class Sala extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelBuscarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBuscarRegistroMouseClicked
-        this.conexion.ConectarLaBD().getCrud().llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(txtBusqueda.getText()));
+       tablaGestion.llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(txtBusqueda.getText()));
     }//GEN-LAST:event_panelBuscarRegistroMouseClicked
 
     private void EntrarPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrarPanel
@@ -583,11 +586,11 @@ public class Sala extends javax.swing.JInternalFrame {
         int num_asientos = sala.validacionDeDatos(txtNumSala, txtColumnas, txtFilas);
         if(num_asientos>0){
            //con esta condicion comprobamos que no exista una sala con el mismo numero
-            if(!this.conexion.ConectarLaBD().getCrud().Existe(sala.getConsulta(txtNumSala.getText()),txtNumSala.getText(),"num_sala")){
+            if(!this.crud.Existe(sala.getConsulta(txtNumSala.getText()),txtNumSala.getText(),"num_sala")){
                   //ingresamos la nueva sala
-                  this.conexion.ConectarLaBD().getCrud().EjecutarInstruccion("insert into sala(num_sala,columnas,filas,num_asientos) values("+txtNumSala.getText()+","+txtColumnas.getText()+","+txtFilas.getText()+","+num_asientos+")");    
+                  this.crud.EjecutarInstruccion("insert into sala(num_sala,columnas,filas,num_asientos) values("+txtNumSala.getText()+","+txtColumnas.getText()+","+txtFilas.getText()+","+num_asientos+")");    
                   //volvemos a llenar la tabla, ya con los datos actualizados
-                  this.conexion.ConectarLaBD().getCrud().llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(""));
+                  tablaGestion.llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(""));
                   //Limpiamos los campos de texto
                   txtNumSala.setText("");
                   txtColumnas.setText("");
