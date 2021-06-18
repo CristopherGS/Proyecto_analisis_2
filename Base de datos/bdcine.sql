@@ -21,43 +21,36 @@ CREATE TABLE IF NOT EXISTS `ambientacion` (
   `idAmbientacion` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idAmbientacion`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla bdcine.ambientacion: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `ambientacion` DISABLE KEYS */;
-INSERT INTO `ambientacion` (`idAmbientacion`, `nombre`) VALUES
-	(1, 'Religisa'),
-	(2, 'Futurista'),
-	(3, 'Policiaca'),
-	(4, 'Crimen'),
-	(5, 'Belica'),
-	(6, 'Historica'),
-	(7, 'Deportiva'),
-	(8, 'Western'),
-	(9, 'Otra');
 /*!40000 ALTER TABLE `ambientacion` ENABLE KEYS */;
+
+-- Volcando estructura para tabla bdcine.asiento
+CREATE TABLE IF NOT EXISTS `asiento` (
+  `idAsiento` int(11) NOT NULL AUTO_INCREMENT,
+  `letra` varchar(45) DEFAULT NULL,
+  `numero` int(11) DEFAULT NULL,
+  `disponible` tinyint(4) DEFAULT NULL,
+  `Sala_idSala` int(11) NOT NULL,
+  PRIMARY KEY (`idAsiento`),
+  KEY `fk_Asiento_Sala1_idx` (`Sala_idSala`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla bdcine.asiento: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `asiento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `asiento` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bdcine.categoria
 CREATE TABLE IF NOT EXISTS `categoria` (
   `idCategoria` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idCategoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla bdcine.categoria: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` (`idCategoria`, `nombre`) VALUES
-	(1, 'Accion'),
-	(2, 'Aventura'),
-	(3, 'Ciencia Ficcion'),
-	(4, 'Comedia'),
-	(5, 'No Ficcion/Documental'),
-	(6, 'Drama'),
-	(7, 'Fantasia'),
-	(8, 'Musical'),
-	(9, 'Suspense'),
-	(10, 'Terror'),
-	(11, 'Otro');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bdcine.clasificacion
@@ -66,17 +59,10 @@ CREATE TABLE IF NOT EXISTS `clasificacion` (
   `nombre` varchar(45) DEFAULT NULL,
   `descripcion` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`idClasificacion`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla bdcine.clasificacion: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `clasificacion` DISABLE KEYS */;
-INSERT INTO `clasificacion` (`idClasificacion`, `nombre`, `descripcion`) VALUES
-	(1, 'AA', 'Películas para todo público que tengan además atractivo infantil y sean comprensibles para niños menores de siete años de edad'),
-	(2, 'A', 'Películas para todo público.'),
-	(3, 'B', 'Películas para adolescentes de 12 años en adelante'),
-	(4, 'B15', 'Película no recomendable para menores de 15 años de edad.'),
-	(5, 'C', 'Peliculas para adultos de 18 años en adelante.'),
-	(6, 'D', 'Películas para adultos, con sexo explícito, lenguaje procaz o alto grado de violencia.');
 /*!40000 ALTER TABLE `clasificacion` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bdcine.cliente
@@ -108,19 +94,31 @@ CREATE TABLE IF NOT EXISTS `dias` (
   `iddias_funcion` int(11) NOT NULL AUTO_INCREMENT,
   `dia` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`iddias_funcion`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla bdcine.dias: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `dias` DISABLE KEYS */;
-INSERT INTO `dias` (`iddias_funcion`, `dia`) VALUES
-	(1, 'Lunes'),
-	(2, 'Martes'),
-	(3, 'Miercoles'),
-	(4, 'Jueves'),
-	(5, 'Viernes'),
-	(6, 'Sabado'),
-	(7, 'Domingo');
 /*!40000 ALTER TABLE `dias` ENABLE KEYS */;
+
+-- Volcando estructura para tabla bdcine.empledo
+CREATE TABLE IF NOT EXISTS `empledo` (
+  `idEmpledo` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(45) DEFAULT NULL,
+  `Apellido` varchar(45) DEFAULT NULL,
+  `Correo` varchar(45) DEFAULT NULL,
+  `Direccion` varchar(45) DEFAULT NULL,
+  `Edad` varchar(45) DEFAULT NULL,
+  `Sexo` varchar(45) DEFAULT NULL,
+  `DPI` varchar(45) DEFAULT NULL,
+  `Telefono` varchar(45) DEFAULT NULL,
+  `Puesto_idPuesto` int(11) NOT NULL,
+  PRIMARY KEY (`idEmpledo`),
+  KEY `fk_Empledo_Puesto1_idx` (`Puesto_idPuesto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla bdcine.empledo: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `empledo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `empledo` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bdcine.factura
 CREATE TABLE IF NOT EXISTS `factura` (
@@ -128,9 +126,11 @@ CREATE TABLE IF NOT EXISTS `factura` (
   `Total` float DEFAULT NULL,
   `Cliente_idCliente` int(11) NOT NULL,
   `funcion_particula_idfuncion_particula` int(11) NOT NULL,
+  `Empledo_idEmpledo` int(11) NOT NULL,
   PRIMARY KEY (`idFactura`),
   KEY `fk_Factura_Cliente1_idx` (`Cliente_idCliente`),
-  KEY `fk_Factura_funcion_particula1_idx` (`funcion_particula_idfuncion_particula`)
+  KEY `fk_Factura_funcion_particula1_idx` (`funcion_particula_idfuncion_particula`),
+  KEY `fk_Factura_Empledo1_idx` (`Empledo_idEmpledo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla bdcine.factura: ~0 rows (aproximadamente)
@@ -142,16 +142,10 @@ CREATE TABLE IF NOT EXISTS `formato` (
   `idFormato` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idFormato`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla bdcine.formato: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `formato` DISABLE KEYS */;
-INSERT INTO `formato` (`idFormato`, `nombre`) VALUES
-	(1, 'Cine Mudo'),
-	(2, 'Cine Sonoro'),
-	(3, 'Cine 2D'),
-	(4, 'Cine 3D'),
-	(5, 'Animacion');
 /*!40000 ALTER TABLE `formato` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bdcine.funcion
@@ -206,6 +200,7 @@ CREATE TABLE IF NOT EXISTS `pelicula` (
   `fecha_estreno` date DEFAULT NULL,
   `fecha_salida` date DEFAULT NULL,
   `duracion` int(11) DEFAULT NULL,
+  `imagen` varchar(45) DEFAULT NULL,
   `Categoria_idCategoria` int(11) NOT NULL,
   `Clasificacion_idClasificacion` int(11) NOT NULL,
   `Formato_idFormato` int(11) NOT NULL,
@@ -221,24 +216,34 @@ CREATE TABLE IF NOT EXISTS `pelicula` (
 /*!40000 ALTER TABLE `pelicula` DISABLE KEYS */;
 /*!40000 ALTER TABLE `pelicula` ENABLE KEYS */;
 
+-- Volcando estructura para tabla bdcine.puesto
+CREATE TABLE IF NOT EXISTS `puesto` (
+  `idPuesto` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) DEFAULT NULL,
+  `Sueldo` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idPuesto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla bdcine.puesto: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `puesto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `puesto` ENABLE KEYS */;
+
 -- Volcando estructura para tabla bdcine.sala
 CREATE TABLE IF NOT EXISTS `sala` (
   `idSala` int(11) NOT NULL AUTO_INCREMENT,
-  `num_asientos` int(11) DEFAULT NULL,
   `num_sala` int(11) DEFAULT NULL,
+  `columnas` int(11) DEFAULT NULL,
+  `filas` int(11) DEFAULT NULL,
+  `num_asientos` int(11) DEFAULT NULL,
   PRIMARY KEY (`idSala`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla bdcine.sala: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla bdcine.sala: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `sala` DISABLE KEYS */;
-INSERT INTO `sala` (`idSala`, `num_asientos`, `num_sala`) VALUES
-	(1, 240, 1),
-	(2, 240, 2),
-	(3, 240, 3),
-	(4, 240, 4),
-	(5, 240, 5),
-	(6, 240, 6),
-	(7, 240, 7);
+INSERT INTO `sala` (`idSala`, `num_sala`, `columnas`, `filas`, `num_asientos`) VALUES
+	(1, 1, 20, 20, 400),
+	(2, 2, 15, 27, 405),
+	(3, 3, 27, 2, 54);
 /*!40000 ALTER TABLE `sala` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

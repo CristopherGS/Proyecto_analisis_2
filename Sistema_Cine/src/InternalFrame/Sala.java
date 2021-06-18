@@ -20,13 +20,13 @@ public class Sala extends javax.swing.JInternalFrame {
     private CRUD crud;
     private SalaClass sala;
     private TablaGestion tablaGestion;
+    private ConexionBD conexion;
 
     public Sala() {
         initComponents();
         setTitle("Salas");
         tablaGestion = new TablaGestion();
-        crud = new CRUD();
-        
+     
         //configuraciones de jdialog de nueva sala
         NuevaSala.setTitle("Nueva Sala");
         NuevaSala.setSize(510,430);
@@ -60,7 +60,7 @@ public class Sala extends javax.swing.JInternalFrame {
         panelAceptarNuevo = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
+        labelTitulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         panelGeneral = new javax.swing.JPanel();
         panelSuperior = new javax.swing.JPanel();
@@ -215,11 +215,11 @@ public class Sala extends javax.swing.JInternalFrame {
         jPanel4.setBackground(new java.awt.Color(30, 95, 116));
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel13.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Nueva Sala");
+        labelTitulo.setBackground(new java.awt.Color(255, 255, 255));
+        labelTitulo.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        labelTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        labelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelTitulo.setText("Nueva Sala");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -227,12 +227,12 @@ public class Sala extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(85, 85, 85)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(labelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -338,6 +338,9 @@ public class Sala extends javax.swing.JInternalFrame {
         panelModificarRegistro.setBackground(new java.awt.Color(29, 45, 80));
         panelModificarRegistro.setPreferredSize(new java.awt.Dimension(100, 80));
         panelModificarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickModificar(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 EntrarPanel(evt);
             }
@@ -509,7 +512,8 @@ public class Sala extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelBuscarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBuscarRegistroMouseClicked
-       tablaGestion.llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(txtBusqueda.getText()));
+      
+        tablaGestion.llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(txtBusqueda.getText()));
     }//GEN-LAST:event_panelBuscarRegistroMouseClicked
 
     private void EntrarPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrarPanel
@@ -548,7 +552,12 @@ public class Sala extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_SalirPanel
 
     private void clickNuevo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickNuevo
+        
+        labelTitulo.setText("Nueva Sala");
+        sala.setDesicion(1); 
         NuevaSala.setVisible(true);
+        
+         
     }//GEN-LAST:event_clickNuevo
 
     private void cancelarNuevaSala(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarNuevaSala
@@ -581,30 +590,44 @@ public class Sala extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_SalirPanelDialogo
 
     private void clickAceptar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickAceptar
-        //con esta condicion verificamos que se cumplan todos los requisitos para la nueva sala 
-        //si reportno un numero mayot a cero todo esta bien, este numero es el numero de asientos que tendra la sala
-        int num_asientos = sala.validacionDeDatos(txtNumSala, txtColumnas, txtFilas);
-        if(num_asientos>0){
-           //con esta condicion comprobamos que no exista una sala con el mismo numero
-            if(!this.crud.Existe(sala.getConsulta(txtNumSala.getText()),txtNumSala.getText(),"num_sala")){
-                  //ingresamos la nueva sala
-                  this.crud.EjecutarInstruccion("insert into sala(num_sala,columnas,filas,num_asientos) values("+txtNumSala.getText()+","+txtColumnas.getText()+","+txtFilas.getText()+","+num_asientos+")");    
-                  //volvemos a llenar la tabla, ya con los datos actualizados
-                  tablaGestion.llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(""));
-                  //Limpiamos los campos de texto
-                  txtNumSala.setText("");
-                  txtColumnas.setText("");
-                  txtFilas.setText("");
-                  //Cerramos la ventana emergente de nueva sala 
-                  NuevaSala.dispose();
-                }
-                else{
-                    JOptionPane.showMessageDialog(null,"El numero de sala ya existe ingrese uno diferente","Error",JOptionPane.ERROR_MESSAGE);
-                    txtNumSala.setText("");
-                }
-            
-        }
+        System.out.println(sala.getDesicion());
+        if(sala.validacionDeDatos(txtNumSala, txtColumnas, txtFilas)>0){
+               Comprobacion comprobacion = new Comprobacion();
+               System.out.println(sala.getDesicion());
+               if(!comprobacion.existeRegistro(sala,txtNumSala.getText(),"num_sala")){
+                   System.out.println(sala.getDesicion());
+                   if(sala.getDesicion() == 1){
+                      
+                   }
+                   if(sala.getDesicion()==0){
+                       
+                       System.out.println("Modificar");
+                   }
+               }
+               else{
+                   JOptionPane.showMessageDialog(null,"El registro ya existe","Error",JOptionPane.ERROR_MESSAGE);
+               }
+        
+       }
+       
+       
+        
     }//GEN-LAST:event_clickAceptar
+
+    private void clickModificar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickModificar
+        int fila = tablaSalas.getSelectedRow();
+        if(fila>=0){
+            labelTitulo.setText("Modificar");
+            sala.setDesicion(0);
+            txtNumSala.setText(String.valueOf(tablaSalas.getValueAt(fila,1)));
+            txtColumnas.setText(String.valueOf(tablaSalas.getValueAt(fila,2)));
+            txtFilas.setText(String.valueOf(tablaSalas.getValueAt(fila,3)));
+            NuevaSala.setVisible(true);            
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Seleccione una sala","Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_clickModificar
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -613,7 +636,6 @@ public class Sala extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
@@ -630,6 +652,7 @@ public class Sala extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelTitulo;
     private javax.swing.JPanel panelAceptarNuevo;
     private javax.swing.JPanel panelBuscarRegistro;
     private javax.swing.JPanel panelCancelarNuevo;

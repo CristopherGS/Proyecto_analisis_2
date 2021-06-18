@@ -22,6 +22,9 @@ public class SalaClass extends Registro {
     public SalaClass() {
         titulosGestion = new TitulosSala();
         this.setTitulo(titulosGestion.DefinirTitulos());
+        this.setParametros("num_sala,columnas,filas,num_asientos");
+        this.setTabla("sala");
+ 
         System.out.println(this.getTitulo().length);
        
     }

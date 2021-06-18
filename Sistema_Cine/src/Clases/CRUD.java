@@ -5,6 +5,7 @@
  */
 package Clases;
 
+import static Clases.ConexionBD.instancia;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -20,6 +21,20 @@ import javax.swing.table.DefaultTableModel;
 public class CRUD {
 
     private ConexionBD conexion;
+    static CRUD instancia;
+    
+    private CRUD(){
+        System.out.println("crear");
+    }
+     
+    public static CRUD InstanciarCRUD(){
+        
+        if(instancia == null){
+              instancia = new CRUD();
+          }
+          
+        return instancia;
+    }
 
     public void EjecutarInstruccion(String Instruccion) {
         int filas = 0;
