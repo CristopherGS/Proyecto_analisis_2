@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package InternalFrame;
+package Sala;
 
-import Clases.*;
+import ClasesGlobales.Comprobacion;
+import ClasesGlobales.ConexionBD;
+import ClasesGlobales.TablaGestion;
+import ClasesInterfaz.TitulosSala;
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.JDialog;
@@ -17,16 +20,16 @@ import javax.swing.JOptionPane;
  */
 public class Sala extends javax.swing.JInternalFrame {
 
-    private CRUD crud;
+   
     private SalaClass sala;
     private TablaGestion tablaGestion;
+    private TitulosSala titulos;
     private ConexionBD conexion;
 
     public Sala() {
         initComponents();
         setTitle("Salas");
-        tablaGestion = new TablaGestion();
-     
+        titulos = new TitulosSala();
         //configuraciones de jdialog de nueva sala
         NuevaSala.setTitle("Nueva Sala");
         NuevaSala.setSize(510,430);
@@ -37,7 +40,8 @@ public class Sala extends javax.swing.JInternalFrame {
         //System.out.println(sala.getTitulo().length);
         
         //Llenamos la tabla de salas
-        tablaGestion.llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(""));
+        tablaGestion = tablaGestion.instanciarTablaGestion();
+        tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas,sala.getConsulta(""));
     }
 
     @SuppressWarnings("unchecked")
@@ -512,8 +516,8 @@ public class Sala extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelBuscarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBuscarRegistroMouseClicked
-      
-        tablaGestion.llenarTabla(sala.getTitulo(), tablaSalas,sala.getConsulta(txtBusqueda.getText()));
+ 
+       tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas,sala.getConsulta(txtBusqueda.getText()));
     }//GEN-LAST:event_panelBuscarRegistroMouseClicked
 
     private void EntrarPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrarPanel
@@ -591,17 +595,28 @@ public class Sala extends javax.swing.JInternalFrame {
 
     private void clickAceptar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickAceptar
         System.out.println(sala.getDesicion());
-        if(sala.validacionDeDatos(txtNumSala, txtColumnas, txtFilas)>0){
+        int total_asientos =sala.validacionDeDatos(txtNumSala, txtColumnas, txtFilas);
+        if(total_asientos>0){
                Comprobacion comprobacion = new Comprobacion();
                System.out.println(sala.getDesicion());
                if(!comprobacion.existeRegistro(sala,txtNumSala.getText(),"num_sala")){
-                   System.out.println(sala.getDesicion());
+                  // System.out.println(sala.getDesicion());
                    if(sala.getDesicion() == 1){
-                      
+                       
+                       sala.setNum_sala(txtNumSala.getText());
+                       sala.setColumnas(txtColumnas.getText());
+                       sala.setFilas(txtFilas.getText());
+                       sala.setNum_asientos(total_asientos+"");
+                       sala.actualizarValues();
+                       
+                       String query = sala.getAdminConsulta().queryInsertar(sala.getValues(),sala.getParametros(),sala.getNombre());
+                       comprobacion.EjecutarInstruccion(query);
+                       tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas,sala.getConsulta(""));
+                       NuevaSala.dispose();
                    }
                    if(sala.getDesicion()==0){
                        
-                       System.out.println("Modificar");
+                      
                    }
                }
                else{

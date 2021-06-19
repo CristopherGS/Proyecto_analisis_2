@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Clases;
+package Sala;
 
-import ImplemetInterface.TitulosSala;
-import Interface.DefinirTitulos;
+import ClasesGlobales.Registro;
+import ClasesInterfaz.TitulosSala;
+import Interfaz.DefinirTitulos;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -17,22 +18,40 @@ import javax.swing.JTextField;
 public class SalaClass extends Registro {
     
    
-    private DefinirTitulos titulosGestion;
+    private String num_sala, columnas,filas,num_asientos;
 
     public SalaClass() {
-        titulosGestion = new TitulosSala();
-        this.setTitulo(titulosGestion.DefinirTitulos());
+    
         this.setParametros("num_sala,columnas,filas,num_asientos");
-        this.setTabla("sala");
- 
-        System.out.println(this.getTitulo().length);
-       
+        this.setNombre("sala");
+     
+    }
+
+    public void setNum_sala(String num_sala) {
+        this.num_sala = num_sala;
+    }
+
+    public void setColumnas(String columnas) {
+        this.columnas = columnas;
+    }
+
+    public void setFilas(String filas) {
+        this.filas = filas;
+    }
+
+    public void setNum_asientos(String num_asientos) {
+        this.num_asientos = num_asientos;
+    }
+  
+    @Override
+    public void actualizarValues(){
+       this.setValues("values("+num_sala+","+columnas+","+filas+","+num_asientos+")");
     }
 
     @Override
     public String getConsulta(String  texto) {
         if (texto.length() == 0) {//si no hay nada en la caja de texto para buscar 
-            setWhere(" where 1 = 1"); //esto funciona como un true 
+            getAdminConsulta().setWhere(" where 1 = 1"); //esto funciona como un true 
         } else {
             /*si hay texto se le agrega al where el identificador y cual registro
               se quiere encontrar, que en este caso sera texto
@@ -41,14 +60,13 @@ public class SalaClass extends Registro {
             try {
                 // verificamos que lo que se esta buscando es un numero entero
                 int id_numSala = Integer.parseInt(texto); 
-                setWhere ("where idSala = "+id_numSala+" or num_sala="+id_numSala);  
+                getAdminConsulta().setWhere ("where idSala = "+id_numSala+" or num_sala="+id_numSala);  
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null,"Debe de ingresar un numero entero","Error",JOptionPane.ERROR_MESSAGE);
-            }
-           
+            }   
         }
-        setQuery("select * from sala " + getWhere());
-        return getQuery();
+        getAdminConsulta().setQuery("select * from sala " + getAdminConsulta().getWhere());
+        return getAdminConsulta().getQuery();
     }
     
     public int validacionDeDatos(JTextField num_sala,JTextField txtcolumnas,JTextField txtfilas){

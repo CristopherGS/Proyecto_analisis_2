@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package Main;
-import InternalFrame.*;
+import Pelicula.Pelicula;
+import Sala.Sala;
 
 /**
  *

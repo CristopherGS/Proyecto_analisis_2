@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Clases;
+package ClasesGlobales;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -20,7 +20,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TablaGestion {
     private ConexionBD conexion;
+    static TablaGestion instancia;
     
+    private TablaGestion(){
+        
+    }
+    public static TablaGestion instanciarTablaGestion(){
+        if(instancia == null){
+            instancia = new TablaGestion();
+        }
+        return instancia;
+    }
     public void llenarTabla(String[] titulos, JTable tabla, String consulta) {
         Statement sentenciaAux;//Objeto que se usa para usar ejecutar sentencias de SQL. Ejecuta una sentencia SQL simple que no tiene ningun parametro.
         ResultSet resultSetAux;//Contiene los resultados de una consulta SQL. Mantiene un cursor apuntando a su fila de datos actual. 
@@ -51,6 +61,7 @@ public class TablaGestion {
             JOptionPane.showMessageDialog(null, "Error al llenar la tabla", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getMessage());
         }
+       
     }
 
 }

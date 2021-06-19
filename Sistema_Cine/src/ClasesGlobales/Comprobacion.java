@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Clases;
+package ClasesGlobales;
 
 /**
  * 
@@ -17,4 +17,7 @@ public class Comprobacion {
         return existe;
         
                 }
+    public void EjecutarInstruccion(String query){
+      crud.InstanciarCRUD().EjecutarInstruccion(query);
+    }
 }

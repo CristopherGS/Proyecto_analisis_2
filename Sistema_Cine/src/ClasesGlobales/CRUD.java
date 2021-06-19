@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Clases;
+package ClasesGlobales;
 
-import static Clases.ConexionBD.instancia;
+import static ClasesGlobales.ConexionBD.instancia;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -52,6 +52,7 @@ public class CRUD {
             JOptionPane.showMessageDialog(null, "Error de conexion", "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println(ex.getMessage());
         }
+       
     }
 
     

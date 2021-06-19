@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 
-package ImplemetInterface;
+package ClasesInterfaz;
 
-import Interface.DefinirTitulos;
+import Interfaz.DefinirTitulos;
 
 /**
  * 
@@ -25,8 +25,6 @@ public class TitulosSala implements DefinirTitulos{
         titulos[3] = "Filas";
         titulos[4] = "No. Asientos";
         return titulos;
-    }
-    
-   
+    } 
 
 }
