@@ -35,7 +35,7 @@ public class AdministracionConsulta {
     }
     
     public String queryModificar(String nombre,String set){
-        this.query = "update " + nombre + " set " + set + " " + this.where;
+        this.query = "update " + nombre + " " + set + " " + this.where;
         return this.query;
     }
     

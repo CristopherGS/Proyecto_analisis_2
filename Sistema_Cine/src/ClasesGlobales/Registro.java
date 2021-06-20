@@ -15,8 +15,8 @@ import javax.swing.JTable;
 public class Registro {
 
 
-    private String parametros, nombre,values;
-    private int desicion;
+    private String parametros, nombre,id,values,set;
+    private int desicion,filaSeleccionada;
     private AdministracionConsulta adminConsulta;
     
     public Registro(){
@@ -46,8 +46,33 @@ public class Registro {
     public void setValues(String values) {
         this.values = values;
     }
-        
-   
+
+    public String getSet() {
+        return set;
+    }
+
+    public void setSet(String set) {
+        this.set = set;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getFilaSeleccionada() {
+        return filaSeleccionada;
+    }
+
+    public void setFilaSeleccionada(int filaSeleccionada) {
+        this.filaSeleccionada = filaSeleccionada;
+    }
+    
+    
+    
     public int getDesicion() {
         return desicion;
     }
@@ -57,6 +82,9 @@ public class Registro {
     }
     
     public void actualizarValues(){
+        
+    }
+    public void actualizarSet(){
         
     }
 

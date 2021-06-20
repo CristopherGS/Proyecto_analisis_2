@@ -47,6 +47,11 @@ public class SalaClass extends Registro {
     public void actualizarValues(){
        this.setValues("values("+num_sala+","+columnas+","+filas+","+num_asientos+")");
     }
+    @Override
+    public void actualizarSet(){
+       this.setSet("set num_sala="+num_sala+",columnas="+columnas+",filas="+filas+",num_asientos="+num_asientos);
+       this.getAdminConsulta().setWhere("where idSala = "+this.getId());
+    }
 
     @Override
     public String getConsulta(String  texto) {

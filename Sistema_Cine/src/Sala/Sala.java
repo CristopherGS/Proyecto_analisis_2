@@ -20,7 +20,6 @@ import javax.swing.JOptionPane;
  */
 public class Sala extends javax.swing.JInternalFrame {
 
-   
     private SalaClass sala;
     private TablaGestion tablaGestion;
     private TitulosSala titulos;
@@ -32,16 +31,16 @@ public class Sala extends javax.swing.JInternalFrame {
         titulos = new TitulosSala();
         //configuraciones de jdialog de nueva sala
         NuevaSala.setTitle("Nueva Sala");
-        NuevaSala.setSize(510,430);
+        NuevaSala.setSize(510, 430);
         NuevaSala.setLocationRelativeTo(Sala.this);//el relativo respecto al internal frame
         NuevaSala.setUndecorated(true);//Le quita el boron de cerrar
-        
+
         sala = new SalaClass();//Instanciamos la clase de la sala
         //System.out.println(sala.getTitulo().length);
-        
+
         //Llenamos la tabla de salas
         tablaGestion = tablaGestion.instanciarTablaGestion();
-        tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas,sala.getConsulta(""));
+        tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas, sala.getConsulta(""));
     }
 
     @SuppressWarnings("unchecked")
@@ -516,8 +515,8 @@ public class Sala extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelBuscarRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelBuscarRegistroMouseClicked
- 
-       tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas,sala.getConsulta(txtBusqueda.getText()));
+
+        tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas, sala.getConsulta(txtBusqueda.getText()));
     }//GEN-LAST:event_panelBuscarRegistroMouseClicked
 
     private void EntrarPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrarPanel
@@ -533,7 +532,7 @@ public class Sala extends javax.swing.JInternalFrame {
             panelEliminarRegistro.setBackground(new Color(30, 95, 116));
             panelEliminarRegistro.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
-        if (evt.getSource() == panelBuscarRegistro){
+        if (evt.getSource() == panelBuscarRegistro) {
             panelBuscarRegistro.setBackground(new Color(29, 45, 80));
             panelBuscarRegistro.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
@@ -542,7 +541,7 @@ public class Sala extends javax.swing.JInternalFrame {
     private void SalirPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirPanel
         if (evt.getSource() == panelNuevaSala) {
             panelNuevaSala.setBackground(new Color(29, 45, 80));
-            
+
         }
         if (evt.getSource() == panelModificarRegistro) {
             panelModificarRegistro.setBackground(new Color(29, 45, 80));
@@ -550,44 +549,44 @@ public class Sala extends javax.swing.JInternalFrame {
         if (evt.getSource() == panelEliminarRegistro) {
             panelEliminarRegistro.setBackground(new Color(29, 45, 80));
         }
-        if (evt.getSource() == panelBuscarRegistro){
+        if (evt.getSource() == panelBuscarRegistro) {
             panelBuscarRegistro.setBackground(new Color(30, 95, 116));
         }
     }//GEN-LAST:event_SalirPanel
 
     private void clickNuevo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickNuevo
-        
+
         labelTitulo.setText("Nueva Sala");
-        sala.setDesicion(1); 
+        sala.setDesicion(1);
         NuevaSala.setVisible(true);
-        
-         
+
+
     }//GEN-LAST:event_clickNuevo
 
     private void cancelarNuevaSala(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarNuevaSala
-       NuevaSala.dispose();
-       txtColumnas.setText("");
-       txtFilas.setText("");
-       txtNumSala.setText("");
+        NuevaSala.dispose();
+        txtColumnas.setText("");
+        txtFilas.setText("");
+        txtNumSala.setText("");
     }//GEN-LAST:event_cancelarNuevaSala
 
     private void EntrarPanelDialogo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrarPanelDialogo
-       if (evt.getSource() == panelAceptarNuevo){
+        if (evt.getSource() == panelAceptarNuevo) {
             panelAceptarNuevo.setBackground(new Color(29, 45, 80));
             panelAceptarNuevo.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
-       if (evt.getSource() == panelCancelarNuevo){
+        if (evt.getSource() == panelCancelarNuevo) {
             panelCancelarNuevo.setBackground(new Color(29, 45, 80));
             panelCancelarNuevo.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
     }//GEN-LAST:event_EntrarPanelDialogo
 
     private void SalirPanelDialogo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalirPanelDialogo
-        if (evt.getSource() == panelAceptarNuevo){
+        if (evt.getSource() == panelAceptarNuevo) {
             panelAceptarNuevo.setBackground(new Color(30, 95, 116));
             panelAceptarNuevo.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
-        if (evt.getSource() == panelCancelarNuevo){
+        if (evt.getSource() == panelCancelarNuevo) {
             panelCancelarNuevo.setBackground(new Color(30, 95, 116));
             panelCancelarNuevo.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
@@ -595,52 +594,55 @@ public class Sala extends javax.swing.JInternalFrame {
 
     private void clickAceptar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickAceptar
         System.out.println(sala.getDesicion());
-        int total_asientos =sala.validacionDeDatos(txtNumSala, txtColumnas, txtFilas);
-        if(total_asientos>0){
-               Comprobacion comprobacion = new Comprobacion();
-               System.out.println(sala.getDesicion());
-               if(!comprobacion.existeRegistro(sala,txtNumSala.getText(),"num_sala")){
-                  // System.out.println(sala.getDesicion());
-                   if(sala.getDesicion() == 1){
-                       
-                       sala.setNum_sala(txtNumSala.getText());
-                       sala.setColumnas(txtColumnas.getText());
-                       sala.setFilas(txtFilas.getText());
-                       sala.setNum_asientos(total_asientos+"");
-                       sala.actualizarValues();
-                       
-                       String query = sala.getAdminConsulta().queryInsertar(sala.getValues(),sala.getParametros(),sala.getNombre());
-                       comprobacion.EjecutarInstruccion(query);
-                       tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas,sala.getConsulta(""));
-                       NuevaSala.dispose();
-                   }
-                   if(sala.getDesicion()==0){
-                       
-                      
-                   }
-               }
-               else{
-                   JOptionPane.showMessageDialog(null,"El registro ya existe","Error",JOptionPane.ERROR_MESSAGE);
-               }
-        
-       }
-       
-       
-        
+        int total_asientos = sala.validacionDeDatos(txtNumSala, txtColumnas, txtFilas);
+        if (total_asientos > 0) {
+            Comprobacion comprobacion = new Comprobacion();
+            sala.setNum_sala(txtNumSala.getText());
+            sala.setColumnas(txtColumnas.getText());
+            sala.setFilas(txtFilas.getText());
+            sala.setNum_asientos(total_asientos + "");
+           
+                // System.out.println(sala.getDesicion());
+                String query = "";
+                //para insertar un nuevo registro
+                if (sala.getDesicion() == 1) {
+                    //obtenemos el id del registro seleccionado
+
+                    sala.actualizarValues();
+                    query = sala.getAdminConsulta().queryInsertar(sala.getValues(), sala.getParametros(), sala.getNombre());
+
+                }
+                //para modificar un registro
+                if (sala.getDesicion() == 0) {
+                    sala.setId(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(), 0)));
+                    sala.actualizarSet();
+                    query = sala.getAdminConsulta().queryModificar(sala.getNombre(), sala.getSet());
+                }
+
+                comprobacion.EjecutarInstruccion(query);
+                tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas, sala.getConsulta(""));
+                NuevaSala.dispose();
+                
+                txtNumSala.setText("");
+                txtColumnas.setText("");
+                txtFilas.setText("");
+        }
+
+
     }//GEN-LAST:event_clickAceptar
 
     private void clickModificar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickModificar
-        int fila = tablaSalas.getSelectedRow();
-        if(fila>=0){
+        //modificamos la variable de fila seleccionada
+        sala.setFilaSeleccionada(tablaSalas.getSelectedRow());
+        if (sala.getFilaSeleccionada() >= 0) {
             labelTitulo.setText("Modificar");
             sala.setDesicion(0);
-            txtNumSala.setText(String.valueOf(tablaSalas.getValueAt(fila,1)));
-            txtColumnas.setText(String.valueOf(tablaSalas.getValueAt(fila,2)));
-            txtFilas.setText(String.valueOf(tablaSalas.getValueAt(fila,3)));
-            NuevaSala.setVisible(true);            
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"Seleccione una sala","Error",JOptionPane.ERROR_MESSAGE);
+            txtNumSala.setText(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(), 1)));
+            txtColumnas.setText(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(), 2)));
+            txtFilas.setText(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(), 3)));
+            NuevaSala.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una sala", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_clickModificar
 
