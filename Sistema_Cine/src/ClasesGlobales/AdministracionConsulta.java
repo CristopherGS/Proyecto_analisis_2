@@ -39,8 +39,9 @@ public class AdministracionConsulta {
         return this.query;
     }
     
-    public String queryEliminar(){
-        return"";
+    public String queryEliminar(String nombre){
+        this.query = "delete from "+nombre+" "+this.where;
+        return this.query;
     }   
     
 }

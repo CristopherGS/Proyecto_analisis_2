@@ -23,7 +23,7 @@ public class Sala extends javax.swing.JInternalFrame {
     private SalaClass sala;
     private TablaGestion tablaGestion;
     private TitulosSala titulos;
-    private ConexionBD conexion;
+    private Comprobacion comprobacion;
 
     public Sala() {
         initComponents();
@@ -36,6 +36,7 @@ public class Sala extends javax.swing.JInternalFrame {
         NuevaSala.setUndecorated(true);//Le quita el boron de cerrar
 
         sala = new SalaClass();//Instanciamos la clase de la sala
+        comprobacion = new Comprobacion();
         //System.out.println(sala.getTitulo().length);
 
         //Llenamos la tabla de salas
@@ -312,6 +313,9 @@ public class Sala extends javax.swing.JInternalFrame {
 
         panelEliminarRegistro.setBackground(new java.awt.Color(29, 45, 80));
         panelEliminarRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickEliminar(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 EntrarPanel(evt);
             }
@@ -593,39 +597,39 @@ public class Sala extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_SalirPanelDialogo
 
     private void clickAceptar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickAceptar
-        System.out.println(sala.getDesicion());
+        //System.out.println(sala.getDesicion());
         int total_asientos = sala.validacionDeDatos(txtNumSala, txtColumnas, txtFilas);
         if (total_asientos > 0) {
-            Comprobacion comprobacion = new Comprobacion();
+
             sala.setNum_sala(txtNumSala.getText());
             sala.setColumnas(txtColumnas.getText());
             sala.setFilas(txtFilas.getText());
             sala.setNum_asientos(total_asientos + "");
-           
-                // System.out.println(sala.getDesicion());
-                String query = "";
-                //para insertar un nuevo registro
-                if (sala.getDesicion() == 1) {
-                    //obtenemos el id del registro seleccionado
 
-                    sala.actualizarValues();
-                    query = sala.getAdminConsulta().queryInsertar(sala.getValues(), sala.getParametros(), sala.getNombre());
+            // System.out.println(sala.getDesicion());
+            String query = "";
+            //para insertar un nuevo registro
+            if (sala.getDesicion() == 1) {
+                //obtenemos el id del registro seleccionado
 
-                }
-                //para modificar un registro
-                if (sala.getDesicion() == 0) {
-                    sala.setId(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(), 0)));
-                    sala.actualizarSet();
-                    query = sala.getAdminConsulta().queryModificar(sala.getNombre(), sala.getSet());
-                }
+                sala.actualizarValues();
+                query = sala.getAdminConsulta().queryInsertar(sala.getValues(), sala.getParametros(), sala.getNombre());
 
-                comprobacion.EjecutarInstruccion(query);
-                tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas, sala.getConsulta(""));
-                NuevaSala.dispose();
-                
-                txtNumSala.setText("");
-                txtColumnas.setText("");
-                txtFilas.setText("");
+            }
+            //para modificar un registro
+            if (sala.getDesicion() == 0) {
+                sala.setId(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(), 0)));
+                sala.actualizarSet();
+                query = sala.getAdminConsulta().queryModificar(sala.getNombre(), sala.getSet());
+            }
+
+            comprobacion.EjecutarInstruccion(query);
+            tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas, sala.getConsulta(""));
+            NuevaSala.dispose();
+
+            txtNumSala.setText("");
+            txtColumnas.setText("");
+            txtFilas.setText("");
         }
 
 
@@ -645,6 +649,23 @@ public class Sala extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Seleccione una sala", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_clickModificar
+
+    private void clickEliminar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickEliminar
+        sala.setFilaSeleccionada(tablaSalas.getSelectedRow());
+        if (sala.getFilaSeleccionada() >= 0) {
+            int res = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar la sala?", "Eliminar", JOptionPane.YES_NO_OPTION);
+            if (res == 0) {
+                sala.setId(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(), 0)));
+                sala.getAdminConsulta().setWhere("where idSala =" + sala.getId());
+                String query = sala.getAdminConsulta().queryEliminar(sala.getNombre());
+                comprobacion.EjecutarInstruccion(query);
+                tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas, sala.getConsulta(""));
+                
+            } 
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una sala", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_clickEliminar
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
