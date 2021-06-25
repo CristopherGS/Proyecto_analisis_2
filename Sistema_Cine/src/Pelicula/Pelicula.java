@@ -36,7 +36,6 @@ public class Pelicula extends javax.swing.JInternalFrame {
         registrapeli = new javax.swing.JLabel();
         guardapeli = new javax.swing.JLabel();
         panelCentral = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         nombrepeli = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -114,19 +113,6 @@ public class Pelicula extends javax.swing.JInternalFrame {
         panelGeneral.add(panelSuperior, java.awt.BorderLayout.PAGE_START);
 
         panelCentral.setLayout(new java.awt.CardLayout());
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1017, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 559, Short.MAX_VALUE)
-        );
-
-        panelCentral.add(jPanel7, "card3");
 
         jPanel4.setBackground(new java.awt.Color(30, 95, 116));
 
@@ -267,7 +253,7 @@ public class Pelicula extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
         );
 
         pack();
@@ -307,7 +293,6 @@ public class Pelicula extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nombrepeli;
     private javax.swing.JPanel panelCentral;
