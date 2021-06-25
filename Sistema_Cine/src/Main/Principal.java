@@ -6,6 +6,7 @@
 package Main;
 import Pelicula.Pelicula;
 import Sala.Sala;
+import Venta.JVentas;
 
 /**
  *
@@ -79,7 +80,13 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu3.setText("Venta");
 
-        jMenuItem3.setText("Reservacion ");
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, 0));
+        jMenuItem3.setText("Venta");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem3);
 
         jMenuBar1.add(jMenu3);
@@ -114,6 +121,12 @@ public class Principal extends javax.swing.JFrame {
       this.panelPrincipal.add(pelicula);
       pelicula.show();
     }//GEN-LAST:event_menuPeliculaActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+      JVentas v = new JVentas();
+      this.panelPrincipal.add(v);
+      v.show();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
