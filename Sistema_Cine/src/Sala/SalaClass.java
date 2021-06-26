@@ -9,6 +9,7 @@ import ClasesGlobales.Registro;
 import ClasesInterfaz.TitulosSala;
 import Interfaz.DefinirTitulos;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -19,39 +20,42 @@ import javax.swing.JTextField;
 public class SalaClass extends Registro {
     
    
-    private String num_sala, columnas,filas,num_asientos;
+    private String num_sala;
+    private int tipo;
     
 
     public SalaClass() {
     
-        this.setParametros("num_sala,columnas,filas,num_asientos");
+        this.setParametros("num_sala,TipoSala_idTipoSala");
         this.setNombre("sala");
      
     }
 
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+    
     public void setNum_sala(String num_sala) {
         this.num_sala = num_sala;
     }
 
-    public void setColumnas(String columnas) {
-        this.columnas = columnas;
+    public String getNum_sala() {
+        return num_sala;
     }
+    
 
-    public void setFilas(String filas) {
-        this.filas = filas;
-    }
-
-    public void setNum_asientos(String num_asientos) {
-        this.num_asientos = num_asientos;
-    }
   
     @Override
     public void actualizarValues(){
-       this.setValues("values("+num_sala+","+columnas+","+filas+","+num_asientos+")");
+       this.setValues("values("+num_sala+","+tipo+")");
     }
     @Override
     public void actualizarSet(){
-       this.setSet("set num_sala="+num_sala+",columnas="+columnas+",filas="+filas+",num_asientos="+num_asientos);
+       this.setSet("set num_sala="+num_sala+",TipoSala_idTipoSala="+tipo);
        this.getAdminConsulta().setWhere("where idSala = "+this.getId());
     }
 
@@ -73,23 +77,21 @@ public class SalaClass extends Registro {
             }   
         }
         getAdminConsulta().setQuery("select s.num_sala, ts.nombre,ts.asientos  from sala as s \n" +
-        "inner join tiposala as ts on ts.idTipoSala = s.TipoSala_idTipoSala " + getAdminConsulta().getWhere());
+        "inner join tiposala as ts on ts.idTipoSala = s.TipoSala_idTipoSala " + getAdminConsulta().getWhere()+" ORDER BY s.idSala ASC");
         return getAdminConsulta().getQuery();
     }
     
-    public int validacionDeDatos(JTextField num_sala){
-        int num_asientos = 0;
+    public int validacionDeDatos(JTextField num_sala,JComboBox combo){
+        int validar = 0;
         //Verificamos que los capos no este vacios
         if(num_sala.getText().length()>0){
             //con esto comprobamos que sean valores enteros 
             try {
                 int num_sala_int = Integer.parseInt(num_sala.getText());
-                
-                
-                        
+                validar = 1;    
                 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,"Debe de ingresar numero enteros","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Debe de ingresar un numero entero","Error",JOptionPane.ERROR_MESSAGE);
                 num_sala.setText("");
                 
             }     
@@ -98,7 +100,7 @@ public class SalaClass extends Registro {
             JOptionPane.showMessageDialog(null,"Debe de llenar todos los campos","Error",JOptionPane.ERROR_MESSAGE);
         }
         
-        return num_asientos;
+        return validar;
     }
     
 

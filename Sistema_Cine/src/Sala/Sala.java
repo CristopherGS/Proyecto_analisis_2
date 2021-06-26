@@ -37,11 +37,17 @@ public class Sala extends javax.swing.JInternalFrame {
 
         sala = new SalaClass();//Instanciamos la clase de la sala
         crud.InstanciarCRUD().llenar_combo(comboSizeSala,"select * from tiposala","nombre");
+        System.out.println("index: "+comboSizeSala.getSelectedIndex());
         //System.out.println(sala.getTitulo().length);
 
         //Llenamos la tabla de salas
         tablaGestion = tablaGestion.instanciarTablaGestion();
         tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas, sala.getConsulta(""));
+    }
+    
+    public void deseleccionar(){
+        tablaSalas.clearSelection();
+        sala.setFilaSeleccionada(-1);
     }
 
     @SuppressWarnings("unchecked")
@@ -422,6 +428,11 @@ public class Sala extends javax.swing.JInternalFrame {
             }
         ));
         tablaSalas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tablaSalas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                seleccionarTabla(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaSalas);
 
         panelBuscarRegistro.setBackground(new java.awt.Color(30, 95, 116));
@@ -552,14 +563,15 @@ public class Sala extends javax.swing.JInternalFrame {
 
         labelTitulo.setText("Nueva Sala");
         sala.setDesicion(1);
+        comboSizeSala.setSelectedItem("pequeña");
+        txtNumSala.setText("");
         NuevaSala.setVisible(true);
-
-
     }//GEN-LAST:event_clickNuevo
 
     private void cancelarNuevaSala(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarNuevaSala
         NuevaSala.dispose();
         txtNumSala.setText("");
+        deseleccionar();
     }//GEN-LAST:event_cancelarNuevaSala
 
     private void EntrarPanelDialogo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrarPanelDialogo
@@ -586,34 +598,34 @@ public class Sala extends javax.swing.JInternalFrame {
 
     private void clickAceptar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickAceptar
         //System.out.println(sala.getDesicion());
-        int total_asientos = sala.validacionDeDatos(txtNumSala);
+        int total_asientos = sala.validacionDeDatos(txtNumSala,comboSizeSala);
         if (total_asientos > 0) {
 
             sala.setNum_sala(txtNumSala.getText());
-            sala.setNum_asientos(total_asientos + "");
-
+            sala.setTipo(comboSizeSala.getSelectedIndex()+1);
             // System.out.println(sala.getDesicion());
             String query = "";
             //para insertar un nuevo registro
             if (sala.getDesicion() == 1) {
-                //obtenemos el id del registro seleccionado
-
+                /*Esto lo que hace es hacer la cadena de values*/
                 sala.actualizarValues();
+                /*con esto ya construimos la cadena query completa*/
                 query = sala.getAdminConsulta().queryInsertar(sala.getValues(), sala.getParametros(), sala.getNombre());
 
             }
             //para modificar un registro
             if (sala.getDesicion() == 0) {
-                sala.setId(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(), 0)));
+                sala.setNum_sala(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(), 0)));
                 sala.actualizarSet();
                 query = sala.getAdminConsulta().queryModificar(sala.getNombre(), sala.getSet());
             }
-
-            crud.EjecutarInstruccion(query);
+            System.out.println(query);
+            crud.InstanciarCRUD().EjecutarInstruccion(query);
             tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas, sala.getConsulta(""));
             NuevaSala.dispose();
 
             txtNumSala.setText("");
+            deseleccionar();
         }
 
 
@@ -621,11 +633,9 @@ public class Sala extends javax.swing.JInternalFrame {
 
     private void clickModificar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickModificar
         //modificamos la variable de fila seleccionada
-        sala.setFilaSeleccionada(tablaSalas.getSelectedRow());
         if (sala.getFilaSeleccionada() >= 0) {
             labelTitulo.setText("Modificar");
             sala.setDesicion(0);
-            txtNumSala.setText(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(), 1)));
             NuevaSala.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una sala", "Error", JOptionPane.ERROR_MESSAGE);
@@ -633,22 +643,32 @@ public class Sala extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_clickModificar
 
     private void clickEliminar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickEliminar
-        sala.setFilaSeleccionada(tablaSalas.getSelectedRow());
+         
         if (sala.getFilaSeleccionada() >= 0) {
+          
             int res = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar la sala?", "Eliminar", JOptionPane.YES_NO_OPTION);
             if (res == 0) {
-                sala.setId(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(), 0)));
+               
                 sala.getAdminConsulta().setWhere("where idSala =" + sala.getId());
                 String query = sala.getAdminConsulta().queryEliminar(sala.getNombre());
-                /*con esto le mandamos el la consulta y ya lo elimina*/
-                crud.EjecutarInstruccion(query);
+                //con esto le mandamos el la consulta y ya lo elimina
+                crud.InstanciarCRUD().EjecutarInstruccion(query);
                 tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas, sala.getConsulta(""));
+                deseleccionar();
                 
             } 
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una sala", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        } 
+       
     }//GEN-LAST:event_clickEliminar
+
+    private void seleccionarTabla(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seleccionarTabla
+      sala.setFilaSeleccionada(tablaSalas.getSelectedRow());
+      sala.setId(crud.InstanciarCRUD().getValor("select * from sala where num_sala="+String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(),0)),"idSala"));
+      txtNumSala.setText(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(),0)));
+      comboSizeSala.setSelectedItem(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(),1)));
+    }//GEN-LAST:event_seleccionarTabla
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

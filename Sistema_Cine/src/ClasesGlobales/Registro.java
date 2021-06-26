@@ -16,7 +16,7 @@ public class Registro {
 
 
     private String parametros, nombre,id,values,set;
-    private int desicion,filaSeleccionada;
+    private int desicion,filaSeleccionada=-1;
     private AdministracionConsulta adminConsulta;
     
     public Registro(){
