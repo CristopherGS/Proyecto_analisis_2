@@ -18,12 +18,10 @@ public class TitulosSala implements DefinirTitulos{
 
     @Override
     public String[] DefinirTitulos() {
-        titulos = new String[5];
-        titulos[0] = "ID";
-        titulos[1] = "No. Sala";
-        titulos[2] = "Columnas";
-        titulos[3] = "Filas";
-        titulos[4] = "No. Asientos";
+        titulos = new String[3];
+        titulos[0] = "No. Sala";
+        titulos[1] = "Tipo";
+        titulos[2] = "Asientos";
         return titulos;
     } 
 

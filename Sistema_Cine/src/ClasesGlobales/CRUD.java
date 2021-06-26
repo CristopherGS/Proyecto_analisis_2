@@ -10,6 +10,10 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -78,6 +82,37 @@ public class CRUD {
             System.out.println(ex.getMessage());
         }
         return existe;
+    }
+    public void llenar_combo(JComboBox combo,String consulta,String parametro){
+        ArrayList<String> lista = new ArrayList<String>();
+        Statement sentenciaAux;//Objeto que se usa para usar ejecutar sentencias de SQL. Ejecuta una sentencia SQL simple que no tiene ningun parametro.
+        ResultSet resultSetAux = null;//Contiene los resultados de una consulta SQL. Mantiene un cursor apuntando a su fila de datos actual. 
+        try {
+            /*Esto es lo mismo a decir result = sentencia.executeQuery*/
+           sentenciaAux =  conexion.ConectarLaBD().getConexion().createStatement(); //se crea un statemet
+           resultSetAux = sentenciaAux.executeQuery(consulta);//se relizar la sentencia y se pasan los resultados 
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            /*esto hace que cada resultado se agregue, pero se agrega solo los datos de una columna
+             se le manda el nombre de la columna, que sera la variable parametro
+            */
+            while(resultSetAux.next()){
+                /*esto es lo mismo a decir lista.add(result.getString*/
+                lista.add(resultSetAux.getString(parametro));   
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        /*Esto es para llenar el combobox con
+          los datos que se llenaron en la lista 
+        */
+        for(String tipo:lista){
+            combo.addItem(tipo);
+        }
+        
     }
 
 }

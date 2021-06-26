@@ -8,6 +8,7 @@ package Sala;
 import ClasesGlobales.Registro;
 import ClasesInterfaz.TitulosSala;
 import Interfaz.DefinirTitulos;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -19,6 +20,7 @@ public class SalaClass extends Registro {
     
    
     private String num_sala, columnas,filas,num_asientos;
+    
 
     public SalaClass() {
     
@@ -65,49 +67,31 @@ public class SalaClass extends Registro {
             try {
                 // verificamos que lo que se esta buscando es un numero entero
                 int id_numSala = Integer.parseInt(texto); 
-                getAdminConsulta().setWhere ("where idSala = "+id_numSala+" or num_sala="+id_numSala);  
+                getAdminConsulta().setWhere ("where num_sala= "+id_numSala);  
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null,"Debe de ingresar un numero entero","Error",JOptionPane.ERROR_MESSAGE);
             }   
         }
-        getAdminConsulta().setQuery("select * from sala " + getAdminConsulta().getWhere());
+        getAdminConsulta().setQuery("select s.num_sala, ts.nombre,ts.asientos  from sala as s \n" +
+        "inner join tiposala as ts on ts.idTipoSala = s.TipoSala_idTipoSala " + getAdminConsulta().getWhere());
         return getAdminConsulta().getQuery();
     }
     
-    public int validacionDeDatos(JTextField num_sala,JTextField txtcolumnas,JTextField txtfilas){
+    public int validacionDeDatos(JTextField num_sala){
         int num_asientos = 0;
         //Verificamos que los capos no este vacios
-        if(num_sala.getText().length()>0&&txtcolumnas.getText().length()>0&&txtfilas.getText().length()>0){
+        if(num_sala.getText().length()>0){
             //con esto comprobamos que sean valores enteros 
             try {
                 int num_sala_int = Integer.parseInt(num_sala.getText());
-               
-                int columnas = Integer.parseInt(txtcolumnas.getText());
-                int filas = Integer.parseInt(txtfilas.getText());
                 
-                //verificamos que las columnas y filas sean mayores a cero
-                if(columnas>0 && filas >0){
-                    if(filas<=27){
-                        num_asientos = filas*columnas;
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(null,"El numero de filas debe de ser menor a 27","Error",JOptionPane.ERROR_MESSAGE);
-                         txtfilas.setText("");
-                    }
-                    
-                }
-                else{
-                    JOptionPane.showMessageDialog(null,"Las filas y columnas debe de ser mayor a cero","Errro",JOptionPane.ERROR_MESSAGE);
-                    txtcolumnas.setText("");
-                    txtfilas.setText("");
-                }
+                
                         
                 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null,"Debe de ingresar numero enteros","Error",JOptionPane.ERROR_MESSAGE);
-                 num_sala.setText("");
-                 txtcolumnas.setText("");
-                 txtfilas.setText("");
+                num_sala.setText("");
+                
             }     
         }
         else{

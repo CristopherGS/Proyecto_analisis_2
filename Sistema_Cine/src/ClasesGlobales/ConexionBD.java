@@ -28,9 +28,9 @@ public class ConexionBD {
   
     
     private String baseDatos = "bdcine";
-    private String puerto ="3306";
+    private String puerto ="3305";
     private String usuario = "root";
-    private String password = "ljrp";
+    private String password = "xela2020";
     private String claseNombre = "com.mysql.jdbc.Driver";
     private String cadenaConexion = "";
     

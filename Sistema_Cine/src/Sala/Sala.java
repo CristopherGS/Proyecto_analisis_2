@@ -5,7 +5,7 @@
  */
 package Sala;
 
-import ClasesGlobales.Comprobacion;
+import ClasesGlobales.CRUD;
 import ClasesGlobales.ConexionBD;
 import ClasesGlobales.TablaGestion;
 import ClasesInterfaz.TitulosSala;
@@ -23,7 +23,7 @@ public class Sala extends javax.swing.JInternalFrame {
     private SalaClass sala;
     private TablaGestion tablaGestion;
     private TitulosSala titulos;
-    private Comprobacion comprobacion;
+    private CRUD crud;
 
     public Sala() {
         initComponents();
@@ -36,7 +36,7 @@ public class Sala extends javax.swing.JInternalFrame {
         NuevaSala.setUndecorated(true);//Le quita el boron de cerrar
 
         sala = new SalaClass();//Instanciamos la clase de la sala
-        comprobacion = new Comprobacion();
+        crud.InstanciarCRUD().llenar_combo(comboSizeSala,"select * from tiposala","nombre");
         //System.out.println(sala.getTitulo().length);
 
         //Llenamos la tabla de salas
@@ -54,10 +54,8 @@ public class Sala extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         txtNumSala = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtColumnas = new javax.swing.JTextField();
-        txtFilas = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        comboSizeSala = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         panelCancelarNuevo = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -97,27 +95,23 @@ public class Sala extends javax.swing.JInternalFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Numero de sala");
 
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Columnas");
-
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Filas");
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Tipo de sala");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel14))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFilas, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtColumnas, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNumSala, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(comboSizeSala, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNumSala, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
                 .addGap(68, 68, 68))
         );
         jPanel2Layout.setVerticalGroup(
@@ -127,15 +121,11 @@ public class Sala extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNumSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGap(46, 46, 46)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtColumnas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addGap(33, 33, 33)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFilas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
-                .addGap(33, 33, 33))
+                    .addComponent(comboSizeSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(30, 95, 116));
@@ -202,7 +192,7 @@ public class Sala extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(106, 106, 106)
                 .addComponent(panelAceptarNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                 .addComponent(panelCancelarNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92))
         );
@@ -463,7 +453,7 @@ public class Sala extends javax.swing.JInternalFrame {
         );
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        jLabel8.setText("Buscar por ID o por numero de sala");
+        jLabel8.setText("por numero de sala");
 
         javax.swing.GroupLayout panelinicialLayout = new javax.swing.GroupLayout(panelinicial);
         panelinicial.setLayout(panelinicialLayout);
@@ -569,8 +559,6 @@ public class Sala extends javax.swing.JInternalFrame {
 
     private void cancelarNuevaSala(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarNuevaSala
         NuevaSala.dispose();
-        txtColumnas.setText("");
-        txtFilas.setText("");
         txtNumSala.setText("");
     }//GEN-LAST:event_cancelarNuevaSala
 
@@ -598,12 +586,10 @@ public class Sala extends javax.swing.JInternalFrame {
 
     private void clickAceptar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickAceptar
         //System.out.println(sala.getDesicion());
-        int total_asientos = sala.validacionDeDatos(txtNumSala, txtColumnas, txtFilas);
+        int total_asientos = sala.validacionDeDatos(txtNumSala);
         if (total_asientos > 0) {
 
             sala.setNum_sala(txtNumSala.getText());
-            sala.setColumnas(txtColumnas.getText());
-            sala.setFilas(txtFilas.getText());
             sala.setNum_asientos(total_asientos + "");
 
             // System.out.println(sala.getDesicion());
@@ -623,13 +609,11 @@ public class Sala extends javax.swing.JInternalFrame {
                 query = sala.getAdminConsulta().queryModificar(sala.getNombre(), sala.getSet());
             }
 
-            comprobacion.EjecutarInstruccion(query);
+            crud.EjecutarInstruccion(query);
             tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas, sala.getConsulta(""));
             NuevaSala.dispose();
 
             txtNumSala.setText("");
-            txtColumnas.setText("");
-            txtFilas.setText("");
         }
 
 
@@ -642,8 +626,6 @@ public class Sala extends javax.swing.JInternalFrame {
             labelTitulo.setText("Modificar");
             sala.setDesicion(0);
             txtNumSala.setText(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(), 1)));
-            txtColumnas.setText(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(), 2)));
-            txtFilas.setText(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(), 3)));
             NuevaSala.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione una sala", "Error", JOptionPane.ERROR_MESSAGE);
@@ -658,7 +640,8 @@ public class Sala extends javax.swing.JInternalFrame {
                 sala.setId(String.valueOf(tablaSalas.getValueAt(sala.getFilaSeleccionada(), 0)));
                 sala.getAdminConsulta().setWhere("where idSala =" + sala.getId());
                 String query = sala.getAdminConsulta().queryEliminar(sala.getNombre());
-                comprobacion.EjecutarInstruccion(query);
+                /*con esto le mandamos el la consulta y ya lo elimina*/
+                crud.EjecutarInstruccion(query);
                 tablaGestion.llenarTabla(titulos.DefinirTitulos(), tablaSalas, sala.getConsulta(""));
                 
             } 
@@ -670,12 +653,12 @@ public class Sala extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog NuevaSala;
+    private javax.swing.JComboBox<String> comboSizeSala;
     private javax.swing.ButtonGroup grupoRadioButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -703,8 +686,6 @@ public class Sala extends javax.swing.JInternalFrame {
     private javax.swing.JPanel panelinicial;
     private javax.swing.JTable tablaSalas;
     private javax.swing.JTextField txtBusqueda;
-    private javax.swing.JTextField txtColumnas;
-    private javax.swing.JTextField txtFilas;
     private javax.swing.JTextField txtNumSala;
     // End of variables declaration//GEN-END:variables
 }
