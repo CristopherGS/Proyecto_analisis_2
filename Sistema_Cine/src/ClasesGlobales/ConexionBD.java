@@ -6,12 +6,18 @@
 
 package ClasesGlobales;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -23,19 +29,17 @@ import javax.swing.table.DefaultTableModel;
 public class ConexionBD {
     static ConexionBD instancia;
     private Connection conexion;//Se utiliza para instanciar un objeto en el cual se inviara la cadena de conexion
-    private Statement sentencia;//Se utiliza para ejecutar la instruccion o consulta
-    private ResultSet resultSet;//Se utiliza para recibir los datos resultado de la instruccion o consulta 
-  
-    
-    private String baseDatos = "bdcine";
-    private String puerto ="3305";
-    private String usuario = "root";
-    private String password = "xela2020";
-    private String claseNombre = "com.mysql.jdbc.Driver";
+       
+    private String baseDatos;
+    private String puerto;
+    private String usuario;
+    private String password ;
+    private String claseNombre;
     private String cadenaConexion = "";
     
      private ConexionBD() {
-        try {
+        obtenerDatosBD();//con esto obtenemos los datos de base de datos
+         try {
             cadenaConexion = "jdbc:mysql://localhost"+":"+puerto+"/"+baseDatos;
             Class.forName(claseNombre);
             conexion = DriverManager.getConnection(cadenaConexion, usuario, password);
@@ -60,22 +64,40 @@ public class ConexionBD {
     public Connection getConexion() {
         return conexion;
     }
+    public void obtenerDatosBD(){
+        String linea;
+        try {  
+            FileReader fr = new FileReader("src/Fichero/datosBD.txt");
+            BufferedReader br = new BufferedReader(fr);
+     
+            int conta = 0;
+            while((linea=br.readLine())!=null){
+                if(conta ==0){
+                    this.baseDatos = linea;
+                } 
+                if(conta ==1){
+                     this.puerto = linea;
+                } 
+                if(conta ==2){
+                     this.usuario = linea;
+                } 
+                if(conta ==3){
+                    this.password = linea;
+                }
+                if(conta ==4){
+                    this.claseNombre = linea;
+                }
+                conta++;
+               
+            }
+            
 
-    public Statement getSentencia() {
-        return sentencia;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public ResultSet getResultSet() {
-        return resultSet;
-    }
-
-    public void setSentencia(Statement sentencia) {
-        this.sentencia = sentencia;
-    }
-
-    public void setResultSet(ResultSet resultSet) {
-        this.resultSet = resultSet;
-    } 
-    
-    
+       
 }

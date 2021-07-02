@@ -1,0 +1,5 @@
+bdcine
+3305
+root
+xela2020
+com.mysql.jdbc.Driver
