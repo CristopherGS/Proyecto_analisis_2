@@ -22,6 +22,7 @@ public class Pelicula extends javax.swing.JInternalFrame {
 
     private PeliculaClass pelicula;
     private CRUD crud;
+   
     
     
     public Pelicula() {
@@ -36,6 +37,7 @@ public class Pelicula extends javax.swing.JInternalFrame {
         categoria.setEnabled(false);
         clasificacion.setEnabled(false);
         idioma.setEnabled(false);
+        pelicula = new PeliculaClass();
     
     }
 
