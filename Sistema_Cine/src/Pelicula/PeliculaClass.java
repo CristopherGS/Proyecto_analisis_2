@@ -13,18 +13,18 @@ import javax.swing.JTextField;
 
 public class PeliculaClass extends Registro {
 
-    private String nombre, fecha_estreno, hora_inicio, duracion, imagen, Categoria,
+    private String nombrepelicula, fecha_estreno, hora_inicio, duracion, imagen, Categoria,
             Clasificacion, Idioma;
 
     public PeliculaClass() {
 
-        this.setParametros("nombre, fecha_estreno, hora_inicio, duracion, imagen, Categoria,Clasificacion, Idioma;");
+        this.setParametros("nombre, fecha_estreno, hora_inicio, duracion, imagen, Categoria, Clasificacion, Idioma");
         this.setNombre("pelicula");
 
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombrePeli(String nombre) {
+        this.nombrepelicula = nombrepelicula;
     }
 
     public void setFechaEstreno(String fecha_estreno) {
@@ -54,5 +54,11 @@ public class PeliculaClass extends Registro {
     public void setIdioma(String idioma) {
         this.Idioma = idioma;
     }
+    
+        @Override
+    public void actualizarValues(){
+       this.setValues("values('"+nombrepelicula+"','"+fecha_estreno+"','"+hora_inicio+"','"+duracion+"', '"+imagen+"', '"+Categoria+"', '"+Clasificacion+"', '"+Idioma+"')");
+    }
 
 }
+

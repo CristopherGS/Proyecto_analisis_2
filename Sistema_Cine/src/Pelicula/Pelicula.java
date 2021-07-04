@@ -5,18 +5,38 @@
  */
 package Pelicula;
 
+import ClasesGlobales.CRUD;
+import ClasesGlobales.ConexionBD;
+import ClasesGlobales.TablaGestion;
+import ClasesInterfaz.TitulosSala;
+import Sala.SalaClass;
+import java.awt.Color;
+import java.awt.Cursor;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class Pelicula extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Pelicula
-     */
+    private PeliculaClass pelicula;
+    private CRUD crud;
+    
+    
     public Pelicula() {
         initComponents();
         setTitle("Peliculas");
+        crud.InstanciarCRUD();
+        nombrepeli.setEnabled(false);
+        fechaestreno.setEnabled(false);
+        horainicio.setEnabled(false);
+        duracion.setEnabled(false);
+        imagen.setEnabled(false);
+        categoria.setEnabled(false);
+        clasificacion.setEnabled(false);
+        idioma.setEnabled(false);
+    
     }
 
     /**
@@ -117,6 +137,11 @@ public class Pelicula extends javax.swing.JInternalFrame {
         jPanel4.setBackground(new java.awt.Color(30, 95, 116));
 
         nombrepeli.setText("llenar campo...");
+        nombrepeli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombrepeliActionPerformed(evt);
+            }
+        });
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nombre:");
@@ -260,16 +285,42 @@ public class Pelicula extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void guardarpelicula(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarpelicula
-        // TODO add your handling code here:
+       
+      String query;  
+        
+      pelicula.setNombrePeli(nombrepeli.getText());
+      pelicula.setFechaEstreno(fechaestreno.getText());
+      pelicula.setHoraInicio(horainicio.getText());
+      pelicula.setDuracion(duracion.getText());
+      pelicula.setImagen(imagen.getText());
+      pelicula.setCategoria(categoria.getText());
+      pelicula.setClasificacion(clasificacion.getText());
+      pelicula.setIdioma(idioma.getText());
+     
+      pelicula.actualizarValues();
+      query = pelicula.getAdminConsulta().queryInsertar(pelicula.getValues(), pelicula.getParametros(), pelicula.getNombre());
+      System.out.println(query);
+      crud.InstanciarCRUD().EjecutarInstruccion(query);
     }//GEN-LAST:event_guardarpelicula
 
     private void registrarpelicula(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarpelicula
-        // TODO add your handling code here:
+        nombrepeli.setEnabled(true);
+        fechaestreno.setEnabled(true);
+        horainicio.setEnabled(true);
+        duracion.setEnabled(true);
+        imagen.setEnabled(true);
+        categoria.setEnabled(true);
+        clasificacion.setEnabled(true);
+        idioma.setEnabled(true);
     }//GEN-LAST:event_registrarpelicula
 
     private void fechaestrenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaestrenoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fechaestrenoActionPerformed
+
+    private void nombrepeliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombrepeliActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombrepeliActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
