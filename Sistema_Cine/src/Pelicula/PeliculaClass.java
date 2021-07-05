@@ -24,7 +24,7 @@ public class PeliculaClass extends Registro {
     }
 
     public void setNombrePeli(String nombre) {
-        this.nombrepelicula = nombrepelicula;
+        this.nombrepelicula = nombre;
     }
 
     public void setFechaEstreno(String fecha_estreno) {

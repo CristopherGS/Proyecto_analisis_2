@@ -49,7 +49,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jScrollPane1" alignment="0" pref="592" max="32767" attributes="0"/>
+          <Component id="jScrollPane1" alignment="0" pref="596" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -80,9 +80,13 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="314" max="-2" attributes="0"/>
                           <Component id="registrapeli" pref="135" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="eliminapeli" min="-2" pref="92" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="guardapeli" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="415" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="confirmareli" min="-2" pref="87" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="488" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -90,11 +94,20 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace pref="19" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="registrapeli" min="-2" pref="87" max="-2" attributes="0"/>
-                              <Component id="guardapeli" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="confirmareli" min="-2" pref="87" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="guardapeli" min="-2" pref="87" max="-2" attributes="0"/>
+                                      <Component id="eliminapeli" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
+                                      <Component id="registrapeli" min="-2" pref="87" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -118,6 +131,27 @@
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="guardarpelicula"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="eliminapeli">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/img/eliminar_registro.png"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="EliminarPelicula"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="confirmareli">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/img/aceptar.png"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="jLabel10"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AceptarEliminacion"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -193,7 +227,7 @@
                                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="256" max="32767" attributes="0"/>
+                              <EmptySpace pref="453" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -237,9 +271,6 @@
                   </Layout>
                   <SubComponents>
                     <Component class="javax.swing.JTextField" name="nombrepeli">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="llenar campo..."/>
-                      </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombrepeliActionPerformed"/>
                       </Events>
@@ -261,9 +292,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="horainicio">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="llenar campo..."/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel3">
                       <Properties>
@@ -274,9 +302,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="fechaestreno">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="llenar campo..."/>
-                      </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fechaestrenoActionPerformed"/>
                       </Events>
@@ -290,9 +315,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="duracion">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="llenar campo..."/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel5">
                       <Properties>
@@ -303,9 +325,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="imagen">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="llenar campo..."/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel6">
                       <Properties>
@@ -316,9 +335,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="categoria">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="llenar campo..."/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel7">
                       <Properties>
@@ -329,9 +345,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="clasificacion">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="llenar campo..."/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel8">
                       <Properties>
@@ -342,9 +355,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="idioma">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="llenar campo..."/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel9">
                       <Properties>
