@@ -18,22 +18,21 @@ import javax.swing.ImageIcon;
  * @author Shaddow
  */
 public class Cartelera extends javax.swing.JInternalFrame {
-
+    private int contador = 0;
     private ObtenerPeliculas obtener;
     private ArrayList<PeliculaClass> peliculas; 
     public Cartelera() {
         initComponents();
         obtener = new ObtenerPeliculas();
         this.peliculas = obtener.ObtenerPelis("select * from pelicula");
-        labelNombre.setText(this.peliculas.get(0).getNombrepelicula());
-        labelCategoria.setText(this.peliculas.get(0).getCategoria());
-        labelFecha.setText(this.peliculas.get(0).getFecha_estreno());
-        labelClasificacion.setText(this.peliculas.get(0).getClasificacion());
-        labelDuracion.setText(this.peliculas.get(0).getDuracion());
-        labelIdioma.setText(this.peliculas.get(0).getIdioma());
-        labelHora.setText(this.peliculas.get(0).getHora_inicio());
-       // System.out.println(this.peliculas.get(0).getImagen());
-       cargarImagen(this.peliculas.get(0).getImagen());
+        labelNombre.setText(this.peliculas.get(contador).getNombrepelicula());
+        labelCategoria.setText(this.peliculas.get(contador).getCategoria());
+        labelFecha.setText(this.peliculas.get(contador).getFecha_estreno());
+        labelClasificacion.setText(this.peliculas.get(contador).getClasificacion());
+        labelDuracion.setText(this.peliculas.get(contador).getDuracion());
+        labelIdioma.setText(this.peliculas.get(contador).getIdioma());
+        labelHora.setText(this.peliculas.get(contador).getHora_inicio());
+        cargarImagen(this.peliculas.get(contador).getImagen());
     }
     
     public void cargarImagen(String enlace){
@@ -214,11 +213,32 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
     }// </editor-fold>//GEN-END:initComponents
 
     private void cambiarsiguiente(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarsiguiente
-        // TODO add your handling code here:
+        contador++;  
+        labelNombre.setText(this.peliculas.get(contador).getNombrepelicula());
+        labelCategoria.setText(this.peliculas.get(contador).getCategoria());
+        labelFecha.setText(this.peliculas.get(contador).getFecha_estreno());
+        labelClasificacion.setText(this.peliculas.get(contador).getClasificacion());
+        labelDuracion.setText(this.peliculas.get(contador).getDuracion());
+        labelIdioma.setText(this.peliculas.get(contador).getIdioma());
+        labelHora.setText(this.peliculas.get(contador).getHora_inicio());
+        cargarImagen(this.peliculas.get(contador).getImagen());
     }//GEN-LAST:event_cambiarsiguiente
 
     private void cambiaranterior(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiaranterior
-        // TODO add your handling code here:
+        if(contador==0){
+            System.out.println("error");
+        }
+        else{
+        contador--;  
+        labelNombre.setText(this.peliculas.get(contador).getNombrepelicula());
+        labelCategoria.setText(this.peliculas.get(contador).getCategoria());
+        labelFecha.setText(this.peliculas.get(contador).getFecha_estreno());
+        labelClasificacion.setText(this.peliculas.get(contador).getClasificacion());
+        labelDuracion.setText(this.peliculas.get(contador).getDuracion());
+        labelIdioma.setText(this.peliculas.get(contador).getIdioma());
+        labelHora.setText(this.peliculas.get(contador).getHora_inicio());
+        cargarImagen(this.peliculas.get(contador).getImagen());
+        }
     }//GEN-LAST:event_cambiaranterior
 
 

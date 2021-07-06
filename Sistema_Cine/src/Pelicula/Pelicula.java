@@ -363,6 +363,9 @@ public class Pelicula extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_EliminarPelicula
 
     private void AceptarEliminacion(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AceptarEliminacion
+      pelicula.getAdminConsulta().setWhere("where nombre ='" + nombrepeli.getText() +"'");
+      String query = pelicula.getAdminConsulta().queryEliminar(pelicula.getNombre());
+      crud.InstanciarCRUD().EjecutarInstruccion(query);
       nombrepeli.setEnabled(false);
       nombrepeli.setText("");
       confirmareli.setVisible(false);
