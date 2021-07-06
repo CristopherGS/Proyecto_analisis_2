@@ -78,10 +78,18 @@ CREATE TABLE IF NOT EXISTS `dias` (
   `iddias_funcion` int(11) NOT NULL AUTO_INCREMENT,
   `dia` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`iddias_funcion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla bdcine.dias: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `dias` DISABLE KEYS */;
+INSERT INTO `dias` (`iddias_funcion`, `dia`) VALUES
+	(1, 'Lunes'),
+	(2, 'Martes'),
+	(3, 'Miercoles'),
+	(4, 'Jueves'),
+	(5, 'Viernes'),
+	(6, 'Sabado'),
+	(7, 'Domingo');
 /*!40000 ALTER TABLE `dias` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bdcine.empledo
