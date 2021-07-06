@@ -63,7 +63,6 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
 
         jPanel1 = new javax.swing.JPanel();
         paraimagen = new javax.swing.JLabel();
-        mostrar = new javax.swing.JButton();
         labelNombre = new javax.swing.JLabel();
         labelDuracion = new javax.swing.JLabel();
         labelFecha = new javax.swing.JLabel();
@@ -71,6 +70,8 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
         labelClasificacion = new javax.swing.JLabel();
         labelCategoria = new javax.swing.JLabel();
         labelIdioma = new javax.swing.JLabel();
+        anterior = new javax.swing.JLabel();
+        siguiente = new javax.swing.JLabel();
 
         setIconifiable(true);
         setMaximizable(true);
@@ -80,13 +81,6 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
 
         paraimagen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        mostrar.setText("Mostrar");
-        mostrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostrarActionPerformed(evt);
-            }
-        });
 
         labelNombre.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         labelNombre.setForeground(new java.awt.Color(255, 255, 255));
@@ -129,10 +123,28 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
         labelIdioma.setText("Idioma");
         labelIdioma.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        anterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/anterior.png"))); // NOI18N
+        anterior.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cambiaranterior(evt);
+            }
+        });
+
+        siguiente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/siguiente.png"))); // NOI18N
+        siguiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cambiarsiguiente(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(193, 193, 193)
+                .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 806, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(labelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,16 +159,14 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
                 .addGap(18, 18, 18)
                 .addComponent(labelIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 88, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(paraimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
-                .addComponent(mostrar)
-                .addGap(380, 380, 380))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(193, 193, 193)
-                .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 806, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(anterior)
+                .addGap(47, 47, 47)
+                .addComponent(paraimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(siguiente)
+                .addGap(425, 425, 425))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,12 +175,15 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
                 .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(231, 231, 231)
-                        .addComponent(mostrar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(paraimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                        .addComponent(paraimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(siguiente))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(198, 198, 198)
+                        .addComponent(anterior)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelFecha)
                     .addComponent(labelHora)
@@ -185,24 +198,32 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
-    
-    }//GEN-LAST:event_mostrarActionPerformed
+    private void cambiarsiguiente(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarsiguiente
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cambiarsiguiente
+
+    private void cambiaranterior(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiaranterior
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cambiaranterior
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel anterior;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelCategoria;
     private javax.swing.JLabel labelClasificacion;
@@ -211,7 +232,7 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
     private javax.swing.JLabel labelHora;
     private javax.swing.JLabel labelIdioma;
     private javax.swing.JLabel labelNombre;
-    private javax.swing.JButton mostrar;
     private javax.swing.JLabel paraimagen;
+    private javax.swing.JLabel siguiente;
     // End of variables declaration//GEN-END:variables
 }
