@@ -141,6 +141,33 @@ public class CRUD {
        
         return dato;
     }
+    public int getUltimoID(String formaId,String nombreRegistro){
+        String consulta = "SELECT MAX("+formaId+") AS id FROM"+nombreRegistro;
+        int id=-1;
+        Statement sentenciaAux;//Objeto que se usa para usar ejecutar sentencias de SQL. Ejecuta una sentencia SQL simple que no tiene ningun parametro.
+        ResultSet resultSetAux = null;//Contiene los resultados de una consulta SQL. Mantiene un cursor apuntando a su fila de datos actual. 
+        try {
+            /*Esto es lo mismo a decir result = sentencia.executeQuery*/
+           sentenciaAux =  conexion.ConectarLaBD().getConexion().createStatement(); //se crea un statemet
+           resultSetAux = sentenciaAux.executeQuery(consulta);//se relizar la sentencia y se pasan los resultados 
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            /*esto hace que cada resultado se agregue, pero se agrega solo los datos de una columna
+             se le manda el nombre de la columna, que sera la variable parametro
+            */
+            while(resultSetAux.next()){
+               id = resultSetAux.getInt(formaId);
+               
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        return id;
+    }
 
 
 }
