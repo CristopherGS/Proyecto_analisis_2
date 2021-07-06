@@ -31,7 +31,7 @@ public class Cartelera extends javax.swing.JInternalFrame {
         labelClasificacion.setText(this.peliculas.get(contador).getClasificacion());
         labelDuracion.setText(this.peliculas.get(contador).getDuracion());
         labelIdioma.setText(this.peliculas.get(contador).getIdioma());
-        labelHora.setText(this.peliculas.get(contador).getHora_inicio());
+        //System.out.println(this.peliculas.get(contador).getImagen());
         cargarImagen(this.peliculas.get(contador).getImagen());
     }
     
@@ -221,7 +221,7 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
         labelClasificacion.setText(this.peliculas.get(contador).getClasificacion());
         labelDuracion.setText(this.peliculas.get(contador).getDuracion());
         labelIdioma.setText(this.peliculas.get(contador).getIdioma());
-        labelHora.setText(this.peliculas.get(contador).getHora_inicio());
+      
         cargarImagen(this.peliculas.get(contador).getImagen());
     }//GEN-LAST:event_cambiarsiguiente
 
@@ -237,7 +237,7 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
         labelClasificacion.setText(this.peliculas.get(contador).getClasificacion());
         labelDuracion.setText(this.peliculas.get(contador).getDuracion());
         labelIdioma.setText(this.peliculas.get(contador).getIdioma());
-        labelHora.setText(this.peliculas.get(contador).getHora_inicio());
+       
         cargarImagen(this.peliculas.get(contador).getImagen());
         }
     }//GEN-LAST:event_cambiaranterior

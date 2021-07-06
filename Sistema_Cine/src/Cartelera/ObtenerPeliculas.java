@@ -53,22 +53,20 @@ public class ObtenerPeliculas {
                     if(i == 2){
                         pelicula.setFechaEstreno(resultSetAux.getString(i + 1));
                     }
+                   
                     if(i == 3){
-                         pelicula.setHoraInicio(resultSetAux.getString(i + 1));
-                    }
-                    if(i == 4){
                         pelicula.setDuracion(resultSetAux.getString(i + 1));
                     }
-                    if(i == 5){
+                    if(i == 4){
                         pelicula.setImagen(resultSetAux.getString(i + 1));
                     }
-                    if(i == 6){
+                    if(i == 5){
                         pelicula.setCategoria(resultSetAux.getString(i + 1));
                     }
-                    if(i == 7){
+                    if(i == 6){
                          pelicula.setClasificacion(resultSetAux.getString(i + 1));
                     }
-                    if(i == 8){
+                    if(i == 7){
                          pelicula.setIdioma(resultSetAux.getString(i + 1));
                     }
                 }
