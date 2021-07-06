@@ -33,19 +33,22 @@ public class Cartelera extends javax.swing.JInternalFrame {
         labelIdioma.setText(this.peliculas.get(0).getIdioma());
         labelHora.setText(this.peliculas.get(0).getHora_inicio());
        // System.out.println(this.peliculas.get(0).getImagen());
-       cargarImagen();
+       cargarImagen(this.peliculas.get(0).getImagen());
     }
-    public void cargarImagen(){
+    
+    public void cargarImagen(String enlace){
                Image imagen = null;
         try {
             //Inicializar y asignar url de la imagen a mostrar
-            URL url = new URL("https://pics.filmaffinity.com/monster_hunter-171950842-large.jpg");
+            URL url = new URL(enlace);
             //Asignacion de url a la imagen
             imagen = ImageIO.read(url);
                } catch (IOException e) {
                                       e.printStackTrace();
                                                                  }
-ImageIcon icono = new ImageIcon(imagen.getScaledInstance(paraimagen.getWidth(), paraimagen.getHeight(), Image.SCALE_DEFAULT));
+//ImageIcon icono = new ImageIcon(imagen.getScaledInstance(paraimagen.getWidth(), paraimagen.getHeight(), Image.SCALE_DEFAULT));
+
+ImageIcon icono = new ImageIcon(imagen.getScaledInstance(280, 450, Image.SCALE_DEFAULT));
 paraimagen.setIcon(icono);        // TODO add your handling code here:
     }
 
@@ -76,7 +79,7 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
         jPanel1.setBackground(new java.awt.Color(30, 95, 116));
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        paraimagen.setBorder(new javax.swing.border.MatteBorder(null));
+        paraimagen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         mostrar.setText("Mostrar");
         mostrar.addActionListener(new java.awt.event.ActionListener() {
@@ -143,11 +146,11 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
                 .addComponent(labelCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(labelIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 86, Short.MAX_VALUE))
+                .addGap(0, 88, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(paraimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100)
+                .addGap(75, 75, 75)
                 .addComponent(mostrar)
                 .addGap(380, 380, 380))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -162,12 +165,12 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
                 .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(paraimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(231, 231, 231)
-                        .addComponent(mostrar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addComponent(mostrar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(paraimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelFecha)
                     .addComponent(labelHora)
@@ -188,7 +191,7 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
         );
 
         pack();
