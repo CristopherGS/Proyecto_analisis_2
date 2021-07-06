@@ -5,9 +5,11 @@
  */
 package Cartelera;
 
+import Pelicula.PeliculaClass;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
@@ -17,11 +19,34 @@ import javax.swing.ImageIcon;
  */
 public class Cartelera extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Cartelera
-     */
+    private ObtenerPeliculas obtener;
+    private ArrayList<PeliculaClass> peliculas; 
     public Cartelera() {
         initComponents();
+        obtener = new ObtenerPeliculas();
+        this.peliculas = obtener.ObtenerPelis("select * from pelicula");
+        labelNombre.setText(this.peliculas.get(0).getNombrepelicula());
+        labelCategoria.setText(this.peliculas.get(0).getCategoria());
+        labelFecha.setText(this.peliculas.get(0).getFecha_estreno());
+        labelClasificacion.setText(this.peliculas.get(0).getClasificacion());
+        labelDuracion.setText(this.peliculas.get(0).getDuracion());
+        labelIdioma.setText(this.peliculas.get(0).getIdioma());
+        labelHora.setText(this.peliculas.get(0).getHora_inicio());
+       // System.out.println(this.peliculas.get(0).getImagen());
+       cargarImagen();
+    }
+    public void cargarImagen(){
+               Image imagen = null;
+        try {
+            //Inicializar y asignar url de la imagen a mostrar
+            URL url = new URL("https://pics.filmaffinity.com/monster_hunter-171950842-large.jpg");
+            //Asignacion de url a la imagen
+            imagen = ImageIO.read(url);
+               } catch (IOException e) {
+                                      e.printStackTrace();
+                                                                 }
+ImageIcon icono = new ImageIcon(imagen.getScaledInstance(paraimagen.getWidth(), paraimagen.getHeight(), Image.SCALE_DEFAULT));
+paraimagen.setIcon(icono);        // TODO add your handling code here:
     }
 
     /**
@@ -36,14 +61,16 @@ public class Cartelera extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         paraimagen = new javax.swing.JLabel();
         mostrar = new javax.swing.JButton();
-        cnombre = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        labelNombre = new javax.swing.JLabel();
+        labelDuracion = new javax.swing.JLabel();
+        labelFecha = new javax.swing.JLabel();
+        labelHora = new javax.swing.JLabel();
+        labelClasificacion = new javax.swing.JLabel();
+        labelCategoria = new javax.swing.JLabel();
+        labelIdioma = new javax.swing.JLabel();
 
+        setIconifiable(true);
+        setMaximizable(true);
         setPreferredSize(new java.awt.Dimension(1280, 720));
 
         jPanel1.setBackground(new java.awt.Color(30, 95, 116));
@@ -58,46 +85,46 @@ public class Cartelera extends javax.swing.JInternalFrame {
             }
         });
 
-        cnombre.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        cnombre.setForeground(new java.awt.Color(255, 255, 255));
-        cnombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cnombre.setText("Nombre");
+        labelNombre.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        labelNombre.setForeground(new java.awt.Color(255, 255, 255));
+        labelNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelNombre.setText("Nombre");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Duración");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        labelDuracion.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        labelDuracion.setForeground(new java.awt.Color(255, 255, 255));
+        labelDuracion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelDuracion.setText("Duración");
+        labelDuracion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Fecha");
-        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        labelFecha.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        labelFecha.setForeground(new java.awt.Color(255, 255, 255));
+        labelFecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelFecha.setText("Fecha");
+        labelFecha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Hora");
-        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        labelHora.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        labelHora.setForeground(new java.awt.Color(255, 255, 255));
+        labelHora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelHora.setText("Hora");
+        labelHora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Clasificación");
-        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        labelClasificacion.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        labelClasificacion.setForeground(new java.awt.Color(255, 255, 255));
+        labelClasificacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelClasificacion.setText("Clasificación");
+        labelClasificacion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Categoría");
-        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        labelCategoria.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        labelCategoria.setForeground(new java.awt.Color(255, 255, 255));
+        labelCategoria.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelCategoria.setText("Categoría");
+        labelCategoria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Idioma");
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        labelIdioma.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        labelIdioma.setForeground(new java.awt.Color(255, 255, 255));
+        labelIdioma.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelIdioma.setText("Idioma");
+        labelIdioma.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,18 +132,18 @@ public class Cartelera extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 88, Short.MAX_VALUE))
+                .addComponent(labelIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 86, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(paraimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -125,14 +152,14 @@ public class Cartelera extends javax.swing.JInternalFrame {
                 .addGap(380, 380, 380))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(193, 193, 193)
-                .addComponent(cnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 806, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 806, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(cnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
@@ -140,14 +167,14 @@ public class Cartelera extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(231, 231, 231)
                         .addComponent(mostrar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
+                    .addComponent(labelFecha)
+                    .addComponent(labelHora)
+                    .addComponent(labelDuracion)
+                    .addComponent(labelClasificacion)
+                    .addComponent(labelCategoria)
+                    .addComponent(labelIdioma))
                 .addGap(84, 84, 84))
         );
 
@@ -161,36 +188,26 @@ public class Cartelera extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
-           Image imagen = null;
-        try {
-            //Inicializar y asignar url de la imagen a mostrar
-            URL url = new URL("https://pics.filmaffinity.com/nakitai_watashi_wa_neko_o_kaburu-628042243-large.jpg");
-            //Asignacion de url a la imagen
-            imagen = ImageIO.read(url);
-               } catch (IOException e) {
-                                      e.printStackTrace();
-                                                                 }
-ImageIcon icono = new ImageIcon(imagen.getScaledInstance(paraimagen.getWidth(), paraimagen.getHeight(), Image.SCALE_DEFAULT));
-paraimagen.setIcon(icono);        // TODO add your handling code here:
+    
     }//GEN-LAST:event_mostrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel cnombre;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelCategoria;
+    private javax.swing.JLabel labelClasificacion;
+    private javax.swing.JLabel labelDuracion;
+    private javax.swing.JLabel labelFecha;
+    private javax.swing.JLabel labelHora;
+    private javax.swing.JLabel labelIdioma;
+    private javax.swing.JLabel labelNombre;
     private javax.swing.JButton mostrar;
     private javax.swing.JLabel paraimagen;
     // End of variables declaration//GEN-END:variables

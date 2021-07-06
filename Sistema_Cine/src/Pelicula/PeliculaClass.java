@@ -54,6 +54,39 @@ public class PeliculaClass extends Registro {
     public void setIdioma(String idioma) {
         this.Idioma = idioma;
     }
+
+    public String getNombrepelicula() {
+        return nombrepelicula;
+    }
+
+    public String getFecha_estreno() {
+        return fecha_estreno;
+    }
+
+    public String getHora_inicio() {
+        return hora_inicio;
+    }
+
+    public String getDuracion() {
+        return duracion;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public String getCategoria() {
+        return Categoria;
+    }
+
+    public String getClasificacion() {
+        return Clasificacion;
+    }
+
+    public String getIdioma() {
+        return Idioma;
+    }
+    
     
         @Override
     public void actualizarValues(){
