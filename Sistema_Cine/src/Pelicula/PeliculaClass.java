@@ -13,12 +13,12 @@ import javax.swing.JTextField;
 
 public class PeliculaClass extends Registro {
 
-    private String nombrepelicula, fecha_estreno, hora_inicio, duracion, imagen, Categoria,
+    private String nombrepelicula, fecha_estreno, duracion, imagen, Categoria,
             Clasificacion, Idioma;
 
     public PeliculaClass() {
 
-        this.setParametros("nombre, fecha_estreno, hora_inicio, duracion, imagen, Categoria, Clasificacion, Idioma");
+        this.setParametros("nombre, fecha_estreno, duracion, imagen, Categoria, Clasificacion, Idioma");
         this.setNombre("pelicula");
 
     }
@@ -29,10 +29,6 @@ public class PeliculaClass extends Registro {
 
     public void setFechaEstreno(String fecha_estreno) {
         this.fecha_estreno = fecha_estreno;
-    }
-
-    public void setHoraInicio(String hora_inicio) {
-        this.hora_inicio = hora_inicio;
     }
 
     public void setDuracion(String duracion) {
@@ -63,10 +59,6 @@ public class PeliculaClass extends Registro {
         return fecha_estreno;
     }
 
-    public String getHora_inicio() {
-        return hora_inicio;
-    }
-
     public String getDuracion() {
         return duracion;
     }
@@ -90,7 +82,7 @@ public class PeliculaClass extends Registro {
     
         @Override
     public void actualizarValues(){
-       this.setValues("values('"+nombrepelicula+"','"+fecha_estreno+"','"+hora_inicio+"','"+duracion+"', '"+imagen+"', '"+Categoria+"', '"+Clasificacion+"', '"+Idioma+"')");
+       this.setValues("values('"+nombrepelicula+"','"+fecha_estreno+"','"+duracion+"', '"+imagen+"', '"+Categoria+"', '"+Clasificacion+"', '"+Idioma+"')");
     }
 
 }

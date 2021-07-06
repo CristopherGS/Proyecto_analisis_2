@@ -72,6 +72,7 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
         anterior = new javax.swing.JLabel();
         siguiente = new javax.swing.JLabel();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setPreferredSize(new java.awt.Dimension(1280, 720));

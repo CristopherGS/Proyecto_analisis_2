@@ -172,22 +172,21 @@ CREATE TABLE IF NOT EXISTS `pelicula` (
   `idPelicula` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) DEFAULT NULL,
   `fecha_estreno` varchar(100) DEFAULT NULL,
-  `hora_inicio` varchar(100) DEFAULT NULL,
   `duracion` varchar(100) DEFAULT NULL,
   `imagen` varchar(1000) DEFAULT NULL,
   `Categoria` varchar(100) DEFAULT NULL,
   `Clasificacion` varchar(100) DEFAULT NULL,
   `Idioma` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idPelicula`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 
--- Volcando datos para la tabla bdcine.pelicula: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla bdcine.pelicula: ~5 rows (aproximadamente)
 /*!40000 ALTER TABLE `pelicula` DISABLE KEYS */;
-REPLACE INTO `pelicula` (`idPelicula`, `nombre`, `fecha_estreno`, `hora_inicio`, `duracion`, `imagen`, `Categoria`, `Clasificacion`, `Idioma`) VALUES
-	(1, 'Monster Hunter', '3 de Diciembrew', '8pm', '1h 44m', 'https://pics.filmaffinity.com/monster_hunter-171950842-large.jpg', 'Acción/Fantasía', 'B15', 'Español Sub'),
-	(2, 'Soul', '25 de Diciembre', '4pm', '1h 47m', 'https://pics.filmaffinity.com/soul-557797463-large.jpg', 'Infantil/Comedia', 'AA', 'Español'),
-	(3, 'Amor de Gata', '18 de Junio', '5pm', '1h 44m', 'https://pics.filmaffinity.com/nakitai_watashi_wa_neko_o_kaburu-628042243-large.jpg', 'Fantasía/Romance', 'B', 'Español'),
-	(4, 'Batman: The Long Halloween', '22 de Junio', '9pm', '1h 25m', 'https://pics.filmaffinity.com/batman_the_long_halloween_part_one-325438685-large.jpg', 'Acción', 'B15', 'Español');
+REPLACE INTO `pelicula` (`idPelicula`, `nombre`, `fecha_estreno`, `duracion`, `imagen`, `Categoria`, `Clasificacion`, `Idioma`) VALUES
+	(1, 'Monster Hunter', '3 de Diciembre', '1h 44m', 'https://pics.filmaffinity.com/monster_hunter-171950842-large.jpg', 'Acción/Fantasía', 'B15', 'Español Sub'),
+	(2, 'Soul', '25 de Diciembre', '1h 47m', 'https://pics.filmaffinity.com/soul-557797463-large.jpg', 'Infantil/Comedia', 'AA', 'Español'),
+	(3, 'Amor de Gata', '18 de Junio', '1h 44m', 'https://pics.filmaffinity.com/nakitai_watashi_wa_neko_o_kaburu-628042243-large.jpg', 'Fantasía/Romance', 'B', 'Español'),
+	(4, 'Batman: The Long Halloween', '22 de Junio', '1h 25m', 'https://pics.filmaffinity.com/batman_the_long_halloween_part_one-325438685-large.jpg', 'Acción', 'B15', 'Español');
 /*!40000 ALTER TABLE `pelicula` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bdcine.puesto
