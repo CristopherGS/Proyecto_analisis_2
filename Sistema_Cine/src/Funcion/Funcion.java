@@ -5,8 +5,9 @@
  */
 package Funcion;
 
-import ClasesGlobales.CRUD;
-import ClasesInterfaz.ValidarFuncion;
+import ClasesGlobales.*;
+import ClasesInterfaz.*;
+import Interfaz.*;
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.JOptionPane;
@@ -22,6 +23,9 @@ public class Funcion extends javax.swing.JInternalFrame {
     private FuncionClass funcion;
     private ValidarFuncion validarFuncion;
     private FuncionDias funcionDia;
+    private TablaGestion tablaGestion;
+    private DefinirConsulta definirConsulta;
+    private DefinirTitulos definirTitulos;
 
     public Funcion() {
         initComponents();
@@ -31,6 +35,13 @@ public class Funcion extends javax.swing.JInternalFrame {
         funcionDia = new FuncionDias();
         validarFuncion = new ValidarFuncion();
         bloquearDesbloquearObjetos(0);
+        
+        tablaGestion = tablaGestion.instanciarTablaGestion();
+        definirConsulta = new DefinirConsultaFuncion();
+        definirTitulos = new TituloFuncion();
+        //EL numero 1 significa que se va buscar respecto al nombre de la pelicula
+        //El numero 0 significa que se va a buscar respecto al horario de la pelicula 
+        tablaGestion.llenarTabla(definirTitulos.DefinirTitulos(), tablaFuncion,definirConsulta.getConsulta("", funcion,1));
 
     }
 

@@ -3,20 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Funcion;
 
 import ClasesGlobales.Registro;
+import javax.swing.JOptionPane;
 
 /**
- * 
+ *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class FuncionClass extends Registro{
+public class FuncionClass extends Registro {
+
     private float precio;
     private String horario;
-    private int idSala,idPelicula;
-    public FuncionClass(){
+    private int idSala, idPelicula;
+
+    public FuncionClass() {
         this.setNombre("funcion");
         this.setParametros("Precio,Horario,Sala_idSala,Pelicula_idPelicula");
     }
@@ -52,9 +54,11 @@ public class FuncionClass extends Registro{
     public void setIdPelicula(int idPelicula) {
         this.idPelicula = idPelicula;
     }
-    @Override
-    public void actualizarValues(){
-       this.setValues("values("+precio+",'"+horario+"',"+idSala+","+idPelicula+")");
-    }
-}
 
+    @Override
+    public void actualizarValues() {
+        this.setValues("values(" + precio + ",'" + horario + "'," + idSala + "," + idPelicula + ")");
+    }
+
+
+}
