@@ -6,6 +6,9 @@
 package Funcion;
 
 import ClasesGlobales.CRUD;
+import ClasesInterfaz.ValidarFuncion;
+import java.awt.Color;
+import java.awt.Cursor;
 
 /**
  *
@@ -14,10 +17,16 @@ import ClasesGlobales.CRUD;
 public class Funcion extends javax.swing.JInternalFrame {
 
     private CRUD crud;
+    private int opcionNuevoModificar;
+    private FuncionClass funcion;
+    private ValidarFuncion validarFuncion;
     public Funcion() {
         initComponents();
         crud.InstanciarCRUD().llenar_combo(comboSala,"select * from sala","num_sala");
         crud.InstanciarCRUD().llenar_combo(comboPelicula,"select * from pelicula","nombre");
+        funcion = new FuncionClass();
+        validarFuncion = new ValidarFuncion();
+        bloquearDesbloquearObjetos(0);
         
     }
 
@@ -93,6 +102,17 @@ public class Funcion extends javax.swing.JInternalFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         panelEditar.setBackground(new java.awt.Color(30, 95, 116));
+        panelEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickPanel(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                entrarPanel(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                salirPanel(evt);
+            }
+        });
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar_registro.png"))); // NOI18N
@@ -109,6 +129,17 @@ public class Funcion extends javax.swing.JInternalFrame {
         );
 
         panelEliminar.setBackground(new java.awt.Color(30, 95, 116));
+        panelEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickPanel(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                entrarPanel(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                salirPanel(evt);
+            }
+        });
 
         jLabel6.setBackground(new java.awt.Color(30, 95, 116));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -126,6 +157,17 @@ public class Funcion extends javax.swing.JInternalFrame {
         );
 
         panelNuevo.setBackground(new java.awt.Color(30, 95, 116));
+        panelNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickPanel(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                entrarPanel(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                salirPanel(evt);
+            }
+        });
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevo_registro.png"))); // NOI18N
@@ -261,6 +303,17 @@ public class Funcion extends javax.swing.JInternalFrame {
         jLabel10.setText("Sala");
 
         panelCancelar.setBackground(new java.awt.Color(30, 95, 116));
+        panelCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickPanel(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                entrarPanel(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                salirPanel(evt);
+            }
+        });
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
 
@@ -276,6 +329,17 @@ public class Funcion extends javax.swing.JInternalFrame {
         );
 
         panelAceptar.setBackground(new java.awt.Color(30, 95, 116));
+        panelAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickPanel(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                entrarPanel(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                salirPanel(evt);
+            }
+        });
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/aceptar.png"))); // NOI18N
 
@@ -384,6 +448,17 @@ public class Funcion extends javax.swing.JInternalFrame {
         radioPelicula.setText("Pelicula");
 
         panelBuscar.setBackground(new java.awt.Color(30, 95, 116));
+        panelBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickPanel(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                entrarPanel(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                salirPanel(evt);
+            }
+        });
 
         jLabel7.setBackground(new java.awt.Color(30, 95, 116));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -444,6 +519,11 @@ public class Funcion extends javax.swing.JInternalFrame {
 
             }
         ));
+        tablaFuncion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickTabla(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaFuncion);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -474,6 +554,33 @@ public class Funcion extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+public void bloquearDesbloquearObjetos(int opcion){
+    boolean bloquear = false;
+    //si se manda una opcion que sea igual a 1 se bloquearan los objetos
+    if(opcion == 1){
+       bloquear=true;
+    }
+    
+    txtPrecio.setEnabled(bloquear);
+    
+    comboPelicula.setEnabled(bloquear);
+    comboSala.setEnabled(bloquear);
+    
+    panelAceptar.setEnabled(bloquear);
+    panelCancelar.setEnabled(bloquear);
+    
+    spinerHora.setEnabled(bloquear);
+    spinerMinuto.setEnabled(bloquear);
+    
+    checkDomingo.setEnabled(bloquear);
+    checkJueves.setEnabled(bloquear);
+    checkLunes.setEnabled(bloquear);
+    checkMartes.setEnabled(bloquear);
+    checkMiercoles.setEnabled(bloquear);
+    checkSabado.setEnabled(bloquear);
+    checkTodos.setEnabled(bloquear);
+    checkViernes.setEnabled(bloquear);
+}
 
     private void checkTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkTodosActionPerformed
       boolean activar = false;
@@ -488,6 +595,96 @@ public class Funcion extends javax.swing.JInternalFrame {
        checkSabado.setSelected(activar);
        checkViernes.setSelected(activar);
     }//GEN-LAST:event_checkTodosActionPerformed
+
+    private void entrarPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrarPanel
+        if (evt.getSource() == panelNuevo) {
+            panelNuevo.setBackground(new Color(29, 45, 80));
+            panelNuevo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+          
+        }
+        if (evt.getSource() == panelEditar) {
+            panelEditar.setBackground(new Color(29, 45, 80));
+            panelEditar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+        if (evt.getSource() == panelEliminar) {
+            panelEliminar.setBackground(new Color(29, 45, 80));
+            panelEliminar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+        if (evt.getSource() == panelAceptar) {
+            panelAceptar.setBackground(new Color(29, 45, 80));
+            panelAceptar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+         if (evt.getSource() == panelCancelar) {
+            panelCancelar.setBackground(new Color(29, 45, 80));
+            panelCancelar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+          if (evt.getSource() == panelBuscar) {
+            panelBuscar.setBackground(new Color(29, 45, 80));
+            panelBuscar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        }
+    }//GEN-LAST:event_entrarPanel
+
+    private void salirPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirPanel
+       if (evt.getSource() == panelNuevo) {
+            panelNuevo.setBackground(new Color(30, 95, 116));
+            
+        }
+        if (evt.getSource() == panelEditar) {
+            panelEditar.setBackground(new Color(30, 95, 116));
+           
+        }
+        if (evt.getSource() == panelEliminar) {
+            panelEliminar.setBackground(new Color(30, 95, 116));
+           
+        }
+        if (evt.getSource() == panelAceptar) {
+            panelAceptar.setBackground(new Color(30, 95, 116));
+            
+        }
+         if (evt.getSource() == panelCancelar) {
+            panelCancelar.setBackground(new Color(30, 95, 116));
+           
+        }
+          if (evt.getSource() == panelBuscar) {
+            panelBuscar.setBackground(new Color(30, 95, 116));
+            
+        }
+    }//GEN-LAST:event_salirPanel
+
+    private void clickPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickPanel
+        if (evt.getSource() == panelNuevo) {
+            bloquearDesbloquearObjetos(1);
+            opcionNuevoModificar = 1;
+        }
+        if (evt.getSource() == panelEditar) {
+            opcionNuevoModificar = 0;
+           
+        }
+        if (evt.getSource() == panelEliminar) {
+          
+        }
+        if (evt.getSource() == panelAceptar) {
+            if(opcionNuevoModificar == 1){
+                if(validarFuncion.ValidarDatos(txtPrecio.getText())>=0){
+                    funcion.setHorario(validarFuncion.FormarHora(spinerHora, spinerMinuto));
+                  
+                }
+            }
+            else{
+                
+            }
+        }
+         if (evt.getSource() == panelCancelar) {
+             bloquearDesbloquearObjetos(0);
+        }
+          if (evt.getSource() == panelBuscar) {
+           
+        }
+    }//GEN-LAST:event_clickPanel
+
+    private void clickTabla(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickTabla
+       
+    }//GEN-LAST:event_clickTabla
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
