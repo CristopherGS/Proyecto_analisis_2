@@ -39,7 +39,7 @@ public class CRUD {
           
         return instancia;
     }
-
+//Al ejecutar este metodo se ejecuta la instruccion y devuelve un mensaje 
     public void EjecutarInstruccion(String Instruccion) {
         int filas = 0;
         Statement sentenciaAux;
@@ -49,6 +49,7 @@ public class CRUD {
             sentenciaAux = conexion.ConectarLaBD().getConexion().createStatement();//Se crea el objeto sentencia que es el encargado de inviar la instruccion
             sentenciaAux.executeUpdate(Instruccion);//Se enviar la instruccion y el resultSet guarda los datos. Se debe de enviar el Update que se utiliza para: INSERT, DELETE, UPDATE, REPLACE y TRUNCATE
             //preStare.executeUpdate();
+            //System.out.println("Instruccion ejecutada correctamente");
             JOptionPane.showMessageDialog(null, "Instruccion ejecutada correctamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
             //sentencia.close();
             //El .executeUpdate devuelve el numero de registros modificados. 
@@ -58,7 +59,26 @@ public class CRUD {
         }
        
     }
-
+    //Esta funcion es para ejecutar un instruccion sin devolver un mensaje 
+        public void EjecutarInstruccion(String Instruccion,int num) {
+        int filas = 0;
+        Statement sentenciaAux;
+        try {
+            
+            //preStare = conexion.prepareStatement(Instruccion);
+            sentenciaAux = conexion.ConectarLaBD().getConexion().createStatement();//Se crea el objeto sentencia que es el encargado de inviar la instruccion
+            sentenciaAux.executeUpdate(Instruccion);//Se enviar la instruccion y el resultSet guarda los datos. Se debe de enviar el Update que se utiliza para: INSERT, DELETE, UPDATE, REPLACE y TRUNCATE
+            //preStare.executeUpdate();
+            System.out.println("Instruccion ejecutada correctamente");
+            //JOptionPane.showMessageDialog(null, "Instruccion ejecutada correctamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+            //sentencia.close();
+            //El .executeUpdate devuelve el numero de registros modificados. 
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error de conexion", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println(ex.getMessage());
+        }
+       
+    }
     
 
     public boolean Existe(String consulta, String parametro, String columna) {
@@ -142,8 +162,9 @@ public class CRUD {
         return dato;
     }
     public int getUltimoID(String formaId,String nombreRegistro){
-        String consulta = "SELECT MAX("+formaId+") AS id FROM"+nombreRegistro;
-        int id=-1;
+        String consulta = "SELECT MAX("+formaId+") AS idFuncion FROM "+nombreRegistro;
+        System.out.println(consulta);
+        int id=0;
         Statement sentenciaAux;//Objeto que se usa para usar ejecutar sentencias de SQL. Ejecuta una sentencia SQL simple que no tiene ningun parametro.
         ResultSet resultSetAux = null;//Contiene los resultados de una consulta SQL. Mantiene un cursor apuntando a su fila de datos actual. 
         try {
@@ -159,7 +180,8 @@ public class CRUD {
              se le manda el nombre de la columna, que sera la variable parametro
             */
             while(resultSetAux.next()){
-               id = resultSetAux.getInt(formaId);
+                System.out.println(resultSetAux.getInt(formaId));
+                id = resultSetAux.getInt(formaId);
                
             }
         } catch (SQLException ex) {

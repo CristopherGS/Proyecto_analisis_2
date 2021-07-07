@@ -69,8 +69,24 @@ CREATE TABLE IF NOT EXISTS `detalle_funcion_dias` (
   KEY `fk_detalle_funcion_dias_dias1_idx` (`dias_iddias_funcion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla bdcine.detalle_funcion_dias: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla bdcine.detalle_funcion_dias: ~8 rows (aproximadamente)
 /*!40000 ALTER TABLE `detalle_funcion_dias` DISABLE KEYS */;
+INSERT INTO `detalle_funcion_dias` (`funcion_idHorario`, `dias_iddias_funcion`) VALUES
+	(1, 4),
+	(1, 1),
+	(2, 3),
+	(2, 2),
+	(2, 1),
+	(3, 5),
+	(3, 4),
+	(3, 2),
+	(4, 7),
+	(4, 6),
+	(4, 5),
+	(4, 4),
+	(4, 3),
+	(4, 2),
+	(4, 1);
 /*!40000 ALTER TABLE `detalle_funcion_dias` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bdcine.dias
@@ -80,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `dias` (
   PRIMARY KEY (`iddias_funcion`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla bdcine.dias: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla bdcine.dias: ~7 rows (aproximadamente)
 /*!40000 ALTER TABLE `dias` DISABLE KEYS */;
 INSERT INTO `dias` (`iddias_funcion`, `dia`) VALUES
 	(1, 'Lunes'),
@@ -139,10 +155,15 @@ CREATE TABLE IF NOT EXISTS `funcion` (
   PRIMARY KEY (`idFuncion`),
   KEY `fk_Horario_Sala_idx` (`Sala_idSala`),
   KEY `fk_Horario_uso_Pelicula1_idx` (`Pelicula_idPelicula`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla bdcine.funcion: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla bdcine.funcion: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `funcion` DISABLE KEYS */;
+INSERT INTO `funcion` (`idFuncion`, `Precio`, `Horario`, `Sala_idSala`, `Pelicula_idPelicula`) VALUES
+	(1, 3, '00:00:00', 1, 1),
+	(2, 20, '00:00:00', 1, 1),
+	(3, 50, '05:02:00', 1, 1),
+	(4, 60, '00:00:00', 3, 1);
 /*!40000 ALTER TABLE `funcion` ENABLE KEYS */;
 
 -- Volcando estructura para tabla bdcine.funcion_particula
@@ -216,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `sala` (
   KEY `fk_Sala_TipoSala1_idx` (`TipoSala_idTipoSala`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla bdcine.sala: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla bdcine.sala: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `sala` DISABLE KEYS */;
 INSERT INTO `sala` (`idSala`, `num_sala`, `TipoSala_idTipoSala`) VALUES
 	(1, 1, 2),

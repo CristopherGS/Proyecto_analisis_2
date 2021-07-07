@@ -9,6 +9,7 @@ import ClasesGlobales.CRUD;
 import ClasesInterfaz.ValidarFuncion;
 import java.awt.Color;
 import java.awt.Cursor;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,14 +21,17 @@ public class Funcion extends javax.swing.JInternalFrame {
     private int opcionNuevoModificar;
     private FuncionClass funcion;
     private ValidarFuncion validarFuncion;
+    private FuncionDias funcionDia;
+
     public Funcion() {
         initComponents();
-        crud.InstanciarCRUD().llenar_combo(comboSala,"select * from sala","num_sala");
-        crud.InstanciarCRUD().llenar_combo(comboPelicula,"select * from pelicula","nombre");
+        crud.InstanciarCRUD().llenar_combo(comboSala, "select * from sala", "num_sala");
+        crud.InstanciarCRUD().llenar_combo(comboPelicula, "select * from pelicula", "nombre");
         funcion = new FuncionClass();
+        funcionDia = new FuncionDias();
         validarFuncion = new ValidarFuncion();
         bloquearDesbloquearObjetos(0);
-        
+
     }
 
     /**
@@ -554,53 +558,109 @@ public class Funcion extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-public void bloquearDesbloquearObjetos(int opcion){
-    boolean bloquear = false;
-    //si se manda una opcion que sea igual a 1 se bloquearan los objetos
-    if(opcion == 1){
-       bloquear=true;
+public void bloquearDesbloquearObjetos(int opcion) {
+        boolean bloquear = false;
+        //si se manda una opcion que sea igual a 1 se bloquearan los objetos
+        if (opcion == 1) {
+            bloquear = true;
+        }
+
+        txtPrecio.setEnabled(bloquear);
+
+        comboPelicula.setEnabled(bloquear);
+        comboSala.setEnabled(bloquear);
+
+        panelAceptar.setEnabled(bloquear);
+        panelCancelar.setEnabled(bloquear);
+
+        spinerHora.setEnabled(bloquear);
+        spinerMinuto.setEnabled(bloquear);
+
+        checkDomingo.setEnabled(bloquear);
+        checkJueves.setEnabled(bloquear);
+        checkLunes.setEnabled(bloquear);
+        checkMartes.setEnabled(bloquear);
+        checkMiercoles.setEnabled(bloquear);
+        checkSabado.setEnabled(bloquear);
+        checkTodos.setEnabled(bloquear);
+        checkViernes.setEnabled(bloquear);
     }
-    
-    txtPrecio.setEnabled(bloquear);
-    
-    comboPelicula.setEnabled(bloquear);
-    comboSala.setEnabled(bloquear);
-    
-    panelAceptar.setEnabled(bloquear);
-    panelCancelar.setEnabled(bloquear);
-    
-    spinerHora.setEnabled(bloquear);
-    spinerMinuto.setEnabled(bloquear);
-    
-    checkDomingo.setEnabled(bloquear);
-    checkJueves.setEnabled(bloquear);
-    checkLunes.setEnabled(bloquear);
-    checkMartes.setEnabled(bloquear);
-    checkMiercoles.setEnabled(bloquear);
-    checkSabado.setEnabled(bloquear);
-    checkTodos.setEnabled(bloquear);
-    checkViernes.setEnabled(bloquear);
-}
+
+    public void RelacionarDia(){
+        String query;
+        if(checkDomingo.isSelected()){
+            funcionDia.setIdDia(7);
+            funcionDia.actualizarValues();
+            query=funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(),funcionDia.getParametros(),funcionDia.getNombre());
+            System.out.println(query);
+            crud.InstanciarCRUD().EjecutarInstruccion(query,0);
+        }
+        if(checkSabado.isSelected()){
+            funcionDia.setIdDia(6);
+            funcionDia.actualizarValues();
+            query=funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(),funcionDia.getParametros(),funcionDia.getNombre());
+            System.out.println(query);
+            crud.InstanciarCRUD().EjecutarInstruccion(query,0);
+        }
+        if(checkViernes.isSelected()){
+            funcionDia.setIdDia(5);
+            funcionDia.actualizarValues();
+            query=funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(),funcionDia.getParametros(),funcionDia.getNombre());
+            System.out.println(query);
+            crud.InstanciarCRUD().EjecutarInstruccion(query,0);
+        }
+        if(checkJueves.isSelected()){
+            funcionDia.setIdDia(4);
+            funcionDia.actualizarValues();
+            query=funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(),funcionDia.getParametros(),funcionDia.getNombre());
+            System.out.println(query);
+            crud.InstanciarCRUD().EjecutarInstruccion(query,0);
+        }
+        if(checkMiercoles.isSelected()){
+            funcionDia.setIdDia(3);
+            funcionDia.actualizarValues();
+            query=funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(),funcionDia.getParametros(),funcionDia.getNombre());
+            System.out.println(query);
+            crud.InstanciarCRUD().EjecutarInstruccion(query,0);
+        }
+        if(checkMartes.isSelected()){
+            funcionDia.setIdDia(2);
+            funcionDia.actualizarValues();
+            query=funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(),funcionDia.getParametros(),funcionDia.getNombre());
+            System.out.println(query);
+            crud.InstanciarCRUD().EjecutarInstruccion(query,0);
+        }
+        if(checkLunes.isSelected()){
+            funcionDia.setIdDia(1);
+            funcionDia.actualizarValues();
+            query=funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(),funcionDia.getParametros(),funcionDia.getNombre());
+            System.out.println(query);
+            crud.InstanciarCRUD().EjecutarInstruccion(query,0);
+        }
+        
+        
+    }
+
 
     private void checkTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkTodosActionPerformed
-      boolean activar = false;
-        if(checkTodos.isSelected()){
-           activar = true;
-       }
-       checkDomingo.setSelected(activar);
-       checkJueves.setSelected(activar);
-       checkLunes.setSelected(activar);
-       checkMartes.setSelected(activar);
-       checkMiercoles.setSelected(activar);
-       checkSabado.setSelected(activar);
-       checkViernes.setSelected(activar);
+        boolean activar = false;
+        if (checkTodos.isSelected()) {
+            activar = true;
+        }
+        checkDomingo.setSelected(activar);
+        checkJueves.setSelected(activar);
+        checkLunes.setSelected(activar);
+        checkMartes.setSelected(activar);
+        checkMiercoles.setSelected(activar);
+        checkSabado.setSelected(activar);
+        checkViernes.setSelected(activar);
     }//GEN-LAST:event_checkTodosActionPerformed
 
     private void entrarPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrarPanel
         if (evt.getSource() == panelNuevo) {
             panelNuevo.setBackground(new Color(29, 45, 80));
             panelNuevo.setCursor(new Cursor(Cursor.HAND_CURSOR));
-          
+
         }
         if (evt.getSource() == panelEditar) {
             panelEditar.setBackground(new Color(29, 45, 80));
@@ -614,40 +674,40 @@ public void bloquearDesbloquearObjetos(int opcion){
             panelAceptar.setBackground(new Color(29, 45, 80));
             panelAceptar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
-         if (evt.getSource() == panelCancelar) {
+        if (evt.getSource() == panelCancelar) {
             panelCancelar.setBackground(new Color(29, 45, 80));
             panelCancelar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
-          if (evt.getSource() == panelBuscar) {
+        if (evt.getSource() == panelBuscar) {
             panelBuscar.setBackground(new Color(29, 45, 80));
             panelBuscar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
     }//GEN-LAST:event_entrarPanel
 
     private void salirPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirPanel
-       if (evt.getSource() == panelNuevo) {
+        if (evt.getSource() == panelNuevo) {
             panelNuevo.setBackground(new Color(30, 95, 116));
-            
+
         }
         if (evt.getSource() == panelEditar) {
             panelEditar.setBackground(new Color(30, 95, 116));
-           
+
         }
         if (evt.getSource() == panelEliminar) {
             panelEliminar.setBackground(new Color(30, 95, 116));
-           
+
         }
         if (evt.getSource() == panelAceptar) {
             panelAceptar.setBackground(new Color(30, 95, 116));
-            
+
         }
-         if (evt.getSource() == panelCancelar) {
+        if (evt.getSource() == panelCancelar) {
             panelCancelar.setBackground(new Color(30, 95, 116));
-           
+
         }
-          if (evt.getSource() == panelBuscar) {
+        if (evt.getSource() == panelBuscar) {
             panelBuscar.setBackground(new Color(30, 95, 116));
-            
+
         }
     }//GEN-LAST:event_salirPanel
 
@@ -658,41 +718,45 @@ public void bloquearDesbloquearObjetos(int opcion){
         }
         if (evt.getSource() == panelEditar) {
             opcionNuevoModificar = 0;
-           
+
         }
         if (evt.getSource() == panelEliminar) {
-          
+
         }
         if (evt.getSource() == panelAceptar) {
-            if(opcionNuevoModificar == 1){
-                if(validarFuncion.ValidarDatos(txtPrecio.getText())>=0){
+            if (opcionNuevoModificar == 1) {
+                if (validarFuncion.ValidarDatos(txtPrecio.getText()) >= 0) {
                     funcion.setHorario(validarFuncion.FormarHora(spinerHora, spinerMinuto));
                     funcion.setPrecio(Float.valueOf(txtPrecio.getText()));
-                    
-                    funcion.setIdSala(Integer.parseInt(crud.InstanciarCRUD().getValor("select * from sala where num_sala ="+comboSala.getSelectedItem().toString(),"idSala")));
-                   
-                    funcion.setIdPelicula(Integer.parseInt(crud.InstanciarCRUD().getValor("select * from  pelicula where nombre = '"+comboPelicula.getSelectedItem().toString()+"'","idPelicula")));
+
+                    funcion.setIdSala(Integer.parseInt(crud.InstanciarCRUD().getValor("select * from sala where num_sala =" + comboSala.getSelectedItem().toString(), "idSala")));
+
+                    funcion.setIdPelicula(Integer.parseInt(crud.InstanciarCRUD().getValor("select * from  pelicula where nombre = '" + comboPelicula.getSelectedItem().toString() + "'", "idPelicula")));
                     funcion.actualizarValues();
+
+                    String query = funcion.getAdminConsulta().queryInsertar(funcion.getValues(), funcion.getParametros(), funcion.getNombre());
+                    //System.out.println(query);
+                    crud.InstanciarCRUD().EjecutarInstruccion(query,0);
+                    // System.out.println(crud.InstanciarCRUD().getUltimoID("idFuncion","funcion"));
+                    funcionDia.setIdFuncion(crud.InstanciarCRUD().getUltimoID("idFuncion", "funcion"));
+                    this.RelacionarDia();
+                    JOptionPane.showMessageDialog(null,"Funcion ingresada correctamente","Mensaje",JOptionPane.INFORMATION_MESSAGE);
                     
-                   String query = funcion.getAdminConsulta().queryInsertar(funcion.getValues(),funcion.getParametros(),funcion.getNombre());
-                   //System.out.println(query);
-                   crud.InstanciarCRUD().EjecutarInstruccion(query);
                 }
-            }
-            else{
-                
+            } else {
+
             }
         }
-         if (evt.getSource() == panelCancelar) {
-             bloquearDesbloquearObjetos(0);
+        if (evt.getSource() == panelCancelar) {
+            bloquearDesbloquearObjetos(0);
         }
-          if (evt.getSource() == panelBuscar) {
-           
+        if (evt.getSource() == panelBuscar) {
+
         }
     }//GEN-LAST:event_clickPanel
 
     private void clickTabla(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickTabla
-       
+
     }//GEN-LAST:event_clickTabla
 
 
