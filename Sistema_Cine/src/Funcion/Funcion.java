@@ -667,7 +667,16 @@ public void bloquearDesbloquearObjetos(int opcion){
             if(opcionNuevoModificar == 1){
                 if(validarFuncion.ValidarDatos(txtPrecio.getText())>=0){
                     funcion.setHorario(validarFuncion.FormarHora(spinerHora, spinerMinuto));
-                  
+                    funcion.setPrecio(Float.valueOf(txtPrecio.getText()));
+                    
+                    funcion.setIdSala(Integer.parseInt(crud.InstanciarCRUD().getValor("select * from sala where num_sala ="+comboSala.getSelectedItem().toString(),"idSala")));
+                   
+                    funcion.setIdPelicula(Integer.parseInt(crud.InstanciarCRUD().getValor("select * from  pelicula where nombre = '"+comboPelicula.getSelectedItem().toString()+"'","idPelicula")));
+                    funcion.actualizarValues();
+                    
+                   String query = funcion.getAdminConsulta().queryInsertar(funcion.getValues(),funcion.getParametros(),funcion.getNombre());
+                   //System.out.println(query);
+                   crud.InstanciarCRUD().EjecutarInstruccion(query);
                 }
             }
             else{
