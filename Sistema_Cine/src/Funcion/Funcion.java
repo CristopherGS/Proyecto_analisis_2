@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class Funcion extends javax.swing.JInternalFrame {
-
+    
     private CRUD crud;
     private int opcionNuevoModificar;
     private FuncionClass funcion;
@@ -26,7 +26,8 @@ public class Funcion extends javax.swing.JInternalFrame {
     private TablaGestion tablaGestion;
     private DefinirConsulta definirConsulta;
     private DefinirTitulos definirTitulos;
-
+    
+    
     public Funcion() {
         initComponents();
         crud.InstanciarCRUD().llenar_combo(comboSala, "select * from sala", "num_sala");
@@ -41,8 +42,10 @@ public class Funcion extends javax.swing.JInternalFrame {
         definirTitulos = new TituloFuncion();
         //EL numero 1 significa que se va buscar respecto al nombre de la pelicula
         //El numero 0 significa que se va a buscar respecto al horario de la pelicula 
-        tablaGestion.llenarTabla(definirTitulos.DefinirTitulos(), tablaFuncion,definirConsulta.getConsulta("", funcion,1));
-
+        tablaGestion.llenarTabla(definirTitulos.DefinirTitulos(), tablaFuncion, definirConsulta.getConsulta("", funcion, 1));
+        diaologDias.setTitle("Dias");
+        diaologDias.setSize(340, 170);
+        diaologDias.setLocationRelativeTo(Funcion.this);
     }
 
     /**
@@ -56,6 +59,10 @@ public class Funcion extends javax.swing.JInternalFrame {
 
         jPanel4 = new javax.swing.JPanel();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        diaologDias = new javax.swing.JDialog();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaDias = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         panelEditar = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -92,9 +99,11 @@ public class Funcion extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         radioHorario = new javax.swing.JRadioButton();
         radioPelicula = new javax.swing.JRadioButton();
-        txtBuscar = new javax.swing.JTextField();
         panelBuscar = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        panelDetalle = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaFuncion = new javax.swing.JTable();
 
@@ -107,6 +116,51 @@ public class Funcion extends javax.swing.JInternalFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 516, Short.MAX_VALUE)
+        );
+
+        jPanel7.setBackground(new java.awt.Color(29, 45, 80));
+
+        tablaDias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tablaDias);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout diaologDiasLayout = new javax.swing.GroupLayout(diaologDias.getContentPane());
+        diaologDias.getContentPane().setLayout(diaologDiasLayout);
+        diaologDiasLayout.setHorizontalGroup(
+            diaologDiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(diaologDiasLayout.createSequentialGroup()
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        diaologDiasLayout.setVerticalGroup(
+            diaologDiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         setClosable(true);
@@ -136,11 +190,21 @@ public class Funcion extends javax.swing.JInternalFrame {
         panelEditar.setLayout(panelEditarLayout);
         panelEditarLayout.setHorizontalGroup(
             panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+            .addGap(0, 97, Short.MAX_VALUE)
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelEditarLayout.createSequentialGroup()
+                    .addGap(12, 12, 12)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(13, 13, 13)))
         );
         panelEditarLayout.setVerticalGroup(
             panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+            .addGap(0, 84, Short.MAX_VALUE)
+            .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelEditarLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         panelEliminar.setBackground(new java.awt.Color(30, 95, 116));
@@ -164,11 +228,21 @@ public class Funcion extends javax.swing.JInternalFrame {
         panelEliminar.setLayout(panelEliminarLayout);
         panelEliminarLayout.setHorizontalGroup(
             panelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+            .addGap(0, 97, Short.MAX_VALUE)
+            .addGroup(panelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelEliminarLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         panelEliminarLayout.setVerticalGroup(
             panelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+            .addGap(0, 84, Short.MAX_VALUE)
+            .addGroup(panelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelEliminarLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         panelNuevo.setBackground(new java.awt.Color(30, 95, 116));
@@ -191,11 +265,21 @@ public class Funcion extends javax.swing.JInternalFrame {
         panelNuevo.setLayout(panelNuevoLayout);
         panelNuevoLayout.setHorizontalGroup(
             panelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+            .addGap(0, 97, Short.MAX_VALUE)
+            .addGroup(panelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelNuevoLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         panelNuevoLayout.setVerticalGroup(
             panelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+            .addGap(0, 84, Short.MAX_VALUE)
+            .addGroup(panelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelNuevoLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -203,22 +287,25 @@ public class Funcion extends javax.swing.JInternalFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(185, 185, 185)
+                .addGap(197, 197, 197)
                 .addComponent(panelNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(123, 123, 123)
+                .addGap(97, 97, 97)
                 .addComponent(panelEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(111, 111, 111)
+                .addGap(104, 104, 104)
                 .addComponent(panelEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(panelNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panelEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panelEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -386,7 +473,7 @@ public class Funcion extends javax.swing.JInternalFrame {
                                 .addComponent(comboPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(comboSala, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -411,7 +498,7 @@ public class Funcion extends javax.swing.JInternalFrame {
                                 .addGap(131, 131, 131))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(panelCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(97, 97, 97))))))
+                                .addGap(88, 88, 88))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,11 +570,51 @@ public class Funcion extends javax.swing.JInternalFrame {
         panelBuscar.setLayout(panelBuscarLayout);
         panelBuscarLayout.setHorizontalGroup(
             panelBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+            .addGroup(panelBuscarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelBuscarLayout.setVerticalGroup(
             panelBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        panelDetalle.setBackground(new java.awt.Color(30, 95, 116));
+        panelDetalle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickDetalle(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                entrarDetalle(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                salirDetalle(evt);
+            }
+        });
+
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/view_grid_detail_icon_154644.png"))); // NOI18N
+
+        javax.swing.GroupLayout panelDetalleLayout = new javax.swing.GroupLayout(panelDetalle);
+        panelDetalle.setLayout(panelDetalleLayout);
+        panelDetalleLayout.setHorizontalGroup(
+            panelDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 85, Short.MAX_VALUE)
+            .addGroup(panelDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelDetalleLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel13)
+                    .addContainerGap(7, Short.MAX_VALUE)))
+        );
+        panelDetalleLayout.setVerticalGroup(
+            panelDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 84, Short.MAX_VALUE)
+            .addGroup(panelDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelDetalleLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel13)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -499,28 +626,32 @@ public class Funcion extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(radioPelicula)
                     .addComponent(radioHorario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(53, 53, 53)
                 .addComponent(panelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(101, 101, 101))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
+                    .addComponent(panelDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(16, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(radioHorario)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(radioPelicula))))
+                                .addComponent(radioPelicula))
+                            .addComponent(panelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(7, Short.MAX_VALUE))
+                        .addGap(32, 32, 32)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         tablaFuncion.setModel(new javax.swing.table.DefaultTableModel(
@@ -547,11 +678,11 @@ public class Funcion extends javax.swing.JInternalFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -562,7 +693,7 @@ public class Funcion extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel6, java.awt.BorderLayout.CENTER);
@@ -575,18 +706,18 @@ public void bloquearDesbloquearObjetos(int opcion) {
         if (opcion == 1) {
             bloquear = true;
         }
-
+        
         txtPrecio.setEnabled(bloquear);
-
+        
         comboPelicula.setEnabled(bloquear);
         comboSala.setEnabled(bloquear);
-
+        
         panelAceptar.setEnabled(bloquear);
         panelCancelar.setEnabled(bloquear);
-
+        
         spinerHora.setEnabled(bloquear);
         spinerMinuto.setEnabled(bloquear);
-
+        
         checkDomingo.setEnabled(bloquear);
         checkJueves.setEnabled(bloquear);
         checkLunes.setEnabled(bloquear);
@@ -595,63 +726,65 @@ public void bloquearDesbloquearObjetos(int opcion) {
         checkSabado.setEnabled(bloquear);
         checkTodos.setEnabled(bloquear);
         checkViernes.setEnabled(bloquear);
+        
+       //el relativo respecto al internal frame
+       //diaologDias.setUndecorated(true);//Le quita el boron de cerrar
     }
-
-    public void RelacionarDia(){
+    
+    public void RelacionarDia() {
         String query;
-        if(checkDomingo.isSelected()){
+        if (checkDomingo.isSelected()) {
             funcionDia.setIdDia(7);
             funcionDia.actualizarValues();
-            query=funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(),funcionDia.getParametros(),funcionDia.getNombre());
+            query = funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(), funcionDia.getParametros(), funcionDia.getNombre());
             System.out.println(query);
-            crud.InstanciarCRUD().EjecutarInstruccion(query,0);
+            crud.InstanciarCRUD().EjecutarInstruccion(query, 0);
         }
-        if(checkSabado.isSelected()){
+        if (checkSabado.isSelected()) {
             funcionDia.setIdDia(6);
             funcionDia.actualizarValues();
-            query=funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(),funcionDia.getParametros(),funcionDia.getNombre());
+            query = funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(), funcionDia.getParametros(), funcionDia.getNombre());
             System.out.println(query);
-            crud.InstanciarCRUD().EjecutarInstruccion(query,0);
+            crud.InstanciarCRUD().EjecutarInstruccion(query, 0);
         }
-        if(checkViernes.isSelected()){
+        if (checkViernes.isSelected()) {
             funcionDia.setIdDia(5);
             funcionDia.actualizarValues();
-            query=funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(),funcionDia.getParametros(),funcionDia.getNombre());
+            query = funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(), funcionDia.getParametros(), funcionDia.getNombre());
             System.out.println(query);
-            crud.InstanciarCRUD().EjecutarInstruccion(query,0);
+            crud.InstanciarCRUD().EjecutarInstruccion(query, 0);
         }
-        if(checkJueves.isSelected()){
+        if (checkJueves.isSelected()) {
             funcionDia.setIdDia(4);
             funcionDia.actualizarValues();
-            query=funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(),funcionDia.getParametros(),funcionDia.getNombre());
+            query = funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(), funcionDia.getParametros(), funcionDia.getNombre());
             System.out.println(query);
-            crud.InstanciarCRUD().EjecutarInstruccion(query,0);
+            crud.InstanciarCRUD().EjecutarInstruccion(query, 0);
         }
-        if(checkMiercoles.isSelected()){
+        if (checkMiercoles.isSelected()) {
             funcionDia.setIdDia(3);
             funcionDia.actualizarValues();
-            query=funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(),funcionDia.getParametros(),funcionDia.getNombre());
+            query = funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(), funcionDia.getParametros(), funcionDia.getNombre());
             System.out.println(query);
-            crud.InstanciarCRUD().EjecutarInstruccion(query,0);
+            crud.InstanciarCRUD().EjecutarInstruccion(query, 0);
         }
-        if(checkMartes.isSelected()){
+        if (checkMartes.isSelected()) {
             funcionDia.setIdDia(2);
             funcionDia.actualizarValues();
-            query=funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(),funcionDia.getParametros(),funcionDia.getNombre());
+            query = funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(), funcionDia.getParametros(), funcionDia.getNombre());
             System.out.println(query);
-            crud.InstanciarCRUD().EjecutarInstruccion(query,0);
+            crud.InstanciarCRUD().EjecutarInstruccion(query, 0);
         }
-        if(checkLunes.isSelected()){
+        if (checkLunes.isSelected()) {
             funcionDia.setIdDia(1);
             funcionDia.actualizarValues();
-            query=funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(),funcionDia.getParametros(),funcionDia.getNombre());
+            query = funcionDia.getAdminConsulta().queryInsertar(funcionDia.getValues(), funcionDia.getParametros(), funcionDia.getNombre());
             System.out.println(query);
-            crud.InstanciarCRUD().EjecutarInstruccion(query,0);
+            crud.InstanciarCRUD().EjecutarInstruccion(query, 0);
         }
         
-        
     }
-
+    
 
     private void checkTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkTodosActionPerformed
         boolean activar = false;
@@ -671,7 +804,7 @@ public void bloquearDesbloquearObjetos(int opcion) {
         if (evt.getSource() == panelNuevo) {
             panelNuevo.setBackground(new Color(29, 45, 80));
             panelNuevo.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
+            
         }
         if (evt.getSource() == panelEditar) {
             panelEditar.setBackground(new Color(29, 45, 80));
@@ -698,27 +831,27 @@ public void bloquearDesbloquearObjetos(int opcion) {
     private void salirPanel(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirPanel
         if (evt.getSource() == panelNuevo) {
             panelNuevo.setBackground(new Color(30, 95, 116));
-
+            
         }
         if (evt.getSource() == panelEditar) {
             panelEditar.setBackground(new Color(30, 95, 116));
-
+            
         }
         if (evt.getSource() == panelEliminar) {
             panelEliminar.setBackground(new Color(30, 95, 116));
-
+            
         }
         if (evt.getSource() == panelAceptar) {
             panelAceptar.setBackground(new Color(30, 95, 116));
-
+            
         }
         if (evt.getSource() == panelCancelar) {
             panelCancelar.setBackground(new Color(30, 95, 116));
-
+            
         }
         if (evt.getSource() == panelBuscar) {
             panelBuscar.setBackground(new Color(30, 95, 116));
-
+            
         }
     }//GEN-LAST:event_salirPanel
 
@@ -729,46 +862,81 @@ public void bloquearDesbloquearObjetos(int opcion) {
         }
         if (evt.getSource() == panelEditar) {
             opcionNuevoModificar = 0;
-
+            
         }
         if (evt.getSource() == panelEliminar) {
-
+            
         }
         if (evt.getSource() == panelAceptar) {
             if (opcionNuevoModificar == 1) {
                 if (validarFuncion.ValidarDatos(txtPrecio.getText()) >= 0) {
                     funcion.setHorario(validarFuncion.FormarHora(spinerHora, spinerMinuto));
                     funcion.setPrecio(Float.valueOf(txtPrecio.getText()));
-
+                    
                     funcion.setIdSala(Integer.parseInt(crud.InstanciarCRUD().getValor("select * from sala where num_sala =" + comboSala.getSelectedItem().toString(), "idSala")));
-
+                    
                     funcion.setIdPelicula(Integer.parseInt(crud.InstanciarCRUD().getValor("select * from  pelicula where nombre = '" + comboPelicula.getSelectedItem().toString() + "'", "idPelicula")));
                     funcion.actualizarValues();
-
+                    
                     String query = funcion.getAdminConsulta().queryInsertar(funcion.getValues(), funcion.getParametros(), funcion.getNombre());
                     //System.out.println(query);
-                    crud.InstanciarCRUD().EjecutarInstruccion(query,0);
+                    crud.InstanciarCRUD().EjecutarInstruccion(query, 0);
                     // System.out.println(crud.InstanciarCRUD().getUltimoID("idFuncion","funcion"));
                     funcionDia.setIdFuncion(crud.InstanciarCRUD().getUltimoID("idFuncion", "funcion"));
                     this.RelacionarDia();
-                    JOptionPane.showMessageDialog(null,"Funcion ingresada correctamente","Mensaje",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Funcion ingresada correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                     
                 }
             } else {
-
+                
             }
         }
         if (evt.getSource() == panelCancelar) {
             bloquearDesbloquearObjetos(0);
         }
         if (evt.getSource() == panelBuscar) {
-
+            
         }
     }//GEN-LAST:event_clickPanel
 
     private void clickTabla(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickTabla
+        
 
     }//GEN-LAST:event_clickTabla
+
+    private void clickDetalle(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickDetalle
+        int fila = tablaFuncion.getSelectedRow();
+        if (fila >= 0) {
+            funcion.getAdminConsulta().setWhere("where f.Precio =" + String.valueOf(tablaFuncion.getValueAt(fila, 0)) + " and s.num_sala =" + String.valueOf(tablaFuncion.getValueAt(fila, 2))
+                    + " and p.nombre ='" + String.valueOf(tablaFuncion.getValueAt(fila, 3)) + "' and f.Horario='" + String.valueOf(tablaFuncion.getValueAt(fila, 1)) + "'");
+            
+            funcion.getAdminConsulta().setQuery("select f.idFuncion as id from funcion as f\n"
+                    + "inner join sala as s on s.idSala = f.Sala_idSala\n"
+                    + "inner join pelicula as p on p.idPelicula = f.Pelicula_idPelicula " + funcion.getAdminConsulta().getWhere());
+
+            // System.out.println(funcion.getAdminConsulta().getQuery());
+            funcion.setId(crud.InstanciarCRUD().getValor(funcion.getAdminConsulta().getQuery(), "id"));
+            String[] tituloDia = {"dia"};
+            funcion.getAdminConsulta().setQuery("select d.dia as dia from detalle_funcion_dias as df\n"
+                    + "inner join dias as d on d.iddias_funcion = df.dias_iddias_funcion\n"
+                    + "inner join funcion as f on f.idFuncion = df.funcion_idHorario ");
+            funcion.getAdminConsulta().setWhere("where f.idFuncion = "+funcion.getId());
+           
+            tablaGestion.llenarTabla(tituloDia, tablaDias,funcion.getAdminConsulta().getQuery()+funcion.getAdminConsulta().getWhere());
+            diaologDias.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una funcion", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_clickDetalle
+
+    private void entrarDetalle(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrarDetalle
+        panelDetalle.setBackground(new Color(29, 45, 80));
+        panelDetalle.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_entrarDetalle
+
+    private void salirDetalle(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirDetalle
+        panelDetalle.setBackground(new Color(30, 95, 116));
+    }//GEN-LAST:event_salirDetalle
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -783,10 +951,12 @@ public void bloquearDesbloquearObjetos(int opcion) {
     private javax.swing.JCheckBox checkViernes;
     private javax.swing.JComboBox<String> comboPelicula;
     private javax.swing.JComboBox<String> comboSala;
+    private javax.swing.JDialog diaologDias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -801,10 +971,13 @@ public void bloquearDesbloquearObjetos(int opcion) {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel panelAceptar;
     private javax.swing.JPanel panelBuscar;
     private javax.swing.JPanel panelCancelar;
+    private javax.swing.JPanel panelDetalle;
     private javax.swing.JPanel panelEditar;
     private javax.swing.JPanel panelEliminar;
     private javax.swing.JPanel panelNuevo;
@@ -812,6 +985,7 @@ public void bloquearDesbloquearObjetos(int opcion) {
     private javax.swing.JRadioButton radioPelicula;
     private javax.swing.JSpinner spinerHora;
     private javax.swing.JSpinner spinerMinuto;
+    private javax.swing.JTable tablaDias;
     private javax.swing.JTable tablaFuncion;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtPrecio;
