@@ -22,6 +22,7 @@ public class Pelicula extends javax.swing.JInternalFrame {
 
     private PeliculaClass pelicula;
     private CRUD crud;
+    private int last = 0;
    
     
     
@@ -39,6 +40,10 @@ public class Pelicula extends javax.swing.JInternalFrame {
         pelicula = new PeliculaClass();
         guardapeli.setVisible(false);
         confirmareli.setVisible(false);
+        paceptar.setVisible(false);
+        peliminar.setVisible(false);
+        pcancelaraccion.setVisible(false);
+        ccancelar.setVisible(false);
     
     }
 
@@ -60,6 +65,12 @@ public class Pelicula extends javax.swing.JInternalFrame {
         guardapeli = new javax.swing.JLabel();
         eliminapeli = new javax.swing.JLabel();
         confirmareli = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        paceptar = new javax.swing.JLabel();
+        peliminar = new javax.swing.JLabel();
+        pcancelaraccion = new javax.swing.JLabel();
+        ccancelar = new javax.swing.JLabel();
         panelCentral = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         nombrepeli = new javax.swing.JTextField();
@@ -127,35 +138,86 @@ public class Pelicula extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Añadir");
+
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Eliminar");
+
+        paceptar.setForeground(new java.awt.Color(255, 255, 255));
+        paceptar.setText("Aceptar");
+
+        peliminar.setForeground(new java.awt.Color(255, 255, 255));
+        peliminar.setText("Aceptar");
+
+        pcancelaraccion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
+        pcancelaraccion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pcancelaraccionMouseClicked(evt);
+            }
+        });
+
+        ccancelar.setForeground(new java.awt.Color(255, 255, 255));
+        ccancelar.setText("Cancelar");
+
         javax.swing.GroupLayout panelSuperiorLayout = new javax.swing.GroupLayout(panelSuperior);
         panelSuperior.setLayout(panelSuperiorLayout);
         panelSuperiorLayout.setHorizontalGroup(
             panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSuperiorLayout.createSequentialGroup()
-                .addGap(314, 314, 314)
-                .addComponent(registrapeli, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(eliminapeli, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(guardapeli)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(confirmareli, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(488, 488, 488))
+                .addGap(240, 240, 240)
+                .addGroup(panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelSuperiorLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSuperiorLayout.createSequentialGroup()
+                        .addComponent(registrapeli)
+                        .addGap(33, 33, 33)))
+                .addGroup(panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelSuperiorLayout.createSequentialGroup()
+                        .addComponent(eliminapeli, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pcancelaraccion, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))
+                    .addGroup(panelSuperiorLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ccancelar)
+                        .addGap(47, 47, 47)))
+                .addGroup(panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelSuperiorLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(paceptar)
+                        .addGap(47, 47, 47)
+                        .addComponent(peliminar))
+                    .addGroup(panelSuperiorLayout.createSequentialGroup()
+                        .addComponent(guardapeli)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(confirmareli, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(487, 487, 487))
         );
         panelSuperiorLayout.setVerticalGroup(
             panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSuperiorLayout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelSuperiorLayout.createSequentialGroup()
-                        .addComponent(confirmareli, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                    .addComponent(confirmareli, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSuperiorLayout.createSequentialGroup()
                         .addGroup(panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(guardapeli, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(eliminapeli, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(registrapeli, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26))))
+                            .addComponent(registrapeli, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pcancelaraccion, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(panelSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel10)
+                            .addComponent(paceptar)
+                            .addComponent(peliminar)
+                            .addComponent(ccancelar))))
+                .addContainerGap())
         );
 
         panelGeneral.add(panelSuperior, java.awt.BorderLayout.PAGE_START);
@@ -208,7 +270,10 @@ public class Pelicula extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
+                        .addGap(310, 310, 310)
+                        .addComponent(jLabel9))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel2)
@@ -233,18 +298,15 @@ public class Pelicula extends javax.swing.JInternalFrame {
                             .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(clasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(idioma, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(310, 310, 310)
-                        .addComponent(jLabel9)))
-                .addContainerGap(453, Short.MAX_VALUE))
+                            .addComponent(idioma, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(440, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(64, 64, 64)
                 .addComponent(jLabel9)
-                .addGap(80, 80, 80)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombrepeli, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
@@ -266,7 +328,7 @@ public class Pelicula extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(idioma, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(273, Short.MAX_VALUE))
+                .addContainerGap(394, Short.MAX_VALUE))
         );
 
         panelCentral.add(jPanel4, "card2");
@@ -320,9 +382,11 @@ public class Pelicula extends javax.swing.JInternalFrame {
         categoria.setText("");
         clasificacion.setText("");
         idioma.setText("");
+        paceptar.setVisible(false);
     }//GEN-LAST:event_guardarpelicula
 
     private void registrarpelicula(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarpelicula
+        last = 1;
         nombrepeli.setEnabled(true);
         fechaestreno.setEnabled(true);
         duracion.setEnabled(true);
@@ -331,6 +395,9 @@ public class Pelicula extends javax.swing.JInternalFrame {
         clasificacion.setEnabled(true);
         idioma.setEnabled(true);
         guardapeli.setVisible(true);
+        paceptar.setVisible(true);
+        pcancelaraccion.setVisible(true);
+        ccancelar.setVisible(true);
     }//GEN-LAST:event_registrarpelicula
 
     private void fechaestrenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaestrenoActionPerformed
@@ -342,8 +409,12 @@ public class Pelicula extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_nombrepeliActionPerformed
 
     private void EliminarPelicula(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarPelicula
+      last = 2;
       nombrepeli.setEnabled(true);
       confirmareli.setVisible(true);
+      peliminar.setVisible(true);
+      pcancelaraccion.setVisible(true);
+      ccancelar.setVisible(true);
     }//GEN-LAST:event_EliminarPelicula
 
     private void AceptarEliminacion(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AceptarEliminacion
@@ -353,12 +424,51 @@ public class Pelicula extends javax.swing.JInternalFrame {
       nombrepeli.setEnabled(false);
       nombrepeli.setText("");
       confirmareli.setVisible(false);
+      peliminar.setVisible(false);
     }//GEN-LAST:event_AceptarEliminacion
+
+    private void pcancelaraccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcancelaraccionMouseClicked
+       if (last == 1){
+        nombrepeli.setEnabled(false);
+        fechaestreno.setEnabled(false);
+        duracion.setEnabled(false);
+        imagen.setEnabled(false);
+        categoria.setEnabled(false);
+        clasificacion.setEnabled(false);
+        idioma.setEnabled(false);
+        guardapeli.setVisible(false);
+        nombrepeli.setText("");
+        fechaestreno.setText("");
+        duracion.setText("");
+        imagen.setText("");
+        categoria.setText("");
+        clasificacion.setText("");
+        idioma.setText("");
+        paceptar.setVisible(false);
+        pcancelaraccion.setVisible(false);
+        ccancelar.setVisible(false);
+           
+           
+       }
+       else if(last == 2){
+      nombrepeli.setEnabled(false);
+      nombrepeli.setText("");
+      confirmareli.setVisible(false);
+      peliminar.setVisible(false);
+      pcancelaraccion.setVisible(false);
+      ccancelar.setVisible(false);
+       }
+       
+       else{
+           System.out.println("no se puede completar acción");
+       }
+    }//GEN-LAST:event_pcancelaraccionMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField categoria;
+    private javax.swing.JLabel ccancelar;
     private javax.swing.JTextField clasificacion;
     private javax.swing.JLabel confirmareli;
     private javax.swing.JTextField duracion;
@@ -368,7 +478,9 @@ public class Pelicula extends javax.swing.JInternalFrame {
     private javax.swing.JTextField idioma;
     private javax.swing.JTextField imagen;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -379,9 +491,12 @@ public class Pelicula extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nombrepeli;
+    private javax.swing.JLabel paceptar;
     private javax.swing.JPanel panelCentral;
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JPanel panelSuperior;
+    private javax.swing.JLabel pcancelaraccion;
+    private javax.swing.JLabel peliminar;
     private javax.swing.JLabel registrapeli;
     // End of variables declaration//GEN-END:variables
 }
