@@ -1,5 +1,5 @@
 bdcine
-3306
+3305
 root
-ljrp
+xela2020
 com.mysql.jdbc.Driver
