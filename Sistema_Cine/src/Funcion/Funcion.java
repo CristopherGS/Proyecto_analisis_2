@@ -46,6 +46,10 @@ public class Funcion extends javax.swing.JInternalFrame {
         diaologDias.setTitle("Dias");
         diaologDias.setSize(340, 170);
         diaologDias.setLocationRelativeTo(Funcion.this);
+        radioPelicula.setSelected(true);
+        spinerHoraBusqueda.setEnabled(false);
+        spinerMinutoBusqueda.setEnabled(false);
+        funcion.setDesicion(1);
     }
 
     /**
@@ -104,6 +108,10 @@ public class Funcion extends javax.swing.JInternalFrame {
         panelDetalle = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
+        spinerHoraBusqueda = new javax.swing.JSpinner();
+        spinerMinutoBusqueda = new javax.swing.JSpinner();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaFuncion = new javax.swing.JTable();
 
@@ -545,9 +553,19 @@ public class Funcion extends javax.swing.JInternalFrame {
 
         buttonGroup1.add(radioHorario);
         radioHorario.setText("Horario");
+        radioHorario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioHorarioActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(radioPelicula);
         radioPelicula.setText("Pelicula");
+        radioPelicula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioPeliculaActionPerformed(evt);
+            }
+        });
 
         panelBuscar.setBackground(new java.awt.Color(30, 95, 116));
         panelBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -609,13 +627,23 @@ public class Funcion extends javax.swing.JInternalFrame {
         );
         panelDetalleLayout.setVerticalGroup(
             panelDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 84, Short.MAX_VALUE)
+            .addGap(0, 86, Short.MAX_VALUE)
             .addGroup(panelDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelDetalleLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jLabel13)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
+
+        spinerHoraBusqueda.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+
+        spinerMinutoBusqueda.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Hora");
+
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Minuto");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -629,7 +657,17 @@ public class Funcion extends javax.swing.JInternalFrame {
                 .addGap(53, 53, 53)
                 .addComponent(panelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(spinerHoraBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(spinerMinutoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(101, 101, 101))
@@ -643,12 +681,20 @@ public class Funcion extends javax.swing.JInternalFrame {
                         .addContainerGap(16, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(radioHorario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(radioPelicula))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(radioHorario)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel14)
+                                            .addComponent(jLabel15))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(radioPelicula)
+                                    .addComponent(spinerHoraBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(spinerMinutoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(panelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -693,7 +739,7 @@ public class Funcion extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel6, java.awt.BorderLayout.CENTER);
@@ -729,6 +775,12 @@ public void bloquearDesbloquearObjetos(int opcion) {
         
        //el relativo respecto al internal frame
        //diaologDias.setUndecorated(true);//Le quita el boron de cerrar
+    }
+    //Define el texto a enviar cuando se busca por hora 
+    public String definirHora(){
+            String hora = "";
+            hora = spinerHoraBusqueda.getValue().toString()+":"+spinerMinutoBusqueda.getValue().toString()+":00";
+            return hora;
     }
     
     public void RelacionarDia() {
@@ -894,7 +946,26 @@ public void bloquearDesbloquearObjetos(int opcion) {
         if (evt.getSource() == panelCancelar) {
             bloquearDesbloquearObjetos(0);
         }
+        //Opcion para buscar una funcion en concreto
         if (evt.getSource() == panelBuscar) {
+           //Si la decicion es igual a 0 se va a buscar por hora
+            if(funcion.getDesicion()==0){
+                System.out.println("entro a buscar por hora");
+                System.out.println("hora: "+definirHora());
+                tablaGestion.llenarTabla(definirTitulos.DefinirTitulos(), tablaFuncion, definirConsulta.getConsulta(definirHora(), funcion, funcion.getDesicion()));
+                spinerHoraBusqueda.setValue(0);
+                spinerMinutoBusqueda.setValue(0);
+           }
+            //sino se esta buscando por pelicula
+            //solo se manda el texto como pelicula
+           else{
+                System.out.println("entro a buscar por pelicula");
+                System.out.println("pelicula: "+txtBuscar.getText());
+                tablaGestion.llenarTabla(definirTitulos.DefinirTitulos(), tablaFuncion, definirConsulta.getConsulta(txtBuscar.getText(), funcion, funcion.getDesicion()));
+                txtBuscar.setText("");
+             
+           }
+            
             
         }
     }//GEN-LAST:event_clickPanel
@@ -938,6 +1009,20 @@ public void bloquearDesbloquearObjetos(int opcion) {
         panelDetalle.setBackground(new Color(30, 95, 116));
     }//GEN-LAST:event_salirDetalle
 
+    private void radioHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioHorarioActionPerformed
+    txtBuscar.setEnabled(false);
+    spinerHoraBusqueda.setEnabled(true);
+    spinerMinutoBusqueda.setEnabled(true);
+    funcion.setDesicion(0);
+    }//GEN-LAST:event_radioHorarioActionPerformed
+
+    private void radioPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioPeliculaActionPerformed
+    txtBuscar.setEnabled(true);
+    spinerHoraBusqueda.setEnabled(false);
+    spinerMinutoBusqueda.setEnabled(false); 
+    funcion.setDesicion(1);
+    }//GEN-LAST:event_radioPeliculaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -957,6 +1042,8 @@ public void bloquearDesbloquearObjetos(int opcion) {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -984,7 +1071,9 @@ public void bloquearDesbloquearObjetos(int opcion) {
     private javax.swing.JRadioButton radioHorario;
     private javax.swing.JRadioButton radioPelicula;
     private javax.swing.JSpinner spinerHora;
+    private javax.swing.JSpinner spinerHoraBusqueda;
     private javax.swing.JSpinner spinerMinuto;
+    private javax.swing.JSpinner spinerMinutoBusqueda;
     private javax.swing.JTable tablaDias;
     private javax.swing.JTable tablaFuncion;
     private javax.swing.JTextField txtBuscar;

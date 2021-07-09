@@ -32,8 +32,15 @@ public class DefinirConsultaFuncion implements DefinirConsulta{
             
             try {
                 // verificamos que lo que se esta buscando es un numero entero
-                int id_numSala = Integer.parseInt(texto); 
-                registro.getAdminConsulta().setWhere ("where num_sala= "+id_numSala);  
+               
+                if(tipo ==1){
+                //int id_numSala = Integer.parseInt(texto); 
+                    System.out.println("entro");
+                registro.getAdminConsulta().setWhere ("where p.nombre= '"+texto+"'");  
+                }
+                else{
+                  registro.getAdminConsulta().setWhere ("where f.Horario= '"+texto+"'");  
+                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null,"Debe de ingresar un numero entero","Error",JOptionPane.ERROR_MESSAGE);
             }   
