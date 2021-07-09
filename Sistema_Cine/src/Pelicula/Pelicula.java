@@ -112,14 +112,14 @@ public class Pelicula extends javax.swing.JInternalFrame {
         registrapeli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevo_registro.png"))); // NOI18N
         registrapeli.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                registrarpelicula(evt);
+                RegistrarPelicula(evt);
             }
         });
 
         guardapeli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/aceptar.png"))); // NOI18N
         guardapeli.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                guardarpelicula(evt);
+                GuardarPelicula(evt);
             }
         });
 
@@ -153,7 +153,7 @@ public class Pelicula extends javax.swing.JInternalFrame {
         pcancelaraccion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
         pcancelaraccion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pcancelaraccionMouseClicked(evt);
+                CancelarAccion(evt);
             }
         });
 
@@ -351,7 +351,7 @@ public class Pelicula extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void guardarpelicula(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarpelicula
+    private void GuardarPelicula(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarPelicula
        
       String query;  
         
@@ -383,9 +383,9 @@ public class Pelicula extends javax.swing.JInternalFrame {
         clasificacion.setText("");
         idioma.setText("");
         paceptar.setVisible(false);
-    }//GEN-LAST:event_guardarpelicula
+    }//GEN-LAST:event_GuardarPelicula
 
-    private void registrarpelicula(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarpelicula
+    private void RegistrarPelicula(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarPelicula
         last = 1;
         nombrepeli.setEnabled(true);
         fechaestreno.setEnabled(true);
@@ -398,7 +398,7 @@ public class Pelicula extends javax.swing.JInternalFrame {
         paceptar.setVisible(true);
         pcancelaraccion.setVisible(true);
         ccancelar.setVisible(true);
-    }//GEN-LAST:event_registrarpelicula
+    }//GEN-LAST:event_RegistrarPelicula
 
     private void fechaestrenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaestrenoActionPerformed
         // TODO add your handling code here:
@@ -427,7 +427,7 @@ public class Pelicula extends javax.swing.JInternalFrame {
       peliminar.setVisible(false);
     }//GEN-LAST:event_AceptarEliminacion
 
-    private void pcancelaraccionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pcancelaraccionMouseClicked
+    private void CancelarAccion(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CancelarAccion
        if (last == 1){
         nombrepeli.setEnabled(false);
         fechaestreno.setEnabled(false);
@@ -462,7 +462,7 @@ public class Pelicula extends javax.swing.JInternalFrame {
        else{
            System.out.println("no se puede completar acción");
        }
-    }//GEN-LAST:event_pcancelaraccionMouseClicked
+    }//GEN-LAST:event_CancelarAccion
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
