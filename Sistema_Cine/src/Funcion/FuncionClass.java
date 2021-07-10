@@ -6,7 +6,6 @@
 package Funcion;
 
 import ClasesGlobales.Registro;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,10 +16,27 @@ public class FuncionClass extends Registro {
     private float precio;
     private String horario;
     private int idSala, idPelicula;
+    private String noSala, nombrePelicula;
 
     public FuncionClass() {
         this.setNombre("funcion");
         this.setParametros("Precio,Horario,Sala_idSala,Pelicula_idPelicula");
+    }
+
+    public String getNoSala() {
+        return noSala;
+    }
+
+    public void setNoSala(String noSala) {
+        this.noSala = noSala;
+    }
+
+    public String getNombrePelicula() {
+        return nombrePelicula;
+    }
+
+    public void setNombrePelicula(String nombrePelicula) {
+        this.nombrePelicula = nombrePelicula;
     }
 
     public float getPrecio() {
