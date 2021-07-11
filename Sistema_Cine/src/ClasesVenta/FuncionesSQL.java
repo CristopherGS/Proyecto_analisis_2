@@ -67,7 +67,8 @@ public class FuncionesSQL {
 
         return funciones;
     }
-        public ArrayList obtenerSalas(String consulta) {
+
+    public ArrayList obtenerSalas(String consulta) {
         Statement sentenciaAux;//Objeto que se usa para usar ejecutar sentencias de SQL. Ejecuta una sentencia SQL simple que no tiene ningun parametro.
         ResultSet resultSetAux;//Contiene los resultados de una consulta SQL. Mantiene un cursor apuntando a su fila de datos actual. 
         ResultSetMetaData rsMd; //Metodo que obtiene el numero, tipo y propiedades de las columnas de un ResultSet.
@@ -102,5 +103,5 @@ public class FuncionesSQL {
 
         return funciones;
     }
-    
+
 }

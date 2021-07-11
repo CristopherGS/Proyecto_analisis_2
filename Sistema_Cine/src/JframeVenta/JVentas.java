@@ -7,12 +7,15 @@ package JframeVenta;
 
 import Cartelera.ObtenerPeliculas;
 import ClasesGlobales.CRUD;
+import ClasesVenta.Cliente;
+import ClasesVenta.ClientesSQL;
 import ClasesVenta.FuncionesSQL;
 import Funcion.FuncionClass;
 import Pelicula.*;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,15 +24,21 @@ import javax.swing.JDesktopPane;
 public class JVentas extends javax.swing.JInternalFrame {
 
     private CRUD c;
+    private ClientesSQL obtener;
+    private ArrayList<Cliente> clientes;
 
     public JVentas() {
         initComponents();
         setTitle("Peliculas");
         c = c.InstanciarCRUD();
         //se le manda el combo, la consulta, y el nombre de la columna 
-        c.InstanciarCRUD().llenar_combo(Jsala, "SELECT p.nombre FROM funcion AS f \n"
+        c.InstanciarCRUD().llenar_combo(JPelicula, "SELECT p.nombre FROM funcion AS f \n"
                 + "INNER JOIN sala AS s ON s.idSala = f.Sala_idSala\n"
                 + "INNER JOIN pelicula AS p ON p.idPelicula = f.Pelicula_idPelicula GROUP BY p.nombre;", "nombre");
+        c.InstanciarCRUD().llenar_combo(Jsala, "SELECT s.num_sala FROM funcion AS f \n"
+                + "INNER JOIN sala AS s ON s.idSala = f.Sala_idSala\n"
+                + "INNER JOIN pelicula AS p ON p.idPelicula = f.Pelicula_idPelicula GROUP BY s.num_sala;", "num_sala");
+        rcliente.setVisible(false);
     }
 
     /**
@@ -68,8 +77,8 @@ public class JVentas extends javax.swing.JInternalFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         telefono = new javax.swing.JTextField();
-        nombre = new javax.swing.JTextField();
         nit = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         Jsala = new javax.swing.JComboBox<>();
         noFactura = new javax.swing.JLabel();
@@ -77,11 +86,11 @@ public class JVentas extends javax.swing.JInternalFrame {
         jLabel24 = new javax.swing.JLabel();
         JPelicula = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        telefono1 = new javax.swing.JTextField();
+        comprar = new javax.swing.JPanel();
+        asiento = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        telefono2 = new javax.swing.JTextField();
+        voletos = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
         total = new javax.swing.JLabel();
         rcliente = new javax.swing.JButton();
@@ -140,7 +149,7 @@ public class JVentas extends javax.swing.JInternalFrame {
 
         panelGeneral.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setBackground(new java.awt.Color(122, 118, 114));
+        jPanel1.setBackground(new java.awt.Color(30, 95, 116));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         a12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
@@ -246,14 +255,28 @@ public class JVentas extends javax.swing.JInternalFrame {
         jLabel20.setText("Nit:");
         jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 30, 20));
 
+        telefono.setEditable(false);
         telefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 telefonoActionPerformed(evt);
             }
         });
         jPanel3.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 230, -1));
-        jPanel3.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 160, -1));
-        jPanel3.add(nit, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 230, -1));
+
+        nit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nitActionPerformed(evt);
+            }
+        });
+        jPanel3.add(nit, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 160, -1));
+
+        nombre.setEditable(false);
+        nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreActionPerformed(evt);
+            }
+        });
+        jPanel3.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 230, -1));
 
         jLabel21.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(0, 0, 0));
@@ -287,16 +310,16 @@ public class JVentas extends javax.swing.JInternalFrame {
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, 120, 40));
 
-        jPanel5.setBackground(new java.awt.Color(1, 1, 1));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, 120, 40));
+        comprar.setBackground(new java.awt.Color(1, 1, 1));
+        comprar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.add(comprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, 120, 40));
 
-        telefono1.addActionListener(new java.awt.event.ActionListener() {
+        asiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                telefono1ActionPerformed(evt);
+                asientoActionPerformed(evt);
             }
         });
-        jPanel3.add(telefono1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 90, -1));
+        jPanel3.add(asiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 90, -1));
 
         jLabel19.setBackground(new java.awt.Color(0, 0, 0));
         jLabel19.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
@@ -310,12 +333,12 @@ public class JVentas extends javax.swing.JInternalFrame {
         jLabel25.setText("Cantidad:");
         jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 70, 20));
 
-        telefono2.addActionListener(new java.awt.event.ActionListener() {
+        voletos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                telefono2ActionPerformed(evt);
+                voletosActionPerformed(evt);
             }
         });
-        jPanel3.add(telefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 90, -1));
+        jPanel3.add(voletos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 90, -1));
 
         jLabel26.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(0, 0, 0));
@@ -336,12 +359,17 @@ public class JVentas extends javax.swing.JInternalFrame {
                 rclienteActionPerformed(evt);
             }
         });
-        jPanel3.add(rcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 140, 40));
+        jPanel3.add(rcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 140, 40));
 
         validarcliente.setBackground(new java.awt.Color(226, 235, 240));
         validarcliente.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
         validarcliente.setForeground(new java.awt.Color(0, 0, 0));
         validarcliente.setText("Validar NIT");
+        validarcliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validarclienteActionPerformed(evt);
+            }
+        });
         jPanel3.add(validarcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 110, 40));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 500, 440));
@@ -512,17 +540,50 @@ public class JVentas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_telefonoActionPerformed
 
-    private void telefono1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefono1ActionPerformed
+    private void asientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asientoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_telefono1ActionPerformed
+    }//GEN-LAST:event_asientoActionPerformed
 
-    private void telefono2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefono2ActionPerformed
+    private void voletosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voletosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_telefono2ActionPerformed
+    }//GEN-LAST:event_voletosActionPerformed
 
     private void rclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rclienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rclienteActionPerformed
+
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreActionPerformed
+
+    private void nitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nitActionPerformed
+
+    }//GEN-LAST:event_nitActionPerformed
+
+    private void validarclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validarclienteActionPerformed
+        if (nit.getText().equals("")) {
+            System.out.println("no tiene nada");
+        } else {
+            obtener = new ClientesSQL();
+            System.out.println(nit.getText());
+            this.clientes = obtener.obtenerClientes("SELECT c.nombre, c.nit, c.telefono FROM cliente AS c WHERE c.nit = '" + nit.getText() + "';");
+            System.out.println(clientes.size() + "valio");
+            int size = clientes.size();
+            if (size != 0) {
+                for (int i = 0; i < clientes.size(); i++) {
+                    nombre.setText(clientes.get(i).getNombrec());
+                    telefono.setText(clientes.get(i).getTelefono());
+                    System.out.println(clientes.get(i).getTelefono());
+                }
+            } else {
+                nit.setText("");
+                nombre.setEditable(true);
+                telefono.setEditable(true);
+                rcliente.setVisible(true);
+                JOptionPane.showMessageDialog(null, "No existe el cliente, Registre al nuevo cliente");
+            }
+        }
+    }//GEN-LAST:event_validarclienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -540,6 +601,7 @@ public class JVentas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel a7;
     private javax.swing.JLabel a8;
     private javax.swing.JLabel a9;
+    private javax.swing.JTextField asiento;
     private javax.swing.JLabel b1;
     private javax.swing.JLabel b10;
     private javax.swing.JLabel b11;
@@ -565,6 +627,7 @@ public class JVentas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel c7;
     private javax.swing.JLabel c8;
     private javax.swing.JLabel c9;
+    private javax.swing.JPanel comprar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -594,7 +657,6 @@ public class JVentas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nit;
     private javax.swing.JLabel noFactura;
@@ -602,9 +664,8 @@ public class JVentas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JButton rcliente;
     private javax.swing.JTextField telefono;
-    private javax.swing.JTextField telefono1;
-    private javax.swing.JTextField telefono2;
     private javax.swing.JLabel total;
     private javax.swing.JButton validarcliente;
+    private javax.swing.JTextField voletos;
     // End of variables declaration//GEN-END:variables
 }

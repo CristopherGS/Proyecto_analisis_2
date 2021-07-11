@@ -15,8 +15,8 @@ import ClasesGlobales.Registro;
 public class Cliente extends Registro {
 
     private ConexionBD conexion;
-    public String Nombrec;
-    public int NIT;
+    public String Nombrec, Telefono;
+    public int NIT; 
 
     public Cliente() {
         this.setParametros("nombre, nit");
@@ -26,6 +26,15 @@ public class Cliente extends Registro {
     public String getNombrec() {
         return Nombrec;
     }
+
+    public String getTelefono() {
+        return Telefono;
+    }
+
+    public void setTelefono(String Telefono) {
+        this.Telefono = Telefono;
+    }
+    
 
     public void setNombrec(String Nombre) {
         this.Nombrec = Nombre;
