@@ -5,25 +5,32 @@
  */
 package Cartelera;
 
+import JframeVenta.JVentas;
 import Pelicula.PeliculaClass;
+import java.awt.Color;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JDesktopPane;
 
 /**
  *
  * @author Shaddow
  */
 public class Cartelera extends javax.swing.JInternalFrame {
+
     private int contador = 0;
     private ObtenerPeliculas obtener;
-    private ArrayList<PeliculaClass> peliculas; 
-    public Cartelera() {
+    private ArrayList<PeliculaClass> peliculas;
+    private JDesktopPane panelprincipal;
+
+    public Cartelera(JDesktopPane panelPrincipal) {
         initComponents();
         obtener = new ObtenerPeliculas();
+        this.panelprincipal = panelPrincipal;
         this.peliculas = obtener.ObtenerPelis("select * from pelicula");
         labelNombre.setText(this.peliculas.get(contador).getNombrepelicula());
         labelCategoria.setText(this.peliculas.get(contador).getCategoria());
@@ -34,21 +41,21 @@ public class Cartelera extends javax.swing.JInternalFrame {
         //System.out.println(this.peliculas.get(contador).getImagen());
         cargarImagen(this.peliculas.get(contador).getImagen());
     }
-    
-    public void cargarImagen(String enlace){
-               Image imagen = null;
+
+    public void cargarImagen(String enlace) {
+        Image imagen = null;
         try {
             //Inicializar y asignar url de la imagen a mostrar
             URL url = new URL(enlace);
             //Asignacion de url a la imagen
             imagen = ImageIO.read(url);
-               } catch (IOException e) {
-                                      e.printStackTrace();
-                                                                 }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 //ImageIcon icono = new ImageIcon(imagen.getScaledInstance(paraimagen.getWidth(), paraimagen.getHeight(), Image.SCALE_DEFAULT));
 
-ImageIcon icono = new ImageIcon(imagen.getScaledInstance(280, 450, Image.SCALE_DEFAULT));
-paraimagen.setIcon(icono);        // TODO add your handling code here:
+        ImageIcon icono = new ImageIcon(imagen.getScaledInstance(280, 450, Image.SCALE_DEFAULT));
+        paraimagen.setIcon(icono);        // TODO add your handling code here:
     }
 
     /**
@@ -71,6 +78,8 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
         labelIdioma = new javax.swing.JLabel();
         anterior = new javax.swing.JLabel();
         siguiente = new javax.swing.JLabel();
+        botonComprar = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -137,14 +146,41 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
             }
         });
 
+        botonComprar.setBackground(new java.awt.Color(226, 235, 240));
+        botonComprar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        botonComprar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonComprarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonComprarMouseExited(evt);
+            }
+        });
+        botonComprar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/shop.png"))); // NOI18N
+        jLabel2.setText("COMPRAR");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel2MouseExited(evt);
+            }
+        });
+        botonComprar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 50));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(193, 193, 193)
-                .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 806, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(labelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -158,8 +194,8 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
                 .addComponent(labelCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(labelIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 88, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 40, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(anterior)
                 .addGap(47, 47, 47)
@@ -167,6 +203,15 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
                 .addGap(35, 35, 35)
                 .addComponent(siguiente)
                 .addGap(425, 425, 425))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(193, 193, 193)
+                        .addComponent(labelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 806, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(545, 545, 545)
+                        .addComponent(botonComprar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +228,7 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(198, 198, 198)
                         .addComponent(anterior)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelFecha)
                     .addComponent(labelHora)
@@ -191,7 +236,9 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
                     .addComponent(labelClasificacion)
                     .addComponent(labelCategoria)
                     .addComponent(labelIdioma))
-                .addGap(84, 84, 84))
+                .addGap(27, 27, 27)
+                .addComponent(botonComprar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -206,7 +253,7 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 686, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -214,37 +261,64 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
     }// </editor-fold>//GEN-END:initComponents
 
     private void cambiarsiguiente(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarsiguiente
-        contador++;  
+        contador++;
         labelNombre.setText(this.peliculas.get(contador).getNombrepelicula());
         labelCategoria.setText(this.peliculas.get(contador).getCategoria());
         labelFecha.setText(this.peliculas.get(contador).getFecha_estreno());
         labelClasificacion.setText(this.peliculas.get(contador).getClasificacion());
         labelDuracion.setText(this.peliculas.get(contador).getDuracion());
         labelIdioma.setText(this.peliculas.get(contador).getIdioma());
-      
+
         cargarImagen(this.peliculas.get(contador).getImagen());
     }//GEN-LAST:event_cambiarsiguiente
 
     private void cambiaranterior(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiaranterior
-        if(contador==0){
+        if (contador == 0) {
             System.out.println("error");
-        }
-        else{
-        contador--;  
-        labelNombre.setText(this.peliculas.get(contador).getNombrepelicula());
-        labelCategoria.setText(this.peliculas.get(contador).getCategoria());
-        labelFecha.setText(this.peliculas.get(contador).getFecha_estreno());
-        labelClasificacion.setText(this.peliculas.get(contador).getClasificacion());
-        labelDuracion.setText(this.peliculas.get(contador).getDuracion());
-        labelIdioma.setText(this.peliculas.get(contador).getIdioma());
-       
-        cargarImagen(this.peliculas.get(contador).getImagen());
+        } else {
+            contador--;
+            labelNombre.setText(this.peliculas.get(contador).getNombrepelicula());
+            labelCategoria.setText(this.peliculas.get(contador).getCategoria());
+            labelFecha.setText(this.peliculas.get(contador).getFecha_estreno());
+            labelClasificacion.setText(this.peliculas.get(contador).getClasificacion());
+            labelDuracion.setText(this.peliculas.get(contador).getDuracion());
+            labelIdioma.setText(this.peliculas.get(contador).getIdioma());
+
+            cargarImagen(this.peliculas.get(contador).getImagen());
         }
     }//GEN-LAST:event_cambiaranterior
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        JVentas funcion = new JVentas();
+        this.panelprincipal.add(funcion);
+        funcion.show();
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void botonComprarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonComprarMouseEntered
+        Color color = new Color(161, 196, 253);
+        this.botonComprar.setBackground(color);
+    }//GEN-LAST:event_botonComprarMouseEntered
+
+    private void botonComprarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonComprarMouseExited
+        Color color = new Color(226, 235, 240);
+        this.botonComprar.setBackground(color);
+    }//GEN-LAST:event_botonComprarMouseExited
+
+    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
+        Color color = new Color(161, 196, 253);
+        this.botonComprar.setBackground(color);
+    }//GEN-LAST:event_jLabel2MouseEntered
+
+    private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
+        Color color = new Color(226, 235, 240);
+        this.botonComprar.setBackground(color);
+    }//GEN-LAST:event_jLabel2MouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel anterior;
+    private javax.swing.JPanel botonComprar;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelCategoria;
     private javax.swing.JLabel labelClasificacion;
@@ -256,4 +330,5 @@ paraimagen.setIcon(icono);        // TODO add your handling code here:
     private javax.swing.JLabel paraimagen;
     private javax.swing.JLabel siguiente;
     // End of variables declaration//GEN-END:variables
+
 }

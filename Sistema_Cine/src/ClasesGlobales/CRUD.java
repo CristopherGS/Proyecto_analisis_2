@@ -27,7 +27,7 @@ public class CRUD {
     private ConexionBD conexion;
     static CRUD instancia;
     
-    private CRUD(){
+    public CRUD(){
         System.out.println("crear");
     }
      

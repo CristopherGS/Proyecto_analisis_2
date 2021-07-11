@@ -132,7 +132,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-      Cartelera carte = new Cartelera();
+      Cartelera carte = new Cartelera(this.panelPrincipal);
       this.panelPrincipal.add(carte);
       carte.show();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
