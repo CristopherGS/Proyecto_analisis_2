@@ -5,10 +5,14 @@
  */
 
 package ClasesInterfaz;
+import ClasesGlobales.CRUD;
+import Funcion.Funcion;
+import Funcion.FuncionClass;
 import Interfaz.*;
 import javax.lang.model.SourceVersion;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
 
 /**
  * 
@@ -37,6 +41,17 @@ public class ValidarFuncion implements Validar{
         }
        
         return horaFinal;
+    }
+    public void obtenerId(FuncionClass funcion,JTable tablaFuncion,int fila,CRUD crud){
+          funcion.getAdminConsulta().setWhere("where f.Precio =" + String.valueOf(tablaFuncion.getValueAt(fila, 0)) + " and s.num_sala =" + String.valueOf(tablaFuncion.getValueAt(fila, 2))
+                    + " and p.nombre ='" + String.valueOf(tablaFuncion.getValueAt(fila, 3)) + "' and f.Horario='" + String.valueOf(tablaFuncion.getValueAt(fila, 1)) + "'");
+            
+            funcion.getAdminConsulta().setQuery("select f.idFuncion as id from funcion as f\n"
+                    + "inner join sala as s on s.idSala = f.Sala_idSala\n"
+                    + "inner join pelicula as p on p.idPelicula = f.Pelicula_idPelicula " + funcion.getAdminConsulta().getWhere());
+
+            // System.out.println(funcion.getAdminConsulta().getQuery());
+            funcion.setId(crud.InstanciarCRUD().getValor(funcion.getAdminConsulta().getQuery(), "id"));
     }
 
    

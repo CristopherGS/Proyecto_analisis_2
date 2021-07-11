@@ -20,16 +20,16 @@ import javax.swing.JDesktopPane;
  */
 public class JVentas extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Pelicula
-     */
+    private CRUD c;
 
     public JVentas() {
         initComponents();
         setTitle("Peliculas");
-        CRUD.InstanciarCRUD().llenar_combo(Jsala, "SELECT p.nombre FROM funcion AS f \n"
+        c = c.InstanciarCRUD();
+        //se le manda el combo, la consulta, y el nombre de la columna 
+        c.InstanciarCRUD().llenar_combo(Jsala, "SELECT p.nombre FROM funcion AS f \n"
                 + "INNER JOIN sala AS s ON s.idSala = f.Sala_idSala\n"
-                + "INNER JOIN pelicula AS p ON p.idPelicula = f.Pelicula_idPelicula GROUP BY p.nombre;", "");
+                + "INNER JOIN pelicula AS p ON p.idPelicula = f.Pelicula_idPelicula GROUP BY p.nombre;", "nombre");
     }
 
     /**

@@ -978,16 +978,10 @@ public void bloquearDesbloquearObjetos(int opcion) {
     private void clickDetalle(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickDetalle
         int fila = tablaFuncion.getSelectedRow();
         if (fila >= 0) {
-            funcion.getAdminConsulta().setWhere("where f.Precio =" + String.valueOf(tablaFuncion.getValueAt(fila, 0)) + " and s.num_sala =" + String.valueOf(tablaFuncion.getValueAt(fila, 2))
-                    + " and p.nombre ='" + String.valueOf(tablaFuncion.getValueAt(fila, 3)) + "' and f.Horario='" + String.valueOf(tablaFuncion.getValueAt(fila, 1)) + "'");
-            
-            funcion.getAdminConsulta().setQuery("select f.idFuncion as id from funcion as f\n"
-                    + "inner join sala as s on s.idSala = f.Sala_idSala\n"
-                    + "inner join pelicula as p on p.idPelicula = f.Pelicula_idPelicula " + funcion.getAdminConsulta().getWhere());
-
-            // System.out.println(funcion.getAdminConsulta().getQuery());
-            funcion.setId(crud.InstanciarCRUD().getValor(funcion.getAdminConsulta().getQuery(), "id"));
+            //Obtiene el id de la funcion seleccionada 
+            validarFuncion.obtenerId(funcion, tablaFuncion, fila, crud);
             String[] tituloDia = {"dia"};
+            //Llena el dialog con una consulta a los dias relacionados con funcion
             funcion.getAdminConsulta().setQuery("select d.dia as dia from detalle_funcion_dias as df\n"
                     + "inner join dias as d on d.iddias_funcion = df.dias_iddias_funcion\n"
                     + "inner join funcion as f on f.idFuncion = df.funcion_idHorario ");
