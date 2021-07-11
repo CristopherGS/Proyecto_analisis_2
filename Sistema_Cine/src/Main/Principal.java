@@ -89,7 +89,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem4.setText("Nueva Película");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                MenuPelicula(evt);
             }
         });
         jMenu5.add(jMenuItem4);
@@ -97,7 +97,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem2.setText("Gestionar Salas");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                MenuSala(evt);
             }
         });
         jMenu5.add(jMenuItem2);
@@ -143,17 +143,17 @@ public class Principal extends javax.swing.JFrame {
        funcion.show();
     }//GEN-LAST:event_menuFuncionActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void MenuPelicula(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuPelicula
        Pelicula pelicula = new Pelicula();
        this.panelPrincipal.add(pelicula);
        pelicula.show(); 
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_MenuPelicula
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void MenuSala(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuSala
         Sala sala= new Sala();
         this.panelPrincipal.add(sala);
         sala.show();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_MenuSala
 
     /**
      * @param args the command line arguments
