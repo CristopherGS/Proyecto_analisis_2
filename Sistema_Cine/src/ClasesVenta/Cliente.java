@@ -16,10 +16,10 @@ public class Cliente extends Registro {
 
     private ConexionBD conexion;
     public String Nombrec, Telefono;
-    public int NIT; 
+    public String NIT; 
 
     public Cliente() {
-        this.setParametros("nombre, nit");
+        this.setParametros("nombre, nit, telefono");
         this.setNombre("cliente");
     }
 
@@ -40,11 +40,11 @@ public class Cliente extends Registro {
         this.Nombrec = Nombre;
     }
 
-    public int getNIT() {
+    public String getNIT() {
         return NIT;
     }
 
-    public void setNIT(int NIT) {
+    public void setNIT(String NIT) {
         this.NIT = NIT;
     }
 
@@ -58,6 +58,6 @@ public class Cliente extends Registro {
 
     @Override
     public void actualizarValues() {
-        this.setValues("values('" + Nombrec + "','" + NIT + "')");
+        this.setValues("values('" + Nombrec + "','" + NIT + "','"+Telefono+"')");
     }
 }

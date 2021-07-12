@@ -43,9 +43,9 @@ public class ClientesSQL {
                         cliente.setNombrec(resultSetAux.getString(i + 1));
                     }
                     if (i == 1) {
-                        cliente.setNIT(resultSetAux.getInt(i + 1));
+                        cliente.setNIT(resultSetAux.getString(i + 1));
                     }
-                    if (i == 3) {
+                    if (i == 2) {
                         cliente.setTelefono(resultSetAux.getString(i + 1));
                         System.out.println(resultSetAux.getString(i + 1));
                     }

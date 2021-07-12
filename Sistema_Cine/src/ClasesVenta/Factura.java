@@ -5,28 +5,42 @@
  */
 package ClasesVenta;
 
+import ClasesGlobales.Registro;
 import java.util.ArrayList;
 
 /**
  *
  * @author CRISTOPHERGUERRA
  */
-public class Factura {
+public class Factura extends Registro {
 
-    public int idFactura;
+    private float total;
 
-    public float total;
+    private String detalle;
 
-    public Cliente cliente;
-    
-    public ArrayList<FuncionesSQL> FuncionesSQL;
-    
-    public Empleado empleado;
-
-    public Factura(float total, Cliente cliente) {
-        this.total = total;
-        this.cliente = cliente;
+    public Factura() {
+        this.setParametros("total, Detalle");
+        this.setNombre("factura");
     }
-      public void GenerarFactura() {
-  }
+
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
+
+    @Override
+    public void actualizarValues() {
+        this.setValues("values('" + total + "','" + detalle + "')");
+    }
 }

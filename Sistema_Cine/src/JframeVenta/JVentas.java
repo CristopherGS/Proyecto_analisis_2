@@ -9,13 +9,24 @@ import Cartelera.ObtenerPeliculas;
 import ClasesGlobales.CRUD;
 import ClasesVenta.Cliente;
 import ClasesVenta.ClientesSQL;
+import ClasesVenta.Factura;
 import ClasesVenta.FuncionesSQL;
 import Funcion.FuncionClass;
 import Pelicula.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.BorderLayout;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,7 +36,10 @@ public class JVentas extends javax.swing.JInternalFrame {
 
     private CRUD c;
     private ClientesSQL obtener;
+    private Factura factura;
     private ArrayList<Cliente> clientes;
+    private Cliente cliente;
+    private FuncionClass funcion;
 
     public JVentas() {
         initComponents();
@@ -39,6 +53,30 @@ public class JVentas extends javax.swing.JInternalFrame {
                 + "INNER JOIN sala AS s ON s.idSala = f.Sala_idSala\n"
                 + "INNER JOIN pelicula AS p ON p.idPelicula = f.Pelicula_idPelicula GROUP BY s.num_sala;", "num_sala");
         rcliente.setVisible(false);
+        factura = new Factura();
+        cliente = new Cliente();
+    }
+
+    public void generarFactura(String nombre, String detalle) throws FileNotFoundException, DocumentException, BadElementException, IOException {
+        FileOutputStream archivo = new FileOutputStream(nombre + ".pdf");
+        Image imagen = Image.getInstance("C:\\Users\\CRISTOPHER GUERRA\\Desktop\\Proyecto_analisis_2\\Sistema_Cine\\src\\img\\barcode.png");
+        Document documento = new Document();
+        PdfWriter.getInstance(documento, archivo);
+        documento.open();
+
+        Paragraph parrafo = new Paragraph("COMPROBANTE");
+        parrafo.setAlignment(1);
+        imagen.setAlignment(Element.ALIGN_CENTER);
+        documento.add(parrafo);
+        documento.add(new Paragraph(detalle));
+        documento.add(imagen);
+        documento.close();
+
+    }
+
+    public void abrir(String name) throws IOException {
+        File path = new File(name + ".pdf");
+        Desktop.getDesktop().open(path);
     }
 
     /**
@@ -55,81 +93,26 @@ public class JVentas extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         panelGeneral = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        a12 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        facturacion = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         telefono = new javax.swing.JTextField();
         nit = new javax.swing.JTextField();
         nombre = new javax.swing.JTextField();
-        jLabel21 = new javax.swing.JLabel();
         Jsala = new javax.swing.JComboBox<>();
-        noFactura = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         JPelicula = new javax.swing.JComboBox<>();
-        jPanel4 = new javax.swing.JPanel();
-        comprar = new javax.swing.JPanel();
         asiento = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        voletos = new javax.swing.JTextField();
-        jLabel26 = new javax.swing.JLabel();
         total = new javax.swing.JLabel();
         rcliente = new javax.swing.JButton();
         validarcliente = new javax.swing.JButton();
-        a1 = new javax.swing.JLabel();
-        a2 = new javax.swing.JLabel();
-        a3 = new javax.swing.JLabel();
-        a4 = new javax.swing.JLabel();
-        a5 = new javax.swing.JLabel();
-        a6 = new javax.swing.JLabel();
-        a7 = new javax.swing.JLabel();
-        a8 = new javax.swing.JLabel();
-        a9 = new javax.swing.JLabel();
-        a10 = new javax.swing.JLabel();
-        a11 = new javax.swing.JLabel();
-        b1 = new javax.swing.JLabel();
-        b2 = new javax.swing.JLabel();
-        b3 = new javax.swing.JLabel();
-        b4 = new javax.swing.JLabel();
-        b5 = new javax.swing.JLabel();
-        b6 = new javax.swing.JLabel();
-        b7 = new javax.swing.JLabel();
-        b8 = new javax.swing.JLabel();
-        b9 = new javax.swing.JLabel();
-        b10 = new javax.swing.JLabel();
-        b11 = new javax.swing.JLabel();
-        b12 = new javax.swing.JLabel();
-        c1 = new javax.swing.JLabel();
-        c2 = new javax.swing.JLabel();
-        c3 = new javax.swing.JLabel();
-        c4 = new javax.swing.JLabel();
-        c5 = new javax.swing.JLabel();
-        c6 = new javax.swing.JLabel();
-        c7 = new javax.swing.JLabel();
-        c8 = new javax.swing.JLabel();
-        c9 = new javax.swing.JLabel();
-        c10 = new javax.swing.JLabel();
-        c11 = new javax.swing.JLabel();
-        c12 = new javax.swing.JLabel();
+        cancelar = new javax.swing.JButton();
+        aceptar = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        Salas = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -152,108 +135,24 @@ public class JVentas extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(30, 95, 116));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        a12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a12.setText("|");
-        jPanel1.add(a12, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, -1, 30));
-
-        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(245, 253, 255));
-        jLabel1.setText("FILA \"C\"");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(245, 253, 255));
-        jLabel2.setText("6");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, 20, 20));
-
-        jLabel3.setFont(new java.awt.Font("Yu Gothic UI", 1, 15)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(245, 253, 255));
-        jLabel3.setText("FILA \"A\"");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, -1));
-
-        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel4.setText("COLUMNA");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 80, 20));
-
-        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(245, 253, 255));
-        jLabel5.setText("1");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 20, 20));
-
-        jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(245, 253, 255));
-        jLabel6.setText("2");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 20, 20));
-
-        jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(245, 253, 255));
-        jLabel7.setText("3");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 20, 20));
-
-        jLabel8.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(245, 253, 255));
-        jLabel8.setText("4");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 20, 20));
-
-        jLabel9.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(245, 253, 255));
-        jLabel9.setText("5");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 20, 20));
-
-        jLabel10.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(245, 253, 255));
-        jLabel10.setText("7");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, 20, 20));
-
-        jLabel11.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(245, 253, 255));
-        jLabel11.setText("8");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 50, 20, 20));
-
-        jLabel12.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(245, 253, 255));
-        jLabel12.setText("9");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 20, 20));
-
-        jLabel13.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(245, 253, 255));
-        jLabel13.setText("10");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 50, 20, 20));
-
-        jLabel14.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(245, 253, 255));
-        jLabel14.setText("11");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 20, 20));
-
-        jLabel15.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(245, 253, 255));
-        jLabel15.setText("12");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, 20, 20));
-
-        jLabel16.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(245, 253, 255));
-        jLabel16.setText("FILA \"B\"");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, -1, -1));
-
-        jPanel3.setBackground(new java.awt.Color(243, 234, 232));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        facturacion.setBackground(new java.awt.Color(243, 234, 232));
+        facturacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel17.setBackground(new java.awt.Color(0, 0, 0));
         jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         jLabel17.setText("Telefono:");
-        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 70, 20));
+        facturacion.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 70, 20));
 
         jLabel18.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setText("Nombre:");
-        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 60, 20));
+        facturacion.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 60, 20));
 
         jLabel20.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(0, 0, 0));
         jLabel20.setText("Nit:");
-        jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 30, 20));
+        facturacion.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 30, 20));
 
         telefono.setEditable(false);
         telefono.addActionListener(new java.awt.event.ActionListener() {
@@ -261,14 +160,14 @@ public class JVentas extends javax.swing.JInternalFrame {
                 telefonoActionPerformed(evt);
             }
         });
-        jPanel3.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 230, -1));
+        facturacion.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 230, -1));
 
         nit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nitActionPerformed(evt);
             }
         });
-        jPanel3.add(nit, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 160, -1));
+        facturacion.add(nit, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 160, -1));
 
         nombre.setEditable(false);
         nombre.addActionListener(new java.awt.event.ActionListener() {
@@ -276,79 +175,44 @@ public class JVentas extends javax.swing.JInternalFrame {
                 nombreActionPerformed(evt);
             }
         });
-        jPanel3.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 230, -1));
-
-        jLabel21.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel21.setText("Factura No.");
-        jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 90, 20));
+        facturacion.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 230, -1));
 
         Jsala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JsalaActionPerformed(evt);
             }
         });
-        jPanel3.add(Jsala, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 200, 30));
-
-        noFactura.setForeground(new java.awt.Color(102, 102, 102));
-        noFactura.setText("#00000");
-        jPanel3.add(noFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 50, 20));
+        facturacion.add(Jsala, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 200, 30));
 
         jLabel23.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(0, 0, 0));
         jLabel23.setText("Sala:");
-        jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+        facturacion.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
         jLabel24.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(0, 0, 0));
         jLabel24.setText("Pelicula:");
-        jPanel3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, -1, -1));
+        facturacion.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
 
-        jPanel3.add(JPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 200, 30));
-
-        jPanel4.setBackground(new java.awt.Color(1, 1, 1));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, 120, 40));
-
-        comprar.setBackground(new java.awt.Color(1, 1, 1));
-        comprar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(comprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, 120, 40));
+        JPelicula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JPeliculaActionPerformed(evt);
+            }
+        });
+        facturacion.add(JPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 200, 30));
 
         asiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 asientoActionPerformed(evt);
             }
         });
-        jPanel3.add(asiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 90, -1));
+        facturacion.add(asiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 90, 30));
 
-        jLabel19.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel19.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel19.setText("Asiento No.");
-        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 90, 20));
-
-        jLabel25.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel25.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel25.setText("Cantidad:");
-        jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 70, 20));
-
-        voletos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                voletosActionPerformed(evt);
-            }
-        });
-        jPanel3.add(voletos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 90, -1));
-
-        jLabel26.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel26.setText("Total:");
-        jPanel3.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 50, 40));
-
-        total.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        total.setBackground(new java.awt.Color(102, 102, 102));
+        total.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         total.setForeground(new java.awt.Color(102, 102, 102));
-        total.setText("#00000");
-        jPanel3.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 70, 40));
+        total.setText("#000");
+        facturacion.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, 80, 40));
 
         rcliente.setBackground(new java.awt.Color(226, 235, 240));
         rcliente.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
@@ -359,7 +223,7 @@ public class JVentas extends javax.swing.JInternalFrame {
                 rclienteActionPerformed(evt);
             }
         });
-        jPanel3.add(rcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 140, 40));
+        facturacion.add(rcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 140, 40));
 
         validarcliente.setBackground(new java.awt.Color(226, 235, 240));
         validarcliente.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
@@ -370,149 +234,58 @@ public class JVentas extends javax.swing.JInternalFrame {
                 validarclienteActionPerformed(evt);
             }
         });
-        jPanel3.add(validarcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 110, 40));
+        facturacion.add(validarcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 110, 40));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 500, 440));
+        cancelar.setBackground(new java.awt.Color(226, 235, 240));
+        cancelar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        cancelar.setForeground(new java.awt.Color(0, 0, 0));
+        cancelar.setText("Cancelar");
+        cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarActionPerformed(evt);
+            }
+        });
+        facturacion.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, 130, 40));
 
-        a1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a1.setText("|");
-        jPanel1.add(a1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, 30));
+        aceptar.setBackground(new java.awt.Color(255, 255, 255));
+        aceptar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
+        aceptar.setForeground(new java.awt.Color(0, 0, 0));
+        aceptar.setText("Aceptar");
+        aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aceptarActionPerformed(evt);
+            }
+        });
+        facturacion.add(aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 130, 40));
 
-        a2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a2.setText("|");
-        jPanel1.add(a2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, 30));
+        jLabel21.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel21.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel21.setText("Asiento No.");
+        facturacion.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 90, 30));
 
-        a3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a3.setText("|");
-        jPanel1.add(a3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, -1, 30));
+        jLabel22.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel22.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel22.setText("Total:");
+        facturacion.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 50, 40));
 
-        a4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a4.setText("|");
-        jPanel1.add(a4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, 30));
+        jPanel1.add(facturacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 500, 430));
 
-        a5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a5.setText("|");
-        jPanel1.add(a5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, -1, 30));
+        Salas.setBackground(new java.awt.Color(30, 95, 116));
 
-        a6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a6.setText("|");
-        jPanel1.add(a6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, -1, 30));
+        javax.swing.GroupLayout SalasLayout = new javax.swing.GroupLayout(Salas);
+        Salas.setLayout(SalasLayout);
+        SalasLayout.setHorizontalGroup(
+            SalasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 700, Short.MAX_VALUE)
+        );
+        SalasLayout.setVerticalGroup(
+            SalasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 230, Short.MAX_VALUE)
+        );
 
-        a7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a7.setText("|");
-        jPanel1.add(a7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, -1, 30));
-
-        a8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a8.setText("|");
-        jPanel1.add(a8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, 30));
-
-        a9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a9.setText("|");
-        jPanel1.add(a9, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, -1, 30));
-
-        a10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a10.setText("|");
-        jPanel1.add(a10, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, -1, 30));
-
-        a11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a11.setText("|");
-        jPanel1.add(a11, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 80, -1, 30));
-
-        b1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b1.setText("|");
-        jPanel1.add(b1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, -1, 30));
-
-        b2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b2.setText("|");
-        jPanel1.add(b2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, -1, 30));
-
-        b3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b3.setText("|");
-        jPanel1.add(b3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, -1, 30));
-
-        b4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b4.setText("|");
-        jPanel1.add(b4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, -1, 30));
-
-        b5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b5.setText("|");
-        jPanel1.add(b5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, -1, 30));
-
-        b6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b6.setText("|");
-        jPanel1.add(b6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, -1, 30));
-
-        b7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b7.setText("|");
-        jPanel1.add(b7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, -1, 30));
-
-        b8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b8.setText("|");
-        jPanel1.add(b8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 130, -1, 30));
-
-        b9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b9.setText("|");
-        jPanel1.add(b9, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 130, -1, 30));
-
-        b10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b10.setText("|");
-        jPanel1.add(b10, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, -1, 30));
-
-        b11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b11.setText("|");
-        jPanel1.add(b11, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 130, -1, 30));
-
-        b12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b12.setText("|");
-        jPanel1.add(b12, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 130, -1, 30));
-
-        c1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c1.setText("|");
-        jPanel1.add(c1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, -1, 30));
-
-        c2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c2.setText("|");
-        jPanel1.add(c2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, -1, 30));
-
-        c3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c3.setText("|");
-        jPanel1.add(c3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, -1, 30));
-
-        c4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c4.setText("|");
-        jPanel1.add(c4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, -1, 30));
-
-        c5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c5.setText("|");
-        jPanel1.add(c5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, -1, 30));
-
-        c6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c6.setText("|");
-        jPanel1.add(c6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, -1, 30));
-
-        c7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c7.setText("|");
-        jPanel1.add(c7, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, -1, 30));
-
-        c8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c8.setText("|");
-        jPanel1.add(c8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, -1, 30));
-
-        c9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c9.setText("|");
-        jPanel1.add(c9, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 170, -1, 30));
-
-        c10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c10.setText("|");
-        jPanel1.add(c10, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, -1, 30));
-
-        c11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c11.setText("|");
-        jPanel1.add(c11, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 170, -1, 30));
-
-        c12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c12.setText("|");
-        jPanel1.add(c12, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 170, -1, 30));
+        jPanel1.add(Salas, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 700, 230));
 
         panelGeneral.add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -522,18 +295,40 @@ public class JVentas extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 945, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void JsalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JsalaActionPerformed
-        // TODO add your handling code here:
+        String seleccionSala = (String) Jsala.getSelectedItem();
+        if ("1".equals(seleccionSala)) {
+            Sala1 s1 = new Sala1();
+            s1.setSize(710, 240);
+            s1.setLocation(5, 5);
+
+            Salas.removeAll();
+            Salas.add(s1, BorderLayout.CENTER);
+            Salas.revalidate();
+            Salas.repaint();
+
+        } else if ("2".equals(seleccionSala)){
+            Sala2 s2 = new Sala2();
+            s2.setSize(710, 240);
+            s2.setLocation(5, 5);
+
+            Salas.removeAll();
+            Salas.add(s2, BorderLayout.CENTER);
+            Salas.revalidate();
+            Salas.repaint();
+        }
     }//GEN-LAST:event_JsalaActionPerformed
 
     private void telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoActionPerformed
@@ -544,12 +339,23 @@ public class JVentas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_asientoActionPerformed
 
-    private void voletosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voletosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_voletosActionPerformed
-
     private void rclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rclienteActionPerformed
-        // TODO add your handling code here:
+        if (nit.getText().equals("") || nombre.getText().equals("") || telefono.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Hay campos vacios");
+        } else {
+            String query;
+            cliente.setNIT(nit.getText());
+            cliente.setNombrec(nombre.getText());
+            cliente.setTelefono(telefono.getText());
+            cliente.actualizarValues();
+
+            query = cliente.getAdminConsulta().queryInsertar(cliente.getValues(), cliente.getParametros(), cliente.getNombre());
+            c.InstanciarCRUD().EjecutarInstruccion(query);
+            JOptionPane.showMessageDialog(null, "Se ha registrado Exitosamente");
+            nombre.setText("");
+            telefono.setText("");
+            asiento.setEditable(true);
+        }
     }//GEN-LAST:event_rclienteActionPerformed
 
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
@@ -562,7 +368,7 @@ public class JVentas extends javax.swing.JInternalFrame {
 
     private void validarclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validarclienteActionPerformed
         if (nit.getText().equals("")) {
-            System.out.println("no tiene nada");
+            JOptionPane.showMessageDialog(null, "Paraemtros invalidos");
         } else {
             obtener = new ClientesSQL();
             System.out.println(nit.getText());
@@ -573,10 +379,10 @@ public class JVentas extends javax.swing.JInternalFrame {
                 for (int i = 0; i < clientes.size(); i++) {
                     nombre.setText(clientes.get(i).getNombrec());
                     telefono.setText(clientes.get(i).getTelefono());
-                    System.out.println(clientes.get(i).getTelefono());
+
                 }
             } else {
-                nit.setText("");
+                asiento.setEditable(false);
                 nombre.setEditable(true);
                 telefono.setEditable(true);
                 rcliente.setVisible(true);
@@ -585,87 +391,84 @@ public class JVentas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_validarclienteActionPerformed
 
+    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        this.dispose();
+
+    }//GEN-LAST:event_cancelarActionPerformed
+
+    private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
+        if (nit.getText().equals("") || nombre.getText().equals("") || telefono.getText().equals("") || asiento.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Hay campos vacios");
+        } else {
+            String query;
+            String seleccionSala = (String) Jsala.getSelectedItem();
+            String seleccionPelicula = (String) JPelicula.getSelectedItem();
+            factura.setTotal((float) 0.00);
+            factura.setDetalle("NIT: " + nit.getText() + " \n"
+                    + "Cliente: " + nombre.getText() + " \n"
+                    + "Sala: " + seleccionSala
+                    + "Pelicula: " + seleccionPelicula
+                    + "Asiento: " + asiento.getText());
+            String detalle = "NIT: " + nit.getText() + " \n"
+                    + "Cliente: " + nombre.getText() + " \n"
+                    + "Sala: " + seleccionSala
+                    + "\nPelicula: " + seleccionPelicula
+                    + "\nAsiento: " + asiento.getText();
+            factura.actualizarValues();
+            query = factura.getAdminConsulta().queryInsertar(factura.getValues(), factura.getParametros(), factura.getNombre());
+            c.InstanciarCRUD().EjecutarInstruccion(query);
+            try {
+                generarFactura(nit.getText(), detalle);
+            } catch (DocumentException | IOException ex) {
+                Logger.getLogger(JVentas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            nombre.setText("");
+            telefono.setText("");
+            asiento.setText("");
+            try {
+                abrir(nit.getText());
+            } catch (IOException ex) {
+                Logger.getLogger(JVentas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_aceptarActionPerformed
+
+    private void JPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JPeliculaActionPerformed
+        String seleccionPelicula = (String) JPelicula.getSelectedItem();
+        total.setText(c.InstanciarCRUD().getValor("select f.Precio from funcion as f\n"
+                + "inner join sala as s on s.idSala = f.Sala_idSala\n"
+                + "inner join pelicula as p on p.idPelicula = f.Pelicula_idPelicula\n"
+                + "WHERE p.nombre = '" + seleccionPelicula + "';", "Precio"));
+        System.out.println(seleccionPelicula);
+    }//GEN-LAST:event_JPeliculaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> JPelicula;
     private javax.swing.JComboBox<String> Jsala;
-    private javax.swing.JLabel a1;
-    private javax.swing.JLabel a10;
-    private javax.swing.JLabel a11;
-    private javax.swing.JLabel a12;
-    private javax.swing.JLabel a2;
-    private javax.swing.JLabel a3;
-    private javax.swing.JLabel a4;
-    private javax.swing.JLabel a5;
-    private javax.swing.JLabel a6;
-    private javax.swing.JLabel a7;
-    private javax.swing.JLabel a8;
-    private javax.swing.JLabel a9;
+    public static javax.swing.JPanel Salas;
+    private javax.swing.JButton aceptar;
     private javax.swing.JTextField asiento;
-    private javax.swing.JLabel b1;
-    private javax.swing.JLabel b10;
-    private javax.swing.JLabel b11;
-    private javax.swing.JLabel b12;
-    private javax.swing.JLabel b2;
-    private javax.swing.JLabel b3;
-    private javax.swing.JLabel b4;
-    private javax.swing.JLabel b5;
-    private javax.swing.JLabel b6;
-    private javax.swing.JLabel b7;
-    private javax.swing.JLabel b8;
-    private javax.swing.JLabel b9;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JLabel c1;
-    private javax.swing.JLabel c10;
-    private javax.swing.JLabel c11;
-    private javax.swing.JLabel c12;
-    private javax.swing.JLabel c2;
-    private javax.swing.JLabel c3;
-    private javax.swing.JLabel c4;
-    private javax.swing.JLabel c5;
-    private javax.swing.JLabel c6;
-    private javax.swing.JLabel c7;
-    private javax.swing.JLabel c8;
-    private javax.swing.JLabel c9;
-    private javax.swing.JPanel comprar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
+    private javax.swing.JButton cancelar;
+    private javax.swing.JPanel facturacion;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nit;
-    private javax.swing.JLabel noFactura;
     private javax.swing.JTextField nombre;
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JButton rcliente;
     private javax.swing.JTextField telefono;
     private javax.swing.JLabel total;
     private javax.swing.JButton validarcliente;
-    private javax.swing.JTextField voletos;
     // End of variables declaration//GEN-END:variables
 }
