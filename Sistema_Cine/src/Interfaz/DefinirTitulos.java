@@ -3,19 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sistema_cine;
+package Interfaz;
 
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class Sistema_Cine {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public interface DefinirTitulos {
     
+    public String[] DefinirTitulos();
 }
