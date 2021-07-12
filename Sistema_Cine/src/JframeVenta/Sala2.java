@@ -5,16 +5,21 @@
  */
 package JframeVenta;
 
+import Cartelera.ObtenerPeliculas;
+import ClasesVenta.Asiento;
+import ClasesVenta.AsientoSQL;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author CRISTOPHERGUERRA
  */
 public class Sala2 extends javax.swing.JPanel {
 
-    /**
-     * Creates new form Sala2
-     */
-    public Sala2() {
+
+
+    public Sala2( ) {
         initComponents();
     }
 
@@ -30,26 +35,26 @@ public class Sala2 extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         Sala1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        a1 = new javax.swing.JLabel();
-        a2 = new javax.swing.JLabel();
-        a3 = new javax.swing.JLabel();
-        a4 = new javax.swing.JLabel();
-        a5 = new javax.swing.JLabel();
+        aa1 = new javax.swing.JLabel();
+        aa2 = new javax.swing.JLabel();
+        aa3 = new javax.swing.JLabel();
+        aa4 = new javax.swing.JLabel();
+        aa5 = new javax.swing.JLabel();
         a6 = new javax.swing.JLabel();
-        b6 = new javax.swing.JLabel();
-        b5 = new javax.swing.JLabel();
-        b4 = new javax.swing.JLabel();
-        b3 = new javax.swing.JLabel();
-        b2 = new javax.swing.JLabel();
-        b1 = new javax.swing.JLabel();
+        bb6 = new javax.swing.JLabel();
+        bb5 = new javax.swing.JLabel();
+        bb4 = new javax.swing.JLabel();
+        bb3 = new javax.swing.JLabel();
+        bb2 = new javax.swing.JLabel();
+        bb1 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        c1 = new javax.swing.JLabel();
+        cc1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        c2 = new javax.swing.JLabel();
-        c3 = new javax.swing.JLabel();
-        c4 = new javax.swing.JLabel();
-        c5 = new javax.swing.JLabel();
-        c6 = new javax.swing.JLabel();
+        cc2 = new javax.swing.JLabel();
+        cc3 = new javax.swing.JLabel();
+        cc4 = new javax.swing.JLabel();
+        cc5 = new javax.swing.JLabel();
+        cc6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -62,24 +67,24 @@ public class Sala2 extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        a12 = new javax.swing.JLabel();
-        a11 = new javax.swing.JLabel();
-        a10 = new javax.swing.JLabel();
-        a9 = new javax.swing.JLabel();
-        a8 = new javax.swing.JLabel();
-        a7 = new javax.swing.JLabel();
-        b7 = new javax.swing.JLabel();
-        b8 = new javax.swing.JLabel();
-        b9 = new javax.swing.JLabel();
-        b10 = new javax.swing.JLabel();
-        b11 = new javax.swing.JLabel();
-        b12 = new javax.swing.JLabel();
-        c12 = new javax.swing.JLabel();
-        c11 = new javax.swing.JLabel();
-        c10 = new javax.swing.JLabel();
-        c9 = new javax.swing.JLabel();
-        c8 = new javax.swing.JLabel();
-        c7 = new javax.swing.JLabel();
+        aa12 = new javax.swing.JLabel();
+        aa11 = new javax.swing.JLabel();
+        aa10 = new javax.swing.JLabel();
+        aa9 = new javax.swing.JLabel();
+        aa8 = new javax.swing.JLabel();
+        aa7 = new javax.swing.JLabel();
+        bb7 = new javax.swing.JLabel();
+        bb8 = new javax.swing.JLabel();
+        bb9 = new javax.swing.JLabel();
+        bb10 = new javax.swing.JLabel();
+        bb11 = new javax.swing.JLabel();
+        bb12 = new javax.swing.JLabel();
+        cc12 = new javax.swing.JLabel();
+        cc11 = new javax.swing.JLabel();
+        cc10 = new javax.swing.JLabel();
+        cc9 = new javax.swing.JLabel();
+        cc8 = new javax.swing.JLabel();
+        cc7 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -92,87 +97,87 @@ public class Sala2 extends javax.swing.JPanel {
         jLabel3.setText("FILA \"AA\"");
         Sala1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
 
-        a1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a1.setText("|");
-        Sala1.add(a1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, 30));
+        aa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        aa1.setText("|");
+        Sala1.add(aa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, 30));
 
-        a2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a2.setText("|");
-        Sala1.add(a2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, -1, 30));
+        aa2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        aa2.setText("|");
+        Sala1.add(aa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, -1, 30));
 
-        a3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a3.setText("|");
-        Sala1.add(a3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, -1, 30));
+        aa3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        aa3.setText("|");
+        Sala1.add(aa3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, -1, 30));
 
-        a4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a4.setText("|");
-        Sala1.add(a4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, 30));
+        aa4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        aa4.setText("|");
+        Sala1.add(aa4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, -1, 30));
 
-        a5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a5.setText("|");
-        Sala1.add(a5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, 30));
+        aa5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        aa5.setText("|");
+        Sala1.add(aa5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, 30));
 
         a6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
         a6.setText("|");
         Sala1.add(a6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, -1, 30));
 
-        b6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b6.setText("|");
-        Sala1.add(b6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, 30));
+        bb6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        bb6.setText("|");
+        Sala1.add(bb6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, 30));
 
-        b5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b5.setText("|");
-        Sala1.add(b5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, 30));
+        bb5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        bb5.setText("|");
+        Sala1.add(bb5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, 30));
 
-        b4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b4.setText("|");
-        Sala1.add(b4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, -1, 30));
+        bb4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        bb4.setText("|");
+        Sala1.add(bb4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, -1, 30));
 
-        b3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b3.setText("|");
-        Sala1.add(b3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, 30));
+        bb3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        bb3.setText("|");
+        Sala1.add(bb3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, 30));
 
-        b2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b2.setText("|");
-        Sala1.add(b2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, -1, 30));
+        bb2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        bb2.setText("|");
+        Sala1.add(bb2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, -1, 30));
 
-        b1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b1.setText("|");
-        Sala1.add(b1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, -1, 30));
+        bb1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        bb1.setText("|");
+        Sala1.add(bb1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, -1, 30));
 
         jLabel16.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(245, 253, 255));
         jLabel16.setText("FILA \"BB\"");
         Sala1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
 
-        c1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c1.setText("|");
-        Sala1.add(c1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, 30));
+        cc1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        cc1.setText("|");
+        Sala1.add(cc1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, 30));
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(245, 253, 255));
         jLabel1.setText("FILA \"CC\"");
         Sala1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, -1));
 
-        c2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c2.setText("|");
-        Sala1.add(c2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, -1, 30));
+        cc2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        cc2.setText("|");
+        Sala1.add(cc2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, -1, 30));
 
-        c3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c3.setText("|");
-        Sala1.add(c3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, 30));
+        cc3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        cc3.setText("|");
+        Sala1.add(cc3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, 30));
 
-        c4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c4.setText("|");
-        Sala1.add(c4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, 30));
+        cc4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        cc4.setText("|");
+        Sala1.add(cc4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, 30));
 
-        c5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c5.setText("|");
-        Sala1.add(c5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, -1, 30));
+        cc5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        cc5.setText("|");
+        Sala1.add(cc5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, -1, 30));
 
-        c6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c6.setText("|");
-        Sala1.add(c6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, -1, 30));
+        cc6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        cc6.setText("|");
+        Sala1.add(cc6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, -1, 30));
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(245, 253, 255));
@@ -234,77 +239,77 @@ public class Sala2 extends javax.swing.JPanel {
         jLabel15.setText("12");
         Sala1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 60, 20, 20));
 
-        a12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a12.setText("|");
-        Sala1.add(a12, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 90, -1, 30));
+        aa12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        aa12.setText("|");
+        Sala1.add(aa12, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 90, -1, 30));
 
-        a11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a11.setText("|");
-        Sala1.add(a11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, -1, 30));
+        aa11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        aa11.setText("|");
+        Sala1.add(aa11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, -1, 30));
 
-        a10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a10.setText("|");
-        Sala1.add(a10, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 90, -1, 30));
+        aa10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        aa10.setText("|");
+        Sala1.add(aa10, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 90, -1, 30));
 
-        a9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a9.setText("|");
-        Sala1.add(a9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, -1, 30));
+        aa9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        aa9.setText("|");
+        Sala1.add(aa9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, -1, 30));
 
-        a8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a8.setText("|");
-        Sala1.add(a8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, -1, 30));
+        aa8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        aa8.setText("|");
+        Sala1.add(aa8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, -1, 30));
 
-        a7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        a7.setText("|");
-        Sala1.add(a7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, 30));
+        aa7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        aa7.setText("|");
+        Sala1.add(aa7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, 30));
 
-        b7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b7.setText("|");
-        Sala1.add(b7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, 30));
+        bb7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        bb7.setText("|");
+        Sala1.add(bb7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, -1, 30));
 
-        b8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b8.setText("|");
-        Sala1.add(b8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, -1, 30));
+        bb8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        bb8.setText("|");
+        Sala1.add(bb8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, -1, 30));
 
-        b9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b9.setText("|");
-        Sala1.add(b9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, -1, 30));
+        bb9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        bb9.setText("|");
+        Sala1.add(bb9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, -1, 30));
 
-        b10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b10.setText("|");
-        Sala1.add(b10, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, -1, 30));
+        bb10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        bb10.setText("|");
+        Sala1.add(bb10, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, -1, 30));
 
-        b11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b11.setText("|");
-        Sala1.add(b11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, -1, 30));
+        bb11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        bb11.setText("|");
+        Sala1.add(bb11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 140, -1, 30));
 
-        b12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        b12.setText("|");
-        Sala1.add(b12, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 140, -1, 30));
+        bb12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        bb12.setText("|");
+        Sala1.add(bb12, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 140, -1, 30));
 
-        c12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c12.setText("|");
-        Sala1.add(c12, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, -1, 30));
+        cc12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        cc12.setText("|");
+        Sala1.add(cc12, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, -1, 30));
 
-        c11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c11.setText("|");
-        Sala1.add(c11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, -1, 30));
+        cc11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        cc11.setText("|");
+        Sala1.add(cc11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, -1, 30));
 
-        c10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c10.setText("|");
-        Sala1.add(c10, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 180, -1, 30));
+        cc10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        cc10.setText("|");
+        Sala1.add(cc10, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 180, -1, 30));
 
-        c9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c9.setText("|");
-        Sala1.add(c9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, -1, 30));
+        cc9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        cc9.setText("|");
+        Sala1.add(cc9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, -1, 30));
 
-        c8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c8.setText("|");
-        Sala1.add(c8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, -1, 30));
+        cc8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        cc8.setText("|");
+        Sala1.add(cc8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, -1, 30));
 
-        c7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
-        c7.setText("|");
-        Sala1.add(c7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, -1, 30));
+        cc7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/green_chair.png"))); // NOI18N
+        cc7.setText("|");
+        Sala1.add(cc7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, -1, 30));
 
         jLabel39.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel39.setForeground(new java.awt.Color(245, 253, 255));
@@ -327,43 +332,43 @@ public class Sala2 extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Sala1;
-    private javax.swing.JLabel a1;
-    private javax.swing.JLabel a10;
-    private javax.swing.JLabel a11;
-    private javax.swing.JLabel a12;
-    private javax.swing.JLabel a2;
-    private javax.swing.JLabel a3;
-    private javax.swing.JLabel a4;
-    private javax.swing.JLabel a5;
+    public static javax.swing.JPanel Sala1;
     private javax.swing.JLabel a6;
-    private javax.swing.JLabel a7;
-    private javax.swing.JLabel a8;
-    private javax.swing.JLabel a9;
-    private javax.swing.JLabel b1;
-    private javax.swing.JLabel b10;
-    private javax.swing.JLabel b11;
-    private javax.swing.JLabel b12;
-    private javax.swing.JLabel b2;
-    private javax.swing.JLabel b3;
-    private javax.swing.JLabel b4;
-    private javax.swing.JLabel b5;
-    private javax.swing.JLabel b6;
-    private javax.swing.JLabel b7;
-    private javax.swing.JLabel b8;
-    private javax.swing.JLabel b9;
-    private javax.swing.JLabel c1;
-    private javax.swing.JLabel c10;
-    private javax.swing.JLabel c11;
-    private javax.swing.JLabel c12;
-    private javax.swing.JLabel c2;
-    private javax.swing.JLabel c3;
-    private javax.swing.JLabel c4;
-    private javax.swing.JLabel c5;
-    private javax.swing.JLabel c6;
-    private javax.swing.JLabel c7;
-    private javax.swing.JLabel c8;
-    private javax.swing.JLabel c9;
+    public static javax.swing.JLabel aa1;
+    private javax.swing.JLabel aa10;
+    private javax.swing.JLabel aa11;
+    private javax.swing.JLabel aa12;
+    private javax.swing.JLabel aa2;
+    private javax.swing.JLabel aa3;
+    private javax.swing.JLabel aa4;
+    private javax.swing.JLabel aa5;
+    private javax.swing.JLabel aa7;
+    private javax.swing.JLabel aa8;
+    private javax.swing.JLabel aa9;
+    private javax.swing.JLabel bb1;
+    private javax.swing.JLabel bb10;
+    private javax.swing.JLabel bb11;
+    private javax.swing.JLabel bb12;
+    private javax.swing.JLabel bb2;
+    private javax.swing.JLabel bb3;
+    private javax.swing.JLabel bb4;
+    private javax.swing.JLabel bb5;
+    private javax.swing.JLabel bb6;
+    private javax.swing.JLabel bb7;
+    private javax.swing.JLabel bb8;
+    private javax.swing.JLabel bb9;
+    private javax.swing.JLabel cc1;
+    private javax.swing.JLabel cc10;
+    private javax.swing.JLabel cc11;
+    private javax.swing.JLabel cc12;
+    private javax.swing.JLabel cc2;
+    private javax.swing.JLabel cc3;
+    private javax.swing.JLabel cc4;
+    private javax.swing.JLabel cc5;
+    private javax.swing.JLabel cc6;
+    private javax.swing.JLabel cc7;
+    private javax.swing.JLabel cc8;
+    private javax.swing.JLabel cc9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

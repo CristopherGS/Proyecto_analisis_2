@@ -7,6 +7,8 @@ package JframeVenta;
 
 import Cartelera.ObtenerPeliculas;
 import ClasesGlobales.CRUD;
+import ClasesVenta.Asiento;
+import ClasesVenta.AsientoSQL;
 import ClasesVenta.Cliente;
 import ClasesVenta.ClientesSQL;
 import ClasesVenta.Factura;
@@ -34,12 +36,18 @@ import java.util.logging.Logger;
  */
 public class JVentas extends javax.swing.JInternalFrame {
 
+    public static javax.swing.JLabel aa1;
     private CRUD c;
     private ClientesSQL obtener;
     private Factura factura;
+    private Asiento silla;
     private ArrayList<Cliente> clientes;
     private Cliente cliente;
     private FuncionClass funcion;
+    private ArrayList<Asiento> asientoss;
+    public AsientoSQL obetenerAsientos;
+    public Sala1 s1 = new Sala1();
+    public Sala2 s2 = new Sala2();
 
     public JVentas() {
         initComponents();
@@ -55,6 +63,8 @@ public class JVentas extends javax.swing.JInternalFrame {
         rcliente.setVisible(false);
         factura = new Factura();
         cliente = new Cliente();
+        silla = new Asiento();
+        obetenerAsientos = new AsientoSQL();
     }
 
     public void generarFactura(String nombre, String detalle) throws FileNotFoundException, DocumentException, BadElementException, IOException {
@@ -310,7 +320,7 @@ public class JVentas extends javax.swing.JInternalFrame {
     private void JsalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JsalaActionPerformed
         String seleccionSala = (String) Jsala.getSelectedItem();
         if ("1".equals(seleccionSala)) {
-            Sala1 s1 = new Sala1();
+
             s1.setSize(710, 240);
             s1.setLocation(5, 5);
 
@@ -319,8 +329,8 @@ public class JVentas extends javax.swing.JInternalFrame {
             Salas.revalidate();
             Salas.repaint();
 
-        } else if ("2".equals(seleccionSala)){
-            Sala2 s2 = new Sala2();
+        } else if ("2".equals(seleccionSala)) {
+
             s2.setSize(710, 240);
             s2.setLocation(5, 5);
 
@@ -403,7 +413,8 @@ public class JVentas extends javax.swing.JInternalFrame {
             String query;
             String seleccionSala = (String) Jsala.getSelectedItem();
             String seleccionPelicula = (String) JPelicula.getSelectedItem();
-            factura.setTotal((float) 0.00);
+            float f = Float.parseFloat(total.getText());
+            factura.setTotal(f);
             factura.setDetalle("NIT: " + nit.getText() + " \n"
                     + "Cliente: " + nombre.getText() + " \n"
                     + "Sala: " + seleccionSala
@@ -413,10 +424,39 @@ public class JVentas extends javax.swing.JInternalFrame {
                     + "Cliente: " + nombre.getText() + " \n"
                     + "Sala: " + seleccionSala
                     + "\nPelicula: " + seleccionPelicula
-                    + "\nAsiento: " + asiento.getText();
+                    + "\nAsiento: " + asiento.getText()
+                    + "\nTotal: Q" + f;
             factura.actualizarValues();
             query = factura.getAdminConsulta().queryInsertar(factura.getValues(), factura.getParametros(), factura.getNombre());
             c.InstanciarCRUD().EjecutarInstruccion(query);
+
+            String query2;
+            silla.setIdAsiento(asiento.getText());
+            silla.setDisponible(false);
+            silla.actualizarValues();
+            silla.getAdminConsulta().setWhere("WHERE idAsiento = '" + asiento.getText() + "'");
+            query2 = silla.getAdminConsulta().queryModificar("asiento", "SET disponible = 0 ");
+            c.InstanciarCRUD().EjecutarInstruccion(query2);
+            
+            
+            
+            
+            System.out.println("entro");
+            
+            this.asientoss = obetenerAsientos.obtenerAsientos("SELECT a.idAsiento, a.disponible FROM asiento AS a WHERE a.Sala_idSala = '" + asiento + "';");
+            System.out.println(asientoss.get(1).isDisponible());
+            
+            
+            for (Asiento asiento1 : asientoss) {
+                if (!asiento1.isDisponible()) {
+                    if (asiento1.equals("aa1")) {
+                        aa1.setVisible(false);
+                        System.out.println("CAMBIO ICONO");
+                    }
+                }
+            }
+
+            //generamos la facura para que se abra automaticamente
             try {
                 generarFactura(nit.getText(), detalle);
             } catch (DocumentException | IOException ex) {
