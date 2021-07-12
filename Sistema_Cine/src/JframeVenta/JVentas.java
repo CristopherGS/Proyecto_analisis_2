@@ -27,6 +27,8 @@ import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,8 +48,6 @@ public class JVentas extends javax.swing.JInternalFrame {
     private FuncionClass funcion;
     private ArrayList<Asiento> asientoss;
     public AsientoSQL obetenerAsientos;
-    public Sala1 s1 = new Sala1();
-    public Sala2 s2 = new Sala2();
 
     public JVentas() {
         initComponents();
@@ -60,6 +60,8 @@ public class JVentas extends javax.swing.JInternalFrame {
         c.InstanciarCRUD().llenar_combo(Jsala, "SELECT s.num_sala FROM funcion AS f \n"
                 + "INNER JOIN sala AS s ON s.idSala = f.Sala_idSala\n"
                 + "INNER JOIN pelicula AS p ON p.idPelicula = f.Pelicula_idPelicula GROUP BY s.num_sala;", "num_sala");
+        c.InstanciarCRUD().llenar_combo(Jfila, "SELECT a.fila FROM asiento AS a GROUP BY fila;", "fila");
+        c.InstanciarCRUD().llenar_combo(Jcolumna, "SELECT a.columna FROM asiento AS a GROUP BY columna ORDER BY columna asc;", "columna");
         rcliente.setVisible(false);
         factura = new Factura();
         cliente = new Cliente();
@@ -114,15 +116,18 @@ public class JVentas extends javax.swing.JInternalFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         JPelicula = new javax.swing.JComboBox<>();
-        asiento = new javax.swing.JTextField();
         total = new javax.swing.JLabel();
         rcliente = new javax.swing.JButton();
         validarcliente = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
         aceptar = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        Salas = new javax.swing.JPanel();
+        Jcolumna = new javax.swing.JComboBox<>();
+        jLabel25 = new javax.swing.JLabel();
+        Jfila = new javax.swing.JComboBox<>();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -152,17 +157,17 @@ public class JVentas extends javax.swing.JInternalFrame {
         jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         jLabel17.setText("Telefono:");
-        facturacion.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 70, 20));
+        facturacion.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 70, 20));
 
         jLabel18.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setText("Nombre:");
-        facturacion.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 60, 20));
+        facturacion.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 60, 20));
 
         jLabel20.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(0, 0, 0));
         jLabel20.setText("Nit:");
-        facturacion.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 30, 20));
+        facturacion.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 30, 20));
 
         telefono.setEditable(false);
         telefono.addActionListener(new java.awt.event.ActionListener() {
@@ -170,14 +175,14 @@ public class JVentas extends javax.swing.JInternalFrame {
                 telefonoActionPerformed(evt);
             }
         });
-        facturacion.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 230, -1));
+        facturacion.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 230, -1));
 
         nit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nitActionPerformed(evt);
             }
         });
-        facturacion.add(nit, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 160, -1));
+        facturacion.add(nit, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 160, -1));
 
         nombre.setEditable(false);
         nombre.addActionListener(new java.awt.event.ActionListener() {
@@ -185,44 +190,37 @@ public class JVentas extends javax.swing.JInternalFrame {
                 nombreActionPerformed(evt);
             }
         });
-        facturacion.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 230, -1));
+        facturacion.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 230, -1));
 
         Jsala.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JsalaActionPerformed(evt);
             }
         });
-        facturacion.add(Jsala, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 200, 30));
+        facturacion.add(Jsala, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 200, 30));
 
         jLabel23.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(0, 0, 0));
         jLabel23.setText("Sala:");
-        facturacion.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+        facturacion.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
 
         jLabel24.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(0, 0, 0));
         jLabel24.setText("Pelicula:");
-        facturacion.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
+        facturacion.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, -1, -1));
 
         JPelicula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JPeliculaActionPerformed(evt);
             }
         });
-        facturacion.add(JPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 200, 30));
-
-        asiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                asientoActionPerformed(evt);
-            }
-        });
-        facturacion.add(asiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 90, 30));
+        facturacion.add(JPelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 200, 30));
 
         total.setBackground(new java.awt.Color(102, 102, 102));
-        total.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        total.setForeground(new java.awt.Color(102, 102, 102));
+        total.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        total.setForeground(new java.awt.Color(0, 0, 0));
         total.setText("#000");
-        facturacion.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, 80, 40));
+        facturacion.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, 80, 50));
 
         rcliente.setBackground(new java.awt.Color(226, 235, 240));
         rcliente.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
@@ -233,7 +231,7 @@ public class JVentas extends javax.swing.JInternalFrame {
                 rclienteActionPerformed(evt);
             }
         });
-        facturacion.add(rcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 140, 40));
+        facturacion.add(rcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 140, 40));
 
         validarcliente.setBackground(new java.awt.Color(226, 235, 240));
         validarcliente.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
@@ -244,7 +242,7 @@ public class JVentas extends javax.swing.JInternalFrame {
                 validarclienteActionPerformed(evt);
             }
         });
-        facturacion.add(validarcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 110, 40));
+        facturacion.add(validarcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, 110, 40));
 
         cancelar.setBackground(new java.awt.Color(226, 235, 240));
         cancelar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
@@ -255,7 +253,7 @@ public class JVentas extends javax.swing.JInternalFrame {
                 cancelarActionPerformed(evt);
             }
         });
-        facturacion.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, 130, 40));
+        facturacion.add(cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 550, 130, 40));
 
         aceptar.setBackground(new java.awt.Color(255, 255, 255));
         aceptar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
@@ -266,36 +264,48 @@ public class JVentas extends javax.swing.JInternalFrame {
                 aceptarActionPerformed(evt);
             }
         });
-        facturacion.add(aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 130, 40));
+        facturacion.add(aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, 130, 40));
 
         jLabel21.setBackground(new java.awt.Color(0, 0, 0));
         jLabel21.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel21.setText("Asiento No.");
-        facturacion.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 90, 30));
+        jLabel21.setText("Columna:");
+        facturacion.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 350, 70, 30));
 
-        jLabel22.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel22.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel22.setText("Total:");
-        facturacion.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, 50, 40));
+        Jcolumna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JcolumnaActionPerformed(evt);
+            }
+        });
+        facturacion.add(Jcolumna, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 350, 140, 30));
 
-        jPanel1.add(facturacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 500, 430));
+        jLabel25.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel25.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel25.setText("Fila:");
+        facturacion.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 40, 30));
 
-        Salas.setBackground(new java.awt.Color(30, 95, 116));
+        Jfila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JfilaActionPerformed(evt);
+            }
+        });
+        facturacion.add(Jfila, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 140, 30));
 
-        javax.swing.GroupLayout SalasLayout = new javax.swing.GroupLayout(Salas);
-        Salas.setLayout(SalasLayout);
-        SalasLayout.setHorizontalGroup(
-            SalasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-        SalasLayout.setVerticalGroup(
-            SalasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-        );
+        jLabel26.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel26.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel26.setText("Total: Q");
+        facturacion.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 100, 50));
 
-        jPanel1.add(Salas, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 700, 230));
+        jLabel27.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel27.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 153, 0));
+        jLabel27.setText("VENTA DE BOLETOS");
+        facturacion.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 190, 50));
+        facturacion.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 480, 190, 10));
+
+        jPanel1.add(facturacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 630, 660));
 
         panelGeneral.add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -317,64 +327,77 @@ public class JVentas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JsalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JsalaActionPerformed
-        String seleccionSala = (String) Jsala.getSelectedItem();
-        if ("1".equals(seleccionSala)) {
-
-            s1.setSize(710, 240);
-            s1.setLocation(5, 5);
-
-            Salas.removeAll();
-            Salas.add(s1, BorderLayout.CENTER);
-            Salas.revalidate();
-            Salas.repaint();
-
-        } else if ("2".equals(seleccionSala)) {
-
-            s2.setSize(710, 240);
-            s2.setLocation(5, 5);
-
-            Salas.removeAll();
-            Salas.add(s2, BorderLayout.CENTER);
-            Salas.revalidate();
-            Salas.repaint();
-        }
-    }//GEN-LAST:event_JsalaActionPerformed
-
-    private void telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_telefonoActionPerformed
-
-    private void asientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asientoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_asientoActionPerformed
-
-    private void rclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rclienteActionPerformed
+    private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
+        String asiento = (String) Jfila.getSelectedItem() + (String) Jcolumna.getSelectedItem();
+        String fila =(String) Jfila.getSelectedItem();
+        String sala =(String) Jsala.getSelectedItem();
+        String columna = (String) Jcolumna.getSelectedItem();
         if (nit.getText().equals("") || nombre.getText().equals("") || telefono.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Hay campos vacios");
         } else {
-            String query;
-            cliente.setNIT(nit.getText());
-            cliente.setNombrec(nombre.getText());
-            cliente.setTelefono(telefono.getText());
-            cliente.actualizarValues();
+            String seleccionSala = (String) Jsala.getSelectedItem();
 
-            query = cliente.getAdminConsulta().queryInsertar(cliente.getValues(), cliente.getParametros(), cliente.getNombre());
-            c.InstanciarCRUD().EjecutarInstruccion(query);
-            JOptionPane.showMessageDialog(null, "Se ha registrado Exitosamente");
-            nombre.setText("");
-            telefono.setText("");
-            asiento.setEditable(true);
+            //seleccion de disponibilidad del asiento
+            String dispo = c.InstanciarCRUD().getValor("SELECT a.disponible FROM asiento AS a WHERE a.fila= '" + fila + "' AND  a.columna = '" + columna + "' AND a.Sala_idSala = '" + sala +"';", "disponible");
+            System.out.println(fila+columna);
+            if ("1".equals(dispo)) {
+
+                String seleccionPelicula = (String) JPelicula.getSelectedItem();
+
+                String query;
+                float f = Float.parseFloat(total.getText());
+                factura.setTotal(f);
+                factura.setDetalle("NIT: " + nit.getText() + " \n"
+                        + "Cliente: " + nombre.getText() + " \n"
+                        + "Sala: " + seleccionSala
+                        + "\nPelicula: " + seleccionPelicula
+                        + "\nAsiento: " + asiento
+                        + "\nTotal: Q" + f);
+                //obtener la fecha y hora
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                String detalle = "NIT: " + nit.getText() + " \n"
+                        + "Cliente: " + nombre.getText() + " \n"
+                        + "Sala: " + seleccionSala
+                        + "\nPelicula: " + seleccionPelicula
+                        + "\nAsiento: " + asiento
+                        + "\nTotal: Q" + f
+                        + "\nFecha de emicion de Factura: " + dtf.format(LocalDateTime.now());
+                factura.actualizarValues();
+                query = factura.getAdminConsulta().queryInsertar(factura.getValues(), factura.getParametros(), factura.getNombre());
+                c.InstanciarCRUD().EjecutarInstruccion(query);
+                
+                //consulta para cambiar la disponibilidad del asiento a opcupado
+                String query2;
+                silla.setIdAsiento(asiento);
+                silla.setDisponible(false);
+                silla.actualizarValues();
+                silla.getAdminConsulta().setWhere("WHERE fila = '" + fila + "' AND columna = '"+columna+"'");
+                query2 = silla.getAdminConsulta().queryModificar("asiento", "SET disponible = 0 ");
+                c.InstanciarCRUD().EjecutarInstruccion(query2);
+
+                //generamos la facura para que se abra automaticamente
+                try {
+                    generarFactura(nit.getText(), detalle);
+                } catch (DocumentException | IOException ex) {
+                    Logger.getLogger(JVentas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                nombre.setText("");
+                telefono.setText("");
+                try {
+                    abrir(nit.getText());
+                } catch (IOException ex) {
+                    Logger.getLogger(JVentas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El asiento seleccionado no esta disponible");
+            }
+
         }
-    }//GEN-LAST:event_rclienteActionPerformed
+    }//GEN-LAST:event_aceptarActionPerformed
 
-    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nombreActionPerformed
-
-    private void nitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nitActionPerformed
-
-    }//GEN-LAST:event_nitActionPerformed
+    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_cancelarActionPerformed
 
     private void validarclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validarclienteActionPerformed
         if (nit.getText().equals("")) {
@@ -392,7 +415,6 @@ public class JVentas extends javax.swing.JInternalFrame {
 
                 }
             } else {
-                asiento.setEditable(false);
                 nombre.setEditable(true);
                 telefono.setEditable(true);
                 rcliente.setVisible(true);
@@ -401,78 +423,22 @@ public class JVentas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_validarclienteActionPerformed
 
-    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        this.dispose();
-
-    }//GEN-LAST:event_cancelarActionPerformed
-
-    private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
-        if (nit.getText().equals("") || nombre.getText().equals("") || telefono.getText().equals("") || asiento.getText().equals("")) {
+    private void rclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rclienteActionPerformed
+        if (nit.getText().equals("") || nombre.getText().equals("") || telefono.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Hay campos vacios");
         } else {
             String query;
-            String seleccionSala = (String) Jsala.getSelectedItem();
-            String seleccionPelicula = (String) JPelicula.getSelectedItem();
-            float f = Float.parseFloat(total.getText());
-            factura.setTotal(f);
-            factura.setDetalle("NIT: " + nit.getText() + " \n"
-                    + "Cliente: " + nombre.getText() + " \n"
-                    + "Sala: " + seleccionSala
-                    + "Pelicula: " + seleccionPelicula
-                    + "Asiento: " + asiento.getText());
-            String detalle = "NIT: " + nit.getText() + " \n"
-                    + "Cliente: " + nombre.getText() + " \n"
-                    + "Sala: " + seleccionSala
-                    + "\nPelicula: " + seleccionPelicula
-                    + "\nAsiento: " + asiento.getText()
-                    + "\nTotal: Q" + f;
-            factura.actualizarValues();
-            query = factura.getAdminConsulta().queryInsertar(factura.getValues(), factura.getParametros(), factura.getNombre());
+            cliente.setNIT(nit.getText());
+            cliente.setNombrec(nombre.getText());
+            cliente.setTelefono(telefono.getText());
+            cliente.actualizarValues();
+
+            query = cliente.getAdminConsulta().queryInsertar(cliente.getValues(), cliente.getParametros(), cliente.getNombre());
             c.InstanciarCRUD().EjecutarInstruccion(query);
-
-            String query2;
-            silla.setIdAsiento(asiento.getText());
-            silla.setDisponible(false);
-            silla.actualizarValues();
-            silla.getAdminConsulta().setWhere("WHERE idAsiento = '" + asiento.getText() + "'");
-            query2 = silla.getAdminConsulta().queryModificar("asiento", "SET disponible = 0 ");
-            c.InstanciarCRUD().EjecutarInstruccion(query2);
-            
-            
-            
-            
-            System.out.println("entro");
-            
-            this.asientoss = obetenerAsientos.obtenerAsientos("SELECT a.idAsiento, a.disponible FROM asiento AS a WHERE a.Sala_idSala = '" + asiento + "';");
-            System.out.println(asientoss.get(1).isDisponible());
-            
-            
-            for (Asiento asiento1 : asientoss) {
-                if (!asiento1.isDisponible()) {
-                    if (asiento1.equals("aa1")) {
-                        aa1.setVisible(false);
-                        System.out.println("CAMBIO ICONO");
-                    }
-                }
-            }
-
-            //generamos la facura para que se abra automaticamente
-            try {
-                generarFactura(nit.getText(), detalle);
-            } catch (DocumentException | IOException ex) {
-                Logger.getLogger(JVentas.class.getName()).log(Level.SEVERE, null, ex);
-            }
             nombre.setText("");
             telefono.setText("");
-            asiento.setText("");
-            try {
-                abrir(nit.getText());
-            } catch (IOException ex) {
-                Logger.getLogger(JVentas.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
         }
-    }//GEN-LAST:event_aceptarActionPerformed
+    }//GEN-LAST:event_rclienteActionPerformed
 
     private void JPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JPeliculaActionPerformed
         String seleccionPelicula = (String) JPelicula.getSelectedItem();
@@ -483,13 +449,37 @@ public class JVentas extends javax.swing.JInternalFrame {
         System.out.println(seleccionPelicula);
     }//GEN-LAST:event_JPeliculaActionPerformed
 
+    private void JsalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JsalaActionPerformed
+
+    }//GEN-LAST:event_JsalaActionPerformed
+
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreActionPerformed
+
+    private void nitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nitActionPerformed
+
+    }//GEN-LAST:event_nitActionPerformed
+
+    private void telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_telefonoActionPerformed
+
+    private void JcolumnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JcolumnaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JcolumnaActionPerformed
+
+    private void JfilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JfilaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JfilaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> JPelicula;
+    private javax.swing.JComboBox<String> Jcolumna;
+    private javax.swing.JComboBox<String> Jfila;
     private javax.swing.JComboBox<String> Jsala;
-    public static javax.swing.JPanel Salas;
     private javax.swing.JButton aceptar;
-    private javax.swing.JTextField asiento;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton cancelar;
     private javax.swing.JPanel facturacion;
@@ -497,12 +487,15 @@ public class JVentas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField nit;
     private javax.swing.JTextField nombre;
     private javax.swing.JPanel panelGeneral;
