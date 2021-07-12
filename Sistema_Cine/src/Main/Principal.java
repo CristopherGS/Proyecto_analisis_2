@@ -46,7 +46,6 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         menuFuncion = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
 
         menu1.setLabel("File");
         menuBar1.add(menu1);
@@ -109,9 +108,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu5.add(menuFuncion);
-
-        jMenuItem5.setText("Gestionar Empleado");
-        jMenu5.add(jMenuItem5);
 
         jMenuBar1.add(jMenu5);
 
@@ -198,7 +194,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.MenuBar menuBar1;
