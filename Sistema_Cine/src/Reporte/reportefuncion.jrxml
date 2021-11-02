@@ -47,8 +47,8 @@ INNER JOIN sala AS s ON s.idSala = f.Sala_idSala;]]>
 				<text><![CDATA[Reporte de Funciones ]]></text>
 			</staticText>
 			<image>
-				<reportElement x="23" y="0" width="64" height="64" uuid="bd83fdd7-cb3a-4628-abde-46ba0633c869"/>
-				<imageExpression><![CDATA["C:\\Users\\Usuario\\Desktop\\Ingenieria del software\\Proyecto_analisis_2\\Sistema_Cine\\src\\img\\img_cine1.png"]]></imageExpression>
+				<reportElement x="13" y="0" width="63" height="64" uuid="81137996-114c-4b4d-92ba-07485efdbf6c"/>
+				<imageExpression><![CDATA["C:\\Users\\cristopher\\Desktop\\Proyectos\\JAVA\\Proyecto_analisis_2\\Sistema_Cine\\src\\img\\img_cine1.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

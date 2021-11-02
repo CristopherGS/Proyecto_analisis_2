@@ -1,0 +1,5 @@
+basededatoscine
+3306
+root
+0101
+com.mysql.jdbc.Driver

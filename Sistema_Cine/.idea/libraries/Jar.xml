@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/Jar/mysql-connector-java-5.1.49.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/Jar/AbsoluteLayout.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

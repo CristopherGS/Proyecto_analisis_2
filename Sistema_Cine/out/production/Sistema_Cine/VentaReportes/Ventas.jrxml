@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ventas" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f8146be7-d306-4e83-a7c3-403a4a264649">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT * FROM factura;]]>
+	</queryString>
+	<field name="idFactura" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Total" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Detalle" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="112" splitType="Stretch">
+			<rectangle>
+				<reportElement x="167" y="0" width="405" height="112" uuid="b315f710-19d6-4d37-b388-e60b5603db1f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="353" y="9" width="50" height="15" uuid="83c9f9e6-542b-48e0-a530-de27197e58c6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefono: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="4" width="50" height="20" uuid="0f00f6f7-91f4-4c9a-8aa7-357f938ceead"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empresa : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="233" y="4" width="100" height="20" uuid="7b466e2a-fd46-4dd6-a6dc-b04e0400d61d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[CINE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="38" width="25" height="14" uuid="31498bc3-32de-4507-bac1-c2d0563398a4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIT: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="208" y="38" width="100" height="14" uuid="e6cefad8-7c60-440c-9321-0fcb0c0eaddf"/>
+				<textElement textAlignment="Left" verticalAlignment="Top"/>
+				<text><![CDATA[CINE-123455667]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="64" width="50" height="15" uuid="4478464b-c88e-4c74-95f1-cc15c0501eb9">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="233" y="64" width="176" height="15" uuid="563aba6a-46f5-4dc7-b638-b73aacca185c"/>
+				<text><![CDATA[Calle Unión Nro. 610 - Guatemala]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="9" width="59" height="15" uuid="404b24fe-b9e8-481e-b522-3098bf42f02b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[12345678]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="95" width="98" height="15" uuid="908db49a-ff31-4401-ac7e-8807f2e0009b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Correo Electrónico : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="95" width="122" height="15" uuid="e69532f7-8084-4c0e-8e7a-67be0f2cebc5">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[cineguatemala@live.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="34" width="142" height="18" uuid="8a1392a0-ec60-4dd7-bf2a-2d9fad520eb0"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha y Hora de Impresión :]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="475" y="38" width="100" height="14" uuid="03c6dc0d-4a01-495d-b326-03c38832c487"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="444" y="79" width="45" height="18" uuid="fa2125ef-afb1-4160-aca9-faf63ea79359"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pagina:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="489" y="82" width="22" height="13" uuid="4b4e0bce-ba4f-431b-91e6-e036c7e841aa"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="31" y="0" width="113" height="112" uuid="0ce3acaa-05d0-4e08-9c96-96ba4ce4bab2"/>
+				<imageExpression><![CDATA["C:\\Users\\cristopher\\Desktop\\Proyectos\\JAVA\\Proyecto_analisis_2\\Sistema_Cine\\src\\VentaReportes\\logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="34" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="572" height="34" backcolor="#E5DCC3" uuid="4da6fccd-843c-48f3-bab0-c211bbb02919"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="572" height="34" uuid="7cb4ef3c-8484-46ff-86b9-0bdde1a55162"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE VENTAS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="1" width="572" height="20" backcolor="#C7BEA2" uuid="176c8be4-0db6-4499-9809-12923ef11f53"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="1" width="100" height="20" uuid="b6fcb18b-9aeb-495a-9e7d-361476828dc1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="0" width="100" height="20" uuid="aed67957-5fb2-4c7d-9574-1e692f8a9447"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Detalle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="1" width="100" height="20" uuid="39f71a77-062e-48fd-8256-7196936484b2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="44" y="0" width="14" height="20" uuid="0f6dd036-07ea-4ed6-97e9-916dac21c22d"/>
+				<textFieldExpression><![CDATA[$F{idFactura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="144" y="0" width="189" height="20" uuid="7f7dfea6-492e-4029-8b3d-15db9dc0893f"/>
+				<textFieldExpression><![CDATA[$F{Detalle}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="572" height="1" uuid="19dc6b1e-0f03-4711-b7d4-b065e1c8350a"/>
+			</line>
+			<textField>
+				<reportElement x="362" y="0" width="100" height="21" uuid="24fb35aa-b0a0-4148-bc49-ca36dd653242"/>
+				<textFieldExpression><![CDATA[$F{Total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="208" y="0" width="152" height="20" backcolor="#D5D5D5" uuid="62d4fac3-6ce0-4220-8fac-814042f893f3"/>
+			</rectangle>
+			<textField evaluationTime="Report">
+				<reportElement x="293" y="0" width="40" height="20" uuid="ace323ed-7959-4eca-8a07-0316dd244064"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="233" y="0" width="56" height="20" uuid="cf40ca06-d971-40e5-b5ba-3434ce7937fe"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

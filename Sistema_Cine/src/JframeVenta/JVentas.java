@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.io.File;
@@ -69,21 +67,9 @@ public class JVentas extends javax.swing.JInternalFrame {
         obetenerAsientos = new AsientoSQL();
     }
 
-    public void generarFactura(String nombre, String detalle) throws FileNotFoundException, DocumentException, BadElementException, IOException {
-        FileOutputStream archivo = new FileOutputStream(nombre + ".pdf");
-        Image imagen = Image.getInstance("C:\\Users\\CRISTOPHER GUERRA\\Desktop\\Proyecto_analisis_2\\Sistema_Cine\\src\\img\\barcode.png");
-        Document documento = new Document();
-        PdfWriter.getInstance(documento, archivo);
-        documento.open();
-
-        Paragraph parrafo = new Paragraph("COMPROBANTE");
-        parrafo.setAlignment(1);
-        imagen.setAlignment(Element.ALIGN_CENTER);
-        documento.add(parrafo);
-        documento.add(new Paragraph(detalle));
-        documento.add(imagen);
-        documento.close();
-
+    public void generarFactura() {
+        
+        System.out.println("hola");
     }
 
     public void abrir(String name) throws IOException {
@@ -155,17 +141,14 @@ public class JVentas extends javax.swing.JInternalFrame {
 
         jLabel17.setBackground(new java.awt.Color(0, 0, 0));
         jLabel17.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         jLabel17.setText("Telefono:");
         facturacion.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 70, 20));
 
         jLabel18.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setText("Nombre:");
         facturacion.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 60, 20));
 
         jLabel20.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(0, 0, 0));
         jLabel20.setText("Nit:");
         facturacion.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 30, 20));
 
@@ -200,12 +183,10 @@ public class JVentas extends javax.swing.JInternalFrame {
         facturacion.add(Jsala, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 200, 30));
 
         jLabel23.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(0, 0, 0));
         jLabel23.setText("Sala:");
         facturacion.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
 
         jLabel24.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(0, 0, 0));
         jLabel24.setText("Pelicula:");
         facturacion.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, -1, -1));
 
@@ -218,13 +199,11 @@ public class JVentas extends javax.swing.JInternalFrame {
 
         total.setBackground(new java.awt.Color(102, 102, 102));
         total.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
-        total.setForeground(new java.awt.Color(0, 0, 0));
         total.setText("#000");
         facturacion.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 440, 80, 50));
 
         rcliente.setBackground(new java.awt.Color(226, 235, 240));
         rcliente.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        rcliente.setForeground(new java.awt.Color(0, 0, 0));
         rcliente.setText("Registrar Cliente");
         rcliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,7 +214,6 @@ public class JVentas extends javax.swing.JInternalFrame {
 
         validarcliente.setBackground(new java.awt.Color(226, 235, 240));
         validarcliente.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        validarcliente.setForeground(new java.awt.Color(0, 0, 0));
         validarcliente.setText("Validar NIT");
         validarcliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -246,7 +224,6 @@ public class JVentas extends javax.swing.JInternalFrame {
 
         cancelar.setBackground(new java.awt.Color(226, 235, 240));
         cancelar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        cancelar.setForeground(new java.awt.Color(0, 0, 0));
         cancelar.setText("Cancelar");
         cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,7 +234,6 @@ public class JVentas extends javax.swing.JInternalFrame {
 
         aceptar.setBackground(new java.awt.Color(255, 255, 255));
         aceptar.setFont(new java.awt.Font("Yu Gothic UI", 1, 14)); // NOI18N
-        aceptar.setForeground(new java.awt.Color(0, 0, 0));
         aceptar.setText("Aceptar");
         aceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,7 +244,6 @@ public class JVentas extends javax.swing.JInternalFrame {
 
         jLabel21.setBackground(new java.awt.Color(0, 0, 0));
         jLabel21.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
         jLabel21.setText("Columna:");
         facturacion.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 350, 70, 30));
 
@@ -281,7 +256,6 @@ public class JVentas extends javax.swing.JInternalFrame {
 
         jLabel25.setBackground(new java.awt.Color(0, 0, 0));
         jLabel25.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(0, 0, 0));
         jLabel25.setText("Fila:");
         facturacion.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 40, 30));
 
@@ -294,7 +268,6 @@ public class JVentas extends javax.swing.JInternalFrame {
 
         jLabel26.setBackground(new java.awt.Color(0, 0, 0));
         jLabel26.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(0, 0, 0));
         jLabel26.setText("Total: Q");
         facturacion.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 100, 50));
 
@@ -302,10 +275,10 @@ public class JVentas extends javax.swing.JInternalFrame {
         jLabel27.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 153, 0));
         jLabel27.setText("VENTA DE BOLETOS");
-        facturacion.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 190, 50));
+        facturacion.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 190, 50));
         facturacion.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 480, 190, 10));
 
-        jPanel1.add(facturacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 630, 660));
+        jPanel1.add(facturacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 600, 640));
 
         panelGeneral.add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -376,11 +349,7 @@ public class JVentas extends javax.swing.JInternalFrame {
                 c.InstanciarCRUD().EjecutarInstruccion(query2);
 
                 //generamos la facura para que se abra automaticamente
-                try {
-                    generarFactura(nit.getText(), detalle);
-                } catch (DocumentException | IOException ex) {
-                    Logger.getLogger(JVentas.class.getName()).log(Level.SEVERE, null, ex);
-                }
+
                 nombre.setText("");
                 telefono.setText("");
                 try {
