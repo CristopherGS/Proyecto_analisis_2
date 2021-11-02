@@ -187,8 +187,11 @@ public class CRUD {
         } catch (SQLException ex) {
             Logger.getLogger(CRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+        
         return id;
+    }
+    public ConexionBD getConexion(){
+     return conexion;   
     }
 
 

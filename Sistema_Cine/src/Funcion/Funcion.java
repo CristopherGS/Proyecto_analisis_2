@@ -8,9 +8,22 @@ package Funcion;
 import ClasesGlobales.*;
 import ClasesInterfaz.*;
 import Interfaz.*;
+import com.mysql.jdbc.Connection;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -67,6 +80,8 @@ public class Funcion extends javax.swing.JInternalFrame {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaDias = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         panelEditar = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -74,6 +89,8 @@ public class Funcion extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         panelNuevo = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        panelReporte = new javax.swing.JPanel();
+        lableReporte = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         comboPelicula = new javax.swing.JComboBox<>();
@@ -171,6 +188,19 @@ public class Funcion extends javax.swing.JInternalFrame {
             .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -207,7 +237,7 @@ public class Funcion extends javax.swing.JInternalFrame {
         );
         panelEditarLayout.setVerticalGroup(
             panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 84, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelEditarLayout.createSequentialGroup()
                     .addContainerGap()
@@ -236,7 +266,7 @@ public class Funcion extends javax.swing.JInternalFrame {
         panelEliminar.setLayout(panelEliminarLayout);
         panelEliminarLayout.setHorizontalGroup(
             panelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 97, Short.MAX_VALUE)
+            .addGap(0, 105, Short.MAX_VALUE)
             .addGroup(panelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelEliminarLayout.createSequentialGroup()
                     .addContainerGap()
@@ -245,7 +275,7 @@ public class Funcion extends javax.swing.JInternalFrame {
         );
         panelEliminarLayout.setVerticalGroup(
             panelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 84, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(panelEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelEliminarLayout.createSequentialGroup()
                     .addContainerGap()
@@ -273,7 +303,7 @@ public class Funcion extends javax.swing.JInternalFrame {
         panelNuevo.setLayout(panelNuevoLayout);
         panelNuevoLayout.setHorizontalGroup(
             panelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 97, Short.MAX_VALUE)
+            .addGap(0, 105, Short.MAX_VALUE)
             .addGroup(panelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelNuevoLayout.createSequentialGroup()
                     .addContainerGap()
@@ -282,7 +312,7 @@ public class Funcion extends javax.swing.JInternalFrame {
         );
         panelNuevoLayout.setVerticalGroup(
             panelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 84, Short.MAX_VALUE)
+            .addGap(0, 94, Short.MAX_VALUE)
             .addGroup(panelNuevoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelNuevoLayout.createSequentialGroup()
                     .addContainerGap()
@@ -290,30 +320,54 @@ public class Funcion extends javax.swing.JInternalFrame {
                     .addContainerGap()))
         );
 
+        panelReporte.setBackground(new java.awt.Color(30, 95, 116));
+        panelReporte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickReporte(evt);
+            }
+        });
+
+        lableReporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lableReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono_reporte.png"))); // NOI18N
+
+        javax.swing.GroupLayout panelReporteLayout = new javax.swing.GroupLayout(panelReporte);
+        panelReporte.setLayout(panelReporteLayout);
+        panelReporteLayout.setHorizontalGroup(
+            panelReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lableReporte, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+        );
+        panelReporteLayout.setVerticalGroup(
+            panelReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lableReporte, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(197, 197, 197)
+                .addGap(102, 102, 102)
                 .addComponent(panelNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97)
+                .addGap(33, 33, 33)
                 .addComponent(panelEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(104, 104, 104)
+                .addGap(43, 43, 43)
                 .addComponent(panelEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                .addComponent(panelReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(panelNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(panelEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(panelEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panelNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 6, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -618,7 +672,7 @@ public class Funcion extends javax.swing.JInternalFrame {
         panelDetalle.setLayout(panelDetalleLayout);
         panelDetalleLayout.setHorizontalGroup(
             panelDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 85, Short.MAX_VALUE)
+            .addGap(0, 92, Short.MAX_VALUE)
             .addGroup(panelDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelDetalleLayout.createSequentialGroup()
                     .addContainerGap()
@@ -678,7 +732,7 @@ public class Funcion extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(16, Short.MAX_VALUE)
+                        .addContainerGap(35, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -728,7 +782,7 @@ public class Funcion extends javax.swing.JInternalFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -739,7 +793,7 @@ public class Funcion extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel6, java.awt.BorderLayout.CENTER);
@@ -1016,6 +1070,48 @@ public void bloquearDesbloquearObjetos(int opcion) {
     spinerMinutoBusqueda.setEnabled(false); 
     funcion.setDesicion(1);
     }//GEN-LAST:event_radioPeliculaActionPerformed
+//Panel que se le hace click para el reporte 
+    private void clickReporte(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickReporte
+            //Connection conn = (Connection) crud.getConexion().;
+            
+            ConexionAuxiliar con = new ConexionAuxiliar();
+            Connection conn= (Connection) con.getConexion();
+            JasperReport reporte = null;
+            String path = "src\\Reporte\\reportefuncion.jasper";
+            try {
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jprint = JasperFillManager.fillReport(reporte,null,conn);
+            
+            JasperViewer view = new JasperViewer(jprint,false);
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+            
+            } catch (JRException ex) {
+            Logger.getLogger(Funcion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            //Esta puede ser otra forma de hacerlo, pero da el mismo error
+         /*   
+        try {    
+            //ConexionMySQL conexion = new ConexionMySQL(localhost,puerto,baseDeDatos,usuario,contra);
+            System.out.println("entro1");
+            ConexionAuxiliar con = new ConexionAuxiliar();
+            System.out.println("entro2");
+            Connection conn = (Connection) con.getConexion();
+            System.out.println("entro3");
+            InputStream archivo = getClass().getResourceAsStream("/Reporte/reportefuncion.jrxml");
+            System.out.println("entro4");
+            JasperDesign dise = JRXmlLoader.load(archivo);
+            System.out.println("entro5");
+            JasperReport jr = JasperCompileManager.compileReport(dise);
+            JasperPrint jp = JasperFillManager.fillReport(jr, null, conn);
+            JasperViewer.viewReport(jp, false);
+        } catch (JRException ex) {
+            Logger.getLogger(Funcion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+      */
+    }//GEN-LAST:event_clickReporte
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1055,6 +1151,9 @@ public void bloquearDesbloquearObjetos(int opcion) {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lableReporte;
     private javax.swing.JPanel panelAceptar;
     private javax.swing.JPanel panelBuscar;
     private javax.swing.JPanel panelCancelar;
@@ -1062,6 +1161,7 @@ public void bloquearDesbloquearObjetos(int opcion) {
     private javax.swing.JPanel panelEditar;
     private javax.swing.JPanel panelEliminar;
     private javax.swing.JPanel panelNuevo;
+    private javax.swing.JPanel panelReporte;
     private javax.swing.JRadioButton radioHorario;
     private javax.swing.JRadioButton radioPelicula;
     private javax.swing.JSpinner spinerHora;

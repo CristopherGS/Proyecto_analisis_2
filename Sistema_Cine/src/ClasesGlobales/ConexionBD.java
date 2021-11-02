@@ -53,7 +53,7 @@ public class ConexionBD {
     }
     
     public static ConexionBD ConectarLaBD(){
-        
+        System.out.println("se conecto a la base de datos");
         if(instancia == null){
               instancia = new ConexionBD();
           }
@@ -62,6 +62,7 @@ public class ConexionBD {
     }
 
     public Connection getConexion() {
+        System.out.println("retorno la base de datos");
         return conexion;
     }
     public void obtenerDatosBD(){
