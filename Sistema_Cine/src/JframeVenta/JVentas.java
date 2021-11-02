@@ -7,6 +7,7 @@ package JframeVenta;
 
 import Cartelera.ObtenerPeliculas;
 import ClasesGlobales.CRUD;
+import ClasesGlobales.ConexionAuxiliar;
 import ClasesVenta.Asiento;
 import ClasesVenta.AsientoSQL;
 import ClasesVenta.Cliente;
@@ -15,6 +16,7 @@ import ClasesVenta.Factura;
 import ClasesVenta.FuncionesSQL;
 import Funcion.FuncionClass;
 import Pelicula.*;
+import com.mysql.jdbc.Connection;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -29,6 +31,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -68,13 +76,8 @@ public class JVentas extends javax.swing.JInternalFrame {
     }
 
     public void generarFactura() {
-        
-        System.out.println("hola");
-    }
 
-    public void abrir(String name) throws IOException {
-        File path = new File(name + ".pdf");
-        Desktop.getDesktop().open(path);
+        System.out.println("hola");
     }
 
     /**
@@ -114,6 +117,7 @@ public class JVentas extends javax.swing.JInternalFrame {
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        FACTURA = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -240,7 +244,7 @@ public class JVentas extends javax.swing.JInternalFrame {
                 aceptarActionPerformed(evt);
             }
         });
-        facturacion.add(aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, 130, 40));
+        facturacion.add(aceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 550, 130, 40));
 
         jLabel21.setBackground(new java.awt.Color(0, 0, 0));
         jLabel21.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
@@ -278,6 +282,14 @@ public class JVentas extends javax.swing.JInternalFrame {
         facturacion.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 190, 50));
         facturacion.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 480, 190, 10));
 
+        FACTURA.setText("Gen Factura");
+        FACTURA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FACTURAActionPerformed(evt);
+            }
+        });
+        facturacion.add(FACTURA, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 550, 100, 40));
+
         jPanel1.add(facturacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 600, 640));
 
         panelGeneral.add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -302,8 +314,8 @@ public class JVentas extends javax.swing.JInternalFrame {
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
         String asiento = (String) Jfila.getSelectedItem() + (String) Jcolumna.getSelectedItem();
-        String fila =(String) Jfila.getSelectedItem();
-        String sala =(String) Jsala.getSelectedItem();
+        String fila = (String) Jfila.getSelectedItem();
+        String sala = (String) Jsala.getSelectedItem();
         String columna = (String) Jcolumna.getSelectedItem();
         if (nit.getText().equals("") || nombre.getText().equals("") || telefono.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Hay campos vacios");
@@ -311,8 +323,8 @@ public class JVentas extends javax.swing.JInternalFrame {
             String seleccionSala = (String) Jsala.getSelectedItem();
 
             //seleccion de disponibilidad del asiento
-            String dispo = c.InstanciarCRUD().getValor("SELECT a.disponible FROM asiento AS a WHERE a.fila= '" + fila + "' AND  a.columna = '" + columna + "' AND a.Sala_idSala = '" + sala +"';", "disponible");
-            System.out.println(fila+columna);
+            String dispo = c.InstanciarCRUD().getValor("SELECT a.disponible FROM asiento AS a WHERE a.fila= '" + fila + "' AND  a.columna = '" + columna + "' AND a.Sala_idSala = '" + sala + "';", "disponible");
+            System.out.println(fila + columna);
             if ("1".equals(dispo)) {
 
                 String seleccionPelicula = (String) JPelicula.getSelectedItem();
@@ -338,25 +350,18 @@ public class JVentas extends javax.swing.JInternalFrame {
                 factura.actualizarValues();
                 query = factura.getAdminConsulta().queryInsertar(factura.getValues(), factura.getParametros(), factura.getNombre());
                 c.InstanciarCRUD().EjecutarInstruccion(query);
-                
+
                 //consulta para cambiar la disponibilidad del asiento a opcupado
                 String query2;
                 silla.setIdAsiento(asiento);
                 silla.setDisponible(false);
                 silla.actualizarValues();
-                silla.getAdminConsulta().setWhere("WHERE fila = '" + fila + "' AND columna = '"+columna+"'");
+                silla.getAdminConsulta().setWhere("WHERE fila = '" + fila + "' AND columna = '" + columna + "'");
                 query2 = silla.getAdminConsulta().queryModificar("asiento", "SET disponible = 0 ");
-                c.InstanciarCRUD().EjecutarInstruccion(query2);
-
-                //generamos la facura para que se abra automaticamente
+                c.InstanciarCRUD().EjecutarInstruccion(query2);       
 
                 nombre.setText("");
                 telefono.setText("");
-                try {
-                    abrir(nit.getText());
-                } catch (IOException ex) {
-                    Logger.getLogger(JVentas.class.getName()).log(Level.SEVERE, null, ex);
-                }
             } else {
                 JOptionPane.showMessageDialog(null, "El asiento seleccionado no esta disponible");
             }
@@ -375,7 +380,7 @@ public class JVentas extends javax.swing.JInternalFrame {
             obtener = new ClientesSQL();
             System.out.println(nit.getText());
             this.clientes = obtener.obtenerClientes("SELECT c.nombre, c.nit, c.telefono FROM cliente AS c WHERE c.nit = '" + nit.getText() + "';");
-            System.out.println(clientes.size() + "valio");
+            System.out.println(clientes.size());
             int size = clientes.size();
             if (size != 0) {
                 for (int i = 0; i < clientes.size(); i++) {
@@ -442,8 +447,28 @@ public class JVentas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JfilaActionPerformed
 
+    private void FACTURAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FACTURAActionPerformed
+        //generamos la facura para que se abra automaticamente
+                ConexionAuxiliar con = new ConexionAuxiliar();
+                Connection conn = (Connection) con.getConexion();
+                JasperReport reporte = null;
+                String path = "src\\VentaReportes\\Ventas.jasper";
+                try {
+                    reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+                    JasperPrint jprint = JasperFillManager.fillReport(reporte, null, conn);
+
+                    JasperViewer view = new JasperViewer(jprint, false);
+                    view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                    view.setVisible(true);
+
+                } catch (JRException ex) {
+                    Logger.getLogger(Factura.class.getName()).log(Level.SEVERE, null, ex);
+                }
+    }//GEN-LAST:event_FACTURAActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton FACTURA;
     private javax.swing.JComboBox<String> JPelicula;
     private javax.swing.JComboBox<String> Jcolumna;
     private javax.swing.JComboBox<String> Jfila;

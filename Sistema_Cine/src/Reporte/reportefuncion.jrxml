@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportefuncion" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8cf92a6c-f2d5-463a-8eb8-a77fbe8c7864">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.4641000000000006"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
@@ -47,8 +47,8 @@ INNER JOIN sala AS s ON s.idSala = f.Sala_idSala;]]>
 				<text><![CDATA[Reporte de Funciones ]]></text>
 			</staticText>
 			<image>
-				<reportElement x="13" y="0" width="63" height="64" uuid="81137996-114c-4b4d-92ba-07485efdbf6c"/>
-				<imageExpression><![CDATA["C:\\Users\\cristopher\\Desktop\\Proyectos\\JAVA\\Proyecto_analisis_2\\Sistema_Cine\\src\\img\\img_cine1.png"]]></imageExpression>
+				<reportElement x="13" y="0" width="64" height="64" uuid="62f99d8f-6d72-430b-85b6-843695a72056"/>
+				<imageExpression><![CDATA["C:\\Users\\cristopher\\Desktop\\Proyectos\\JAVA\\Proyecto_analisis_2\\Sistema_Cine\\src\\Reporte\\img_cine1.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
