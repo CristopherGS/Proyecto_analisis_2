@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteVentas" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="15a05580-57d6-496b-9287-3373bcea612a">
+	<property name="ireport.zoom" value="2.3579476910000023"/>
+	<property name="ireport.x" value="58"/>
+	<property name="ireport.y" value="53"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#EFF7FF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="930b360f-3de8-4b1a-9132-a97e794206f7"/>
+	<queryString>
+		<![CDATA[select * from factura;]]>
+	</queryString>
+	<field name="idFactura" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Total" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Detalle" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="107" splitType="Stretch">
+			<staticText>
+				<reportElement x="399" y="52" width="50" height="15" uuid="d1de3906-a00b-4f22-a513-db04cfb86069">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefono: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="213" y="80" width="122" height="15" uuid="d6d73dd9-bd01-46f1-bc32-ac9e05e0c830">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[cineguatemala@live.com]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="105" y="52" width="50" height="15" uuid="dc8dddb3-f24d-4fd5-840a-058909ff4ddc">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="105" y="26" width="50" height="14" uuid="9306c956-c319-4dd2-b350-842419a490f9"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIT: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="45" width="160" height="30" uuid="fca496c4-e453-4e48-a23d-d3b5f658fc99"/>
+				<text><![CDATA[Calle Unión Nro. 610 - Guatemala]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="105" y="80" width="98" height="15" uuid="0974af4b-b3b4-4412-b9e0-b3e453d7b636">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Correo Electrónico : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="0" width="80" height="30" uuid="d52d0602-1785-4f88-9e61-a2e56045c414"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha y Hora de Impresión :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="105" y="0" width="50" height="20" uuid="af381476-9e52-4ee7-a136-234280536bbd"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empresa : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="52" width="59" height="15" uuid="cc45275c-0a04-4633-b896-e88c134cb85b">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[12345678]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="0" width="100" height="20" uuid="fcc384c4-921e-4a43-b445-3eab825b4134"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[CINE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="26" width="100" height="14" uuid="011c8a4e-ccc9-477c-96e4-31b210983460"/>
+				<textElement textAlignment="Left" verticalAlignment="Top"/>
+				<text><![CDATA[CINE-123455667]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="449" y="10" width="100" height="20" uuid="1708f560-80ea-4850-8af0-28373c6dcd39"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="419" y="100" width="59" height="15" uuid="b8915e0c-92e5-4f60-88d9-96f1c9aafa4c">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="25" width="572" height="35" forecolor="#000000" backcolor="#B2F9FC" uuid="39c35ca3-7ecd-4cb0-949b-8c85d617c8bb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE VENTAS - CINE]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="113" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="24" y="17" width="100" height="20" backcolor="#33FF33" uuid="ce485ca0-6cf1-4340-8533-6f6821c070a3"/>
+				<text><![CDATA[idFactura]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="24" y="71" width="100" height="20" uuid="0b62516e-4bd8-433f-bd9e-7284fcd199a6"/>
+				<textFieldExpression><![CDATA[$F{idFactura}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="213" y="0" width="152" height="20" backcolor="#D5D5D5" uuid="5589a79e-f4bf-4e91-be5c-7aaeece8722a"/>
+			</rectangle>
+			<textField>
+				<reportElement x="228" y="0" width="80" height="20" uuid="9c729a89-d98d-4a73-bed1-90394be1934e"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="308" y="0" width="40" height="20" uuid="18af6f26-7ce2-4f2c-8655-41e91e570fe3"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
