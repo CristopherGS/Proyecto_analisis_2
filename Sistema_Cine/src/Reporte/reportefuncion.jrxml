@@ -48,7 +48,7 @@ INNER JOIN sala AS s ON s.idSala = f.Sala_idSala;]]>
 			</staticText>
 			<image>
 				<reportElement x="13" y="0" width="64" height="64" uuid="62f99d8f-6d72-430b-85b6-843695a72056"/>
-				<imageExpression><![CDATA["C:\\Users\\cristopher\\Desktop\\Proyectos\\JAVA\\Proyecto_analisis_2\\Sistema_Cine\\src\\Reporte\\img_cine1.png"]]></imageExpression>
+				<imageExpression><![CDATA["./img_cine1.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
