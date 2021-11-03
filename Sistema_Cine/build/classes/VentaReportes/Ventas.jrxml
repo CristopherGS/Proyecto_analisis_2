@@ -119,7 +119,7 @@ ORDER BY factura.idFactura DESC;]]>
 			</textField>
 			<image>
 				<reportElement x="31" y="0" width="113" height="112" uuid="0ce3acaa-05d0-4e08-9c96-96ba4ce4bab2"/>
-				<imageExpression><![CDATA["./VentaReportes/logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["./logo.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

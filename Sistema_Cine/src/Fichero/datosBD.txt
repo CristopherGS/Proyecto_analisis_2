@@ -1,5 +1,5 @@
-dbcine
+bdcine
 3306
 root
-0101
+1234
 com.mysql.jdbc.Driver
