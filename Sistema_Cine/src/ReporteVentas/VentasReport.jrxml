@@ -1,41 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="VentasReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="245a928c-f0e5-4372-a8da-58e6a04593cd">
+	<property name="ireport.zoom" value="1.9487171000000014"/>
+	<property name="ireport.x" value="27"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString>
+		<![CDATA[select * from factura]]>
+	</queryString>
+	<field name="idFactura" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Total" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Detalle" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<group name="Group1">
 		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
 		<groupHeader>
-			<band height="40">
-				<textField>
-					<reportElement style="SubTitle" x="47" y="13" width="506" height="24" forecolor="#006600" uuid="d08e1a0b-b99b-4cc9-b24e-01573b875d1e"/>
-					<textElement>
-						<font isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA["GroupField"]]></textFieldExpression>
-				</textField>
-				<rectangle>
-					<reportElement mode="Opaque" x="0" y="13" width="36" height="24" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="8f0e1121-02dc-4e81-806e-83ee1492f333"/>
-				</rectangle>
-			</band>
+			<band/>
 		</groupHeader>
 		<groupFooter>
-			<band height="6"/>
+			<band/>
 		</groupFooter>
 	</group>
 	<group name="Group2">
 		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/5)]]></groupExpression>
 		<groupHeader>
-			<band height="30">
-				<textField>
-					<reportElement style="SubTitle" x="0" y="4" width="460" height="20" uuid="78139cd7-fda1-42a7-a1a4-2315d6a0e546"/>
-					<textElement>
-						<font size="16" isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA["GroupField"]]></textFieldExpression>
-				</textField>
-			</band>
+			<band/>
 		</groupHeader>
 	</group>
 	<background>
@@ -50,11 +46,7 @@
 			<staticText>
 				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="8c7b3d2e-024a-416b-b662-cfb785919dc8"/>
 				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Leaf Green Title]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="SubTitle" x="100" y="46" width="174" height="22" uuid="0b9ac587-5b31-4129-818e-8d44b78ef241"/>
-				<text><![CDATA[Leaf Green SubTitle]]></text>
+				<text><![CDATA[Reporte de Ventas]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -62,37 +54,63 @@
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="36" splitType="Stretch">
-			<staticText>
-				<reportElement style="Column header" x="0" y="19" width="100" height="15" uuid="d22c5596-03ac-4088-a04b-a1d3f10e67fa"/>
-				<text><![CDATA[Label]]></text>
-			</staticText>
+		<band height="25" splitType="Stretch">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="b40f8eee-fb86-4c1a-aa27-c1d87e1d4836"/>
+				<reportElement positionType="FixRelativeToBottom" x="-2" y="21" width="555" height="1" uuid="b40f8eee-fb86-4c1a-aa27-c1d87e1d4836"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
+			<staticText>
+				<reportElement x="20" y="1" width="100" height="20" uuid="67b7ff0e-1fc6-4484-bf43-0c56186ad8b7"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Factura No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="199" y="1" width="122" height="20" uuid="f83213a0-5f56-4666-8aee-c96b392e52fb"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Detalle de la Factura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="413" y="1" width="100" height="20" uuid="cfd0bc26-9668-408a-a22b-8717b2075e9b"/>
+				<text><![CDATA[Total de Factura]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="16" splitType="Stretch">
+		<band height="73" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="25" width="100" height="20" uuid="df20f284-221f-4d8e-b380-fb363c51edf2"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{idFactura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="199" y="0" width="122" height="72" uuid="a2f866b1-fa8a-4be1-8493-29e5ebee7d53"/>
+				<textFieldExpression><![CDATA[$F{Detalle}]]></textFieldExpression>
+			</textField>
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="892556d2-f21e-46b8-8161-664c4a63751b"/>
+				<reportElement positionType="FixRelativeToBottom" x="-2" y="72" width="555" height="1" uuid="2cb8a477-ed4b-4ac0-b93e-49b4e54af217"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement style="Detail" x="0" y="0" width="100" height="15" uuid="f04a9687-8ca6-416c-af39-b8841fad84cd"/>
-				<textFieldExpression><![CDATA["Field"]]></textFieldExpression>
+				<reportElement x="413" y="25" width="100" height="20" uuid="5163bfd3-b499-469d-b3b9-5e6e39542f6b"/>
+				<textElement textAlignment="Center">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Total}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="bab0a95e-1137-4e54-8021-772a88641459"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="555" height="1" uuid="892556d2-f21e-46b8-8161-664c4a63751b"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
