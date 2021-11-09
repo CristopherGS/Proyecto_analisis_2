@@ -282,13 +282,13 @@ public class JVentas extends javax.swing.JInternalFrame {
         facturacion.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, 190, 50));
         facturacion.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 480, 190, 10));
 
-        FACTURA.setText("Gen Factura");
+        FACTURA.setText("Generar Factura");
         FACTURA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FACTURAActionPerformed(evt);
             }
         });
-        facturacion.add(FACTURA, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 550, 100, 40));
+        facturacion.add(FACTURA, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, 120, 40));
 
         jPanel1.add(facturacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 600, 640));
 
