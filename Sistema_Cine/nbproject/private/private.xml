@@ -3,9 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/cristopher/Desktop/Proyectos/JAVA/Proyecto_analisis_2/Sistema_Cine/src/JframeVenta/JVentas.java</file>
             <file>file:/C:/Users/cristopher/Desktop/Proyectos/JAVA/Proyecto_analisis_2/Sistema_Cine/src/ReporteVentas/VentasReport.jrxml</file>
             <file>file:/C:/Users/cristopher/Desktop/Proyectos/JAVA/Proyecto_analisis_2/Sistema_Cine/src/Funcion/Funcion.java</file>
+=======
+            <file>file:/C:/Users/Usuario/Desktop/Ingenieria%20del%20software/Proyecto_analisis_2/Sistema_Cine/src/Funcion/Funcion.java</file>
+            <file>file:/C:/Users/Usuario/Desktop/Ingenieria%20del%20software/Proyecto_analisis_2/Sistema_Cine/src/Fichero/datosBD.txt</file>
+>>>>>>> 92fab8c25a5d2f4e04616ab21f703d79014bc761
         </group>
     </open-files>
 </project-private>

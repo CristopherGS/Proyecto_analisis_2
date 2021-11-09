@@ -37,9 +37,9 @@ public class Principal extends javax.swing.JFrame {
         menuBar1 = new java.awt.MenuBar();
         menu1 = new java.awt.Menu();
         menu2 = new java.awt.Menu();
+        jLabel1 = new javax.swing.JLabel();
         panelPrincipal = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -53,8 +53,12 @@ public class Principal extends javax.swing.JFrame {
         menu2.setLabel("Edit");
         menuBar1.add(menu2);
 
+        jLabel1.setText("jLabel1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        panelPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        panelPrincipal.setForeground(new java.awt.Color(255, 255, 255));
         panelPrincipal.setPreferredSize(new java.awt.Dimension(1920, 1080));
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
@@ -68,8 +72,7 @@ public class Principal extends javax.swing.JFrame {
             .addGap(0, 770, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Inicio");
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
 
         jMenu3.setText("Venta");
 
@@ -187,7 +190,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;

@@ -325,6 +325,12 @@ public class Funcion extends javax.swing.JInternalFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 clickReporte(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                entrarPanelReporte(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                salirPanelReporte(evt);
+            }
         });
 
         lableReporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1112,6 +1118,15 @@ public void bloquearDesbloquearObjetos(int opcion) {
 
       */
     }//GEN-LAST:event_clickReporte
+
+    private void entrarPanelReporte(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_entrarPanelReporte
+        panelReporte.setBackground(new Color(29, 45, 80));
+        panelReporte.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_entrarPanelReporte
+
+    private void salirPanelReporte(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirPanelReporte
+        panelReporte.setBackground(new Color(30, 95, 116));
+    }//GEN-LAST:event_salirPanelReporte
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
